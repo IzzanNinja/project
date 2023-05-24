@@ -44,5 +44,9 @@ use App\Http\Controllers\AuthController;
 // Registration routes
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/success', function () {
+    return view('auth.success');
+});
+
 
 

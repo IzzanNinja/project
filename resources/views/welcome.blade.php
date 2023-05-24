@@ -51,7 +51,7 @@
                 </div><button class="btn btn-outline-dark btn-lg px-5 mb-3" type="submit">Log Masuk</button>
                 <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="#!">Lupa kata laluan? sila klik sini</a></p>
 
-                <p class="mb-0">Untuk pengguna baru sila daftar dahulu <a href="#!" class="btn btn-outline-light btn-lg px-5 btn-danger" onclick="openNewPage()">Daftar</a></p>
+                <p class="mb-0">Untuk pengguna baru sila daftar dahulu <a href="http://ebajak.test/register" class="btn btn-outline-light btn-lg px-5 btn-danger" onclick="openNewPage()">Daftar</a></p>
                 </div>
             </div>
             <div>

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+
+<form method="POST" action="{{ route('register') }}">
+    @csrf
     <section class="vh-100 bg-image" style="background-image: url('http://10.71.97.88:3006/images/padionlykabur.jpg');">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
             <div class="container h-100">
