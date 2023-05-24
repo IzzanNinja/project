@@ -59,7 +59,7 @@
                                     <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Daftar</button>
                                 </div>
 
-                                <p class="text-center text-muted mt-5 mb-0">Sudah Daftar? <a href="#!" class="fw-bold text-body"><u>Log Masuk disini</u></a></p>
+                                <p class="text-center text-muted mt-5 mb-0">Sudah Daftar? <a href="http://ebajak.test/login" class="fw-bold text-body"><u>Log Masuk disini</u></a></p>
 
                             </div>
                         </div>
