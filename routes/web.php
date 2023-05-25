@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SetPasswordController;
-use App\Http\Controllers\Auth\ForgetPasswordController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +35,12 @@ Route::get('set-password', [SetPasswordController::class, 'showSetPasswordForm']
 Route::post('set-password', [SetPasswordController::class, 'setPassword']);
 
 // Password Reset
-Route::get('forget-password', [ForgetPasswordController::class, 'showForgetPasswordForm'])->name('forget.password');
-Route::post('forget-password', [ForgetPasswordController::class, 'sendPasswordResetLink']);
-Route::get('reset-password/{token}', [ForgetPasswordController::class, 'showResetPasswordForm'])->name('reset.password');
-Route::post('reset-password', [ForgetPasswordController::class, 'resetPassword']);
 
-use App\Http\Controllers\AuthController;
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+
+
+
 
 // Registration routes
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');

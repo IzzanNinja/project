@@ -52,17 +52,17 @@
                                 @enderror
                                 <div class="row mb-3">
                                     <div class="col-md-6 offset-md-4">
-                                        <div class="form-check">
+                                        {{-- <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                             <label class="form-check-label" for="remember">
                                                 {{ __('Ingatkan Saya') }}
                                             </label>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 
-                </div><button class="btn btn-outline-dark btn-lg px-5 mb-3" type="submit">Log Masuk</button>
-                <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="#!">Lupa kata laluan? sila klik sini</a></p>
+                </div><button class="btn btn-dark btn-outline-success btn-lg px-5 mb-3" type="submit">Log Masuk</button>
+                <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="{{ route('password.request') }}">Lupa kata laluan? sila klik sini</a></p>
 
                 <p class="mb-0">Untuk pengguna baru sila daftar dahulu <a href="http://ebajak.test/register" class="btn btn-outline-light btn-lg px-5 btn-danger" onclick="openNewPage()">Daftar</a></p>
                 </div>

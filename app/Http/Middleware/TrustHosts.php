@@ -9,12 +9,13 @@ class TrustHosts extends Middleware
     /**
      * Get the host patterns that should be trusted.
      *
-     * @return array<int, string|null>
-     */
-    public function hosts()
-    {
-        return [
-            $this->allSubdomainsOfApplicationUrl(),
-        ];
-    }
+   * @return array
+ */
+public function hosts()
+{
+    return [
+        'ebajak.test',
+        $this->allSubdomainsOfApplicationUrl(),
+    ];
+}
 }

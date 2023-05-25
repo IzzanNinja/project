@@ -44,7 +44,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        return back()->with('success','Berjaya didaftarkan!');
+        return back()->with('success',);
     }
 
 
@@ -55,7 +55,7 @@ protected function registered(Request $request, $user)
 
     $user = User::create($validatedData);
 
-    return redirect('/dashboard')->with('success', 'Registration successful. Welcome to our site!');
+    return redirect('/dashboard')->with('success', 'Pendaftaran berjaya. Sila log masuk');
 }
 
 
