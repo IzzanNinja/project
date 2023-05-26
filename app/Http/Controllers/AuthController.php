@@ -17,6 +17,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'kad_pengenalan' => ['required', 'string', 'max:12', 'unique:users', 'regex:/^\d{12}$/'],
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -25,6 +26,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'kad_pengenalan' => $request->kad_pengenalan,
         ]);
 
         // You can customize the logic here after the user is registered successfully

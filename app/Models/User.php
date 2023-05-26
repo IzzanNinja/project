@@ -14,6 +14,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function username()
+    {
+        return 'kad_pengenalan';
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +26,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'kad_pengenalan',
         'email',
         'password',
     ];

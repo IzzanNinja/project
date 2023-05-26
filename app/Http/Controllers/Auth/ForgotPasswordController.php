@@ -16,8 +16,34 @@ class ForgotPasswordController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function showLinkRequestForm()
+    // public function showLinkRequestForm()
+    // {
+    //     return view('auth.passwords.email');
+    // }
+
+    public function forgotPassword()
     {
-        return view('auth.passwords.email');
+        return view('auth.forgot-password');
     }
+
+
+public function sendResetEmail(Request $request)
+{
+    $this->validate($request, [
+        'email' => 'required|email',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (!$user) {
+        return back()->with('error', 'Email dimasukkan sudah wujud.');
+    }
+
+    $token = $this->createToken($user);
+
+    Mail::to($user->email)->send(new ResetPasswordMail($token));
+
+    return back()->with('success', 'Link Tukar Kata Laluan berjaya dihantar ke email anda.');
+}
+
 }
