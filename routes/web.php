@@ -39,8 +39,19 @@ Route::post('set-password', [SetPasswordController::class, 'setPassword']);
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
 
+Route::get('/daftar', function () {
+    return view('daftar');
+})->name('daftar');
+
+Route::view('senaraitanah', 'senaraitanah');
 
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// });
+
+
+Route::view('dashboard', 'Dashboard');
 
 // Registration routes
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
