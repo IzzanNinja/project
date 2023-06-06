@@ -38,7 +38,7 @@
                                     @enderror
                                     <div class="form-group row mb-3">
                                         <div class="text-right">
-                                            <!-- Content here -->
+                                            <a href="dashboard">skip login utk projek developer sahaja</a>
                                         </div>
                                     </div>
                                 </div>
@@ -54,8 +54,24 @@
                             <span>&copy; {{ date('Y') }}© 2020 - 2023 Hak Cipta terpelihara Jabatan Perkhidmatan Komputer Negeri Sabah</span>
                         </div>
                     </footer>
+
+
                 </div>
             </div>
         </div>
     </section>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
