@@ -8,7 +8,7 @@ class DaftarController extends Controller
 {
     public function index()
     {
-        return view('daftar');
+        return view('layouts.daftar');
     }
 }
 

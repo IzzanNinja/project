@@ -59,7 +59,4 @@ protected function registered(Request $request, $user)
     return redirect('/dashboard')->with('success', 'Pendaftaran berjaya. Sila log masuk');
 }
 
-
-
-
 }

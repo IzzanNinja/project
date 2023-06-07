@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SetPasswordController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,10 +41,27 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 
 
 Route::get('/daftar', function () {
-    return view('daftar');
+    return view('layouts.daftar');
 })->name('daftar');
 
-Route::view('senaraitanah', 'senaraitanah');
+Route::get('/senaraitanah', function () {
+    return view('layouts.senaraitanah');
+})->name('senaraitanah');
+
+Route::get('/pet_cetak', function () {
+    return view('layouts.pet_cetak');
+})->name('pet_cetak');
+
+
+// Route::get('/daftar', [DaftarController::class,'index'])->name('daftar');
+// Route::get('/daftar', [DaftarController::class,'create'])->name('daftar.add');
+// Route::post('/application/store', [DaftarController::class,'store'])->name('daftar.store');
+// Route::get('/daftar/{id}', [DaftarController::class,'edit'])->name('daftar.edit');
+// Route::post('/daftar/senaraitanah/store', [DaftarController::class,'storeSenaraitanah'])->name('Senaraitanah.store');
+
+
+
+
 
 
 // Route::get('/dashboard', function () {
@@ -51,7 +69,7 @@ Route::view('senaraitanah', 'senaraitanah');
 // });
 
 
-Route::view('dashboard', 'Dashboard');
+// Route::view('dashboard', 'Dashboard');
 
 // Registration routes
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
