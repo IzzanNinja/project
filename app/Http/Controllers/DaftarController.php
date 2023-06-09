@@ -45,11 +45,16 @@ class DaftarController extends Controller
             'bulanmusim2' => 'required|string',
         ]);
 
+        dd($request);
+
         // Retrieve the form data from the request
         $data = $request->only(['nama', 'nokp', 'alamat', 'poskod', 'daerah', 'telrumah', 'telhp']);
 
+
+
         // Redirect back to the daftar create form
         return redirect()->route('daftar.create')->with('success', 'Data stored successfully.');
+
     }
 
 }
