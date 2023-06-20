@@ -1,8 +1,4 @@
 @extends('navigation')
-@php
-    $daerahOptions = $daerahOptions ?? [];
-@endphp
-
 {{-- <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 </head> --}}
@@ -19,17 +15,7 @@
         </ol>
       </section>
   <!-- Main content -->
-
-        <form method="post" action="{{ route('daftar.store') }}" id="pet" name="pet">
-            @csrf
-
-            @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-
+    <form method="post" action="pet_act.php" id="pet" name="pet">
     <section class="content">
        <div class="row ">
 
@@ -45,99 +31,98 @@
               <div class="box-body">
                   <div class="form-group">
                     <label for="pemohon">Nama Pemohon</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pemohon">
+                    <input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon">
 
                     <label for="pendaftaran">No.Kad Pengenalan</label>
                     <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan">
 
                     <!-- textarea -->
                     <label>Alamat</label>
-                    <textarea class="form-control" id="alamat" rows="3" placeholder="Alamat ..." name="alamat"></textarea>
+                    <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat"></textarea>
 
                     <label for="poskod">Poskod</label>
                     <input type="text" class="form-control" id="poskod" name="poskod" placeholder="Poskod">
 
                     <!-- select -->
-                  <label for="daerah">Daerah</label>
-                  <select class="form-control"  name="daerah">
-                    <option value="0">Sila pilih...</option>
-                   	<option value="32"
-                        >Banggi					</option>
-                   	<option value="17"
-                        >Beaufort					</option>
-                   	<option value="8"
-                        >Beluran					</option>
-                   	<option value="38"
-                        >Kemabong					</option>
-                   	<option value="13"
-                        >Keningau					</option>
-                   	<option value="9"
-                        >Kinabatangan					</option>
-                   	<option value="3"
-                        >Kota Belud					</option>
-                   	<option value="1"
-                        >Kota Kinabalu					</option>
-                   	<option value="22"
-                        >Kota Marudu					</option>
-                   	<option value="18"
-                        >Kuala Penyu					</option>
-                   	<option value="5"
-                        >Kudat					</option>
-                   	<option value="23"
-                        >Kunak					</option>
-                   	<option value="11"
-                        >Lahad Datu					</option>
-                   	<option value="36"
-                        >Matunggong					</option>
-                   	<option value="35"
-                        >Membakut					</option>
-                   	<option value="34"
-                        >Menumbok					</option>
-                   	<option value="15"
-                        >Nabawan					</option>
-                   	<option value="40"
-                        >Paitan					</option>
-                   	<option value="2"
-                        >Papar					</option>
-                   	<option value="21"
-                        >Penampang					</option>
-                   	<option value="26"
-                        >Pitas					</option>
-                   	<option value="39"
-                        >Putatan					</option>
-                   	<option value="6"
-                        >Ranau					</option>
-                   	<option value="7"
-                        >Sandakan					</option>
-                   	<option value="12"
-                        >Semporna					</option>
-                   	<option value="19"
-                        >Sipitang					</option>
-                   	<option value="37"
-                        >Sook					</option>
-                   	<option value="14"
-                        >Tambunan					</option>
-                   	<option value="33"
-                        >Tamparuli					</option>
-                   	<option value="10"
-                        >Tawau					</option>
-                   	<option value="30"
-                        >Telupid					</option>
-                   	<option value="16"
-                        >Tenom					</option>
-                   	<option value="31"
-                        >Tongod					</option>
-                   	<option value="4"
-                        >Tuaran					</option>
+                    <label for="daerah">Daerah</label>
+                    <select class="form-control"  name="daerah">
+                      <option value="0">Sila pilih...</option>
+                         <option value="32"
+                          >Banggi					</option>
+                         <option value="17"
+                          >Beaufort					</option>
+                         <option value="8"
+                          >Beluran					</option>
+                         <option value="38"
+                          >Kemabong					</option>
+                         <option value="13"
+                          >Keningau					</option>
+                         <option value="9"
+                          >Kinabatangan					</option>
+                         <option value="3"
+                          >Kota Belud					</option>
+                         <option value="1"
+                          >Kota Kinabalu					</option>
+                         <option value="22"
+                          >Kota Marudu					</option>
+                         <option value="18"
+                          >Kuala Penyu					</option>
+                         <option value="5"
+                          >Kudat					</option>
+                         <option value="23"
+                          >Kunak					</option>
+                         <option value="11"
+                          >Lahad Datu					</option>
+                         <option value="36"
+                          >Matunggong					</option>
+                         <option value="35"
+                          >Membakut					</option>
+                         <option value="34"
+                          >Menumbok					</option>
+                         <option value="15"
+                          >Nabawan					</option>
+                         <option value="40"
+                          >Paitan					</option>
+                         <option value="2"
+                          >Papar					</option>
+                         <option value="21"
+                          >Penampang					</option>
+                         <option value="26"
+                          >Pitas					</option>
+                         <option value="39"
+                          >Putatan					</option>
+                         <option value="6"
+                          >Ranau					</option>
+                         <option value="7"
+                          >Sandakan					</option>
+                         <option value="12"
+                          >Semporna					</option>
+                         <option value="19"
+                          >Sipitang					</option>
+                         <option value="37"
+                          >Sook					</option>
+                         <option value="14"
+                          >Tambunan					</option>
+                         <option value="33"
+                          >Tamparuli					</option>
+                         <option value="10"
+                          >Tawau					</option>
+                         <option value="30"
+                          >Telupid					</option>
+                         <option value="16"
+                          >Tenom					</option>
+                         <option value="31"
+                          >Tongod					</option>
+                         <option value="4"
+                          >Tuaran					</option>
 
-                  </select>
-
+                    </select>
 
                    <label for="notelrumah">No. Telefon</label>
-                    <input type="text" class="form-control" id="telrumah" name="telrumah" placeholder="No.Telefon">
+                    <input type="text" class="form-control" id="notel" name="notel" placeholder="No.Telefon">
 
                    <label for="notel">Handphone</label>
-                    <input type="text" class="form-control" id="telhp" name="telhp" placeholder="Handphone">
+                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone">
 
               </div> <!-- /.form-group -->
             </div> <!-- /.box-body -->
@@ -155,7 +140,7 @@
                 <div class="box-body">
                 <label>No.Kad Petani</label>
                 <div class="input-group date">
-                <input name="pohonid" type="text" class="form-control" id="pohonid">
+                <input name="nokad" type="text" class="form-control" id="nokad">
                 </div>
                 <label>Tahun Permohonan</label>
                 <div class="input-group date">
@@ -165,49 +150,48 @@
 
                   <!-- radio -->
                   <div class="form-group">
-                    <label>Pendaftaran</label>
+                  <label>Pendaftaran</label>
                     <div class="radio">
-                        <label>
-                            <input type="radio" name="rd_daftar" id="rd_daftar1" value="1" checked>
-                            Baru
-                        </label>
+                      <label>
+                        <input type="radio" name="rd_daftar" id="rd_daftar1" value=1 checked>
+                        Baru
+                     </label>
                     </div>
                     <div class="radio">
-                        <label>
-                            <input type="radio" name="rd_daftar" id="rd_daftar2" value="2">
-                            Lama
-                        </label>
+                      <label>
+                        <input type="radio" name="rd_daftar" id="rd_daftar2" value=2>
+                        Lama
+                      </label>
+                    </div>
+                  </div>
+
+
+                  <p></p>
+                  <div class="form-group">
+                  <P><label for="Pemohon">Musim Penanaman</label></P>
+
+                  <!-- checkbox -->
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="ch_musim" id="ch_musim" value=1>
+                        Luar Musim (Bulan Mac - Julai)</input>
+                      </label>
+                    </div>
+
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="ch_musim2" id="ch_musim2" value=1>
+                        Musim Utama (Bulan Ogos - Feb)</input>
+                      </label>
                     </div>
                 </div>
-
-                <p></p>
-
-                <div class="form-group">
-                    <p><label for="Pemohon">Musim Penanaman</label></p>
-
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="ch_musim" id="ch_musim" value="1">
-                                Luar Musim (Bulan Mac - Julai)
-                            </label>
-                        </div>
-
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="ch_musim2" id="ch_musim2" value="1">
-                                Musim Utama (Bulan Ogos - Feb)
-                            </label>
-                        </div>
-                    </div>
-
-                    <label for="tarikh" style="margin-top: 11px">Tarikh</label>
-                    <div class="input-group date">
-                        <input name="tarikh" type="date" class="form-control" id="tarikh"/>
-                        <span class="input-group-addon"></span>
-                    </div>
+                <label for="tarikh" style="margin-top: 11px">Tarikh</label>
+                <div class="input-group date">
+                    <input name="tarikh" type="date" class="form-control" id="tarikh"/>
+                    <span class="input-group-addon">
+                    </span>
                 </div>
-
 
                 <div class="box-footer">
                   <button type="submit" style="margin-top:2rem" class="btn btn-primary" name="submit1" value="seterusnya">Simpan & Seterusnya</button>

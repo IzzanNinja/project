@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('nama', 255);
             $table->text('alamat');
             $table->unsignedInteger('poskod')->length(5);
-            $table->unsignedInteger('daerah_id'); 
+            $table->unsignedInteger('daerah_id');
             $table->string('telrumah')->nullable();
             $table->string('telhp');
             $table->string('stesen');
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->timestamps();
 
             //  Foreign key constraint
-             $table->foreign('daerah_id')->references('id')->on('daerah');
+            //  $table->foreign('daerah_id')->references('id')->on('daerah');
 
         });
     }
