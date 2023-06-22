@@ -7,29 +7,29 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-          Sistem Pembayaran Subsidi Pembajakan Sawah Padi
-          {{-- <small>Modul Pegawai Pertanian</small> --}}
+        Sistem Pembayaran Subsidi Pembajakan Sawah Padi
+        {{-- <small>Modul Pegawai Pertanian</small> --}}
         </h1>
         <ol class="breadcrumb">
-          <li><a href="home"><i class="fa fa-dashboard"></i> Laman Utama</a></li>
+        <li><a href="home"><i class="fa fa-dashboard"></i> Laman Utama</a></li>
         </ol>
-      </section>
-  <!-- Main content -->
+    </section>
+<!-- Main content -->
     <form method="post" action="pet_act.php" id="pet" name="pet">
     <section class="content">
-       <div class="row ">
+    <div class="row ">
 
-       <!-- left column -->
-          <div class="col-md-6">
+    <!-- left column -->
+        <div class="col-md-6">
             <!-- general form elements -->
             <div class="box box-primary">
-              <div class="box-header with-border">
+            <div class="box-header with-border">
                 <h3 class="box-title">BUTIR-BUTIR PEMOHON (INDIVIDU)</h3>
-              </div>
-              <!-- /.box-header -->
+            </div>
+            <!-- /.box-header -->
 
-              <div class="box-body">
-                  <div class="form-group">
+            <div class="box-body">
+                <div class="form-group">
                     <label for="pemohon">Nama Pemohon</label>
                     <input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon">
 
@@ -121,8 +121,20 @@
                    <label for="notelrumah">No. Telefon</label>
                     <input type="text" class="form-control" id="notel" name="notel" placeholder="No.Telefon">
 
-                   <label for="notel">Handphone</label>
-                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone">
+
+
+
+                        <label for="notel">Handphone</label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone">
+                        </div>
+
+
+
+
 
               </div> <!-- /.form-group -->
             </div> <!-- /.box-body -->

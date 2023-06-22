@@ -1,735 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>eBajak | Dashboard</title>
+<!--
+Include Tailwind JIT CDN compiler
+More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
+-->
+<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <header class="main-header">
-            <nav class="navbar navbar-expand navbar-white navbar-light">
-                <ul class="navbar-nav ml-auto"> <!-- Add ml-auto class to align items to the right -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="profail.php">Profail ERWATI</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Log Keluar</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <!-- Rest of the content -->
-    </div>
-</body>
-
-
-
-
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="{{ route('home') }}" class="brand-link">
-      <img src="img/doalogo.gif" alt="eBajak Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">eBajak</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Jamal Bin Abdillah</a>
-        </div>
-      </div>
-
-      <!-- SidebarSearch Form -->
-
-      <!-- Sidebar Menu -->
-      <!-- Mula Sidebar ebajak-->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-               <li class="nav-header">MENU PETANI</li>
-          <li class="nav-item menu">
-            <a href="#" class="nav-link active ">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                PETANI
-                <i class="right fas fa-angle-left"></i>
-              </p>
+<!-- Snippet -->
+<section class="flex flex-col justify-center antialiased bg-gray-900 text-gray-200 min-h-screen">
+    <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full">
+        <!-- Blog post -->
+        <article class="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
+            <a class="relative block group" href="#0">
+                <div class="absolute inset-0 bg-gray-800 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none" aria-hidden="true"></div>
+                <figure class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
+                    <img class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src="https://preview.cruip.com/open-pro/images/blog-post-01.jpg" width="540" height="303" alt="Blog post">
+                </figure>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active ">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Daftar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Semak</p>
-                </a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="nav-item menu">
-            <a href="#" class="nav-link ">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                TUNTUTAN
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="ptun_daf.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Daftar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_per.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Periksa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_kem.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dikembalikan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_smk.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Semak</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_lus.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lulus</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-
-          <li class="nav-item menu">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                PENYATA
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pet_janapyt.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jana</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_sed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sedia</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_sah.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Semak</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_lus.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lulus</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_txt.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jana TXT</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-          <li class="nav-header">MENU KONTRAKTOR</li>
-
-
-          <li class="nav-item menu">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                KONTRAKTOR
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="kon.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Daftar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="kon_smk.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Semak</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-
-
-          <li class="nav-item menu">
-            <a href="#" class="nav-link ">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                TUNTUTAN
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="ptun_daf.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Daftar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_kem.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dikembalikan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_smk.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Semak</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_lus.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lulus</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-
-
-
-
-          <li class="nav-item menu">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                PENYATA
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pet_janapyt.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jana</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_sed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sedia</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_sah.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Semak</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_lus.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lulus</p>
-                </a>
-              </li>
-
-            </ul>
-          </li>
-
-
-          <li class="nav-header">MENU KEMASKINI</li>
-
-
-
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                KEMASKINI
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pet_ed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Petani</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="kon_ed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kontraktor</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_ed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tuntutan Individu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ktun_ed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tuntutan Kontraktor</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_ed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Penyata Individu</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pytkon_ed.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Penyata Kontraktor</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-
-
-          <li class="nav-header">MENU CARIAN</li>
-
-          <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-              <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                  <i class="fas fa-search fa-fw"></i>
-                </button>
-              </div>
+            <div>
+                <header>
+                    <div class="mb-3">
+                        <ul class="flex flex-wrap text-xs font-medium -m-1">
+                            <li class="m-1">
+                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out" href="#0">Product</a>
+                            </li>
+                            <li class="m-1">
+                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out" href="#0">Engineering</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
+                        <a class="hover:text-gray-100 transition duration-150 ease-in-out" href="#0">Designing a functional workflow at home.</a>
+                    </h3>
+                </header>
+                <p class="text-lg text-gray-400 flex-grow">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.</p>
+                <footer class="flex items-center mt-4">
+                    <a href="#0">
+                        <img class="rounded-full flex-shrink-0 mr-4" src="https://preview.cruip.com/open-pro/images/news-author-04.jpg" width="40" height="40" alt="Author 04">
+                    </a>
+                    <div>
+                        <a class="font-medium text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out" href="#0">Chris Solerieu</a>
+                        <span class="text-gray-700"> - </span>
+                        <span class="text-gray-500">Jan 19, 2020</span>
+                    </div>
+                </footer>
             </div>
-          </div>
-
-
-
-          <li class="nav-header">MENU LAPORAN/SENARAI</li>
-
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-edit"></i>
-              <p>
-                LAPORAN/SENARAI
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pet_ls.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Permohonan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="kon_ls.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kontraktor</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="ptun_ls.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tuntutan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pyt_ls.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Penyata</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pbyr_ls.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pembayaran</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-
-          <li class="nav-header">MENU SISTEM</li>
-
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fa-regular fa-gear"></i>
-              <p>
-                SISTEM
-                <i class="right fa fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="sis_z.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Zon</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="sis_kw.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Kawasan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="sis_m.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mukim</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="sis_lok.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lokasi</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="sis_user.php" class="nav-link" style="text-decoration:none;">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pengguna</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-      </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+        </article>
     </div>
-    <!-- /.sidebar -->
-  </aside>
+</section>
 
-  <!-- Content Wrapper. Contains page content -->
-  {{-- <div class="content-wrapper"> --}}
-    <!-- Content Header (Page header) -->
-    {{-- <div class="content-header">
-        <ol class="breadcrumb">
-            <li><a href="index.php"><i class="fa fa-dashboard"></i> Laman Utama</a></li>
-          </ol> --}}
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+<!-- More components -->
+<div x-show="open" class="fixed bottom-0 right-0 w-full md:bottom-8 md:right-12 md:w-auto z-60" x-data="{ open: true }">
+    <div class="bg-gray-800 text-gray-50 text-sm p-3 md:rounded shadow-lg flex justify-between">
+        <div>👉 <a class="hover:underline ml-1" href="https://cruip.com/?ref=codepen-cruip-blog-post-hover" target="_blank">More components on Cruip.com</a></div>
+        <button class="text-gray-500 hover:text-gray-400 ml-5" @click="open = false">
+            <span class="sr-only">Close</span>
+            <svg class="w-4 h-4 flex-shrink-0 fill-current" viewBox="0 0 16 16">
+                <path d="M12.72 3.293a1 1 0 00-1.415 0L8.012 6.586 4.72 3.293a1 1 0 00-1.414 1.414L6.598 8l-3.293 3.293a1 1 0 101.414 1.414l3.293-3.293 3.293 3.293a1 1 0 001.414-1.414L9.426 8l3.293-3.293a1 1 0 000-1.414z" />
+            </svg>
+        </button>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-     <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-          Sistem Pembayaran Subsidi Pembajakan Sawah Padi
-          <small>Modul Pegawai Pertanian</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="index.php"><i class="fa fa-dashboard"></i> Laman Utama</a></li>
-        </ol>
-      </section>
-  <!-- Main content -->
-    <form method="post" action="pet_act.php" id="pet" name="pet">
-    <section class="content">
-       <div class="row ">
-
-       <!-- left column -->
-          <div class="col-md-6">
-            <!-- general form elements -->
-            <div class="box box-primary">
-              <div class="box-header with-border">
-                <h3 class="box-title">BUTIR-BUTIR PEMOHON (INDIVIDU)</h3>
-              </div>
-              <!-- /.box-header -->
-
-              <div class="box-body">
-                  <div class="form-group">
-                    <label for="pemohon">Nama Pemohon</label>
-                    <input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon">
-
-                    <label for="pendaftaran">No.Kad Pengenalan</label>
-                    <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan">
-
-                    <!-- textarea -->
-                    <label>Alamat</label>
-                    <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat"></textarea>
-
-                    <label for="poskod">Poskod</label>
-                    <input type="text" class="form-control" id="poskod" name="poskod" placeholder="Poskod">
-
-                    <!-- select -->
-                    <label for="daerah">Daerah</label>
-                    <select class="form-control"  name="daerah">
-                      <option value="0">Sila pilih...</option>
-                         <option value="32"
-                          >Banggi					</option>
-                         <option value="17"
-                          >Beaufort					</option>
-                         <option value="8"
-                          >Beluran					</option>
-                         <option value="38"
-                          >Kemabong					</option>
-                         <option value="13"
-                          >Keningau					</option>
-                         <option value="9"
-                          >Kinabatangan					</option>
-                         <option value="3"
-                          >Kota Belud					</option>
-                         <option value="1"
-                          >Kota Kinabalu					</option>
-                         <option value="22"
-                          >Kota Marudu					</option>
-                         <option value="18"
-                          >Kuala Penyu					</option>
-                         <option value="5"
-                          >Kudat					</option>
-                         <option value="23"
-                          >Kunak					</option>
-                         <option value="11"
-                          >Lahad Datu					</option>
-                         <option value="36"
-                          >Matunggong					</option>
-                         <option value="35"
-                          >Membakut					</option>
-                         <option value="34"
-                          >Menumbok					</option>
-                         <option value="15"
-                          >Nabawan					</option>
-                         <option value="40"
-                          >Paitan					</option>
-                         <option value="2"
-                          >Papar					</option>
-                         <option value="21"
-                          >Penampang					</option>
-                         <option value="26"
-                          >Pitas					</option>
-                         <option value="39"
-                          >Putatan					</option>
-                         <option value="6"
-                          >Ranau					</option>
-                         <option value="7"
-                          >Sandakan					</option>
-                         <option value="12"
-                          >Semporna					</option>
-                         <option value="19"
-                          >Sipitang					</option>
-                         <option value="37"
-                          >Sook					</option>
-                         <option value="14"
-                          >Tambunan					</option>
-                         <option value="33"
-                          >Tamparuli					</option>
-                         <option value="10"
-                          >Tawau					</option>
-                         <option value="30"
-                          >Telupid					</option>
-                         <option value="16"
-                          >Tenom					</option>
-                         <option value="31"
-                          >Tongod					</option>
-                         <option value="4"
-                          >Tuaran					</option>
-
-                    </select>
-
-                   <label for="notelrumah">No. Telefon</label>
-                    <input type="text" class="form-control" id="notel" name="notel" placeholder="No.Telefon">
-
-                   <label for="notel">Handphone</label>
-                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone">
-
-              </div> <!-- /.form-group -->
-            </div> <!-- /.box-body -->
-            </div> <!-- /.box -->
-              </div> <!--/.col (left) -->
-
-          <!-- right column -->
-          <div class="col-md-6">
-            <!-- general form elements -->
-            <div class="box box-primary">
-              <div class="box-header with-border"><h3 class="box-title">MAKLUMAT LAIN </h3></div>
-              <div class="form-group">
-              <!-- /.box-header -->
-
-                <div class="box-body">
-                <label>No.Kad Petani</label>
-                <div class="input-group date">
-                <input name="nokad" type="text" class="form-control" id="nokad">
-                </div>
-                <label>Tahun Permohonan</label>
-                <div class="input-group date">
-                <input name="tahunpohon" type="text" class="form-control" id="tahunpohon" value=2023>
-                </div>
-                  <BR>
-
-                  <!-- radio -->
-                  <div class="form-group">
-                  <label>Pendaftaran</label>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="rd_daftar" id="rd_daftar1" value=1 checked>
-                        Baru
-                     </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="rd_daftar" id="rd_daftar2" value=2>
-                        Lama
-                      </label>
-                    </div>
-                  </div>
-
-
-                  <p></p>
-                  <div class="form-group">
-                  <P><label for="Pemohon">Musim Penanaman</label></P>
-
-                  <!-- checkbox -->
-                  <div class="form-group">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="ch_musim" id="ch_musim" value=1>
-                        Luar Musim (Bulan Mac - Julai)</input>
-                      </label>
-                    </div>
-
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="ch_musim2" id="ch_musim2" value=1>
-                        Musim Utama (Bulan Ogos - Feb)</input>
-                      </label>
-                    </div>
-                </div>
-      <label>Tarikh</label>
-      <div class="input-group date">
-      <input name="tarikh" type="text" class="form-control" id="tarikh"/>
-          <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-      </div>
-
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-primary" name="submit1" value="seterusnya">Simpan & Seterusnya</button>
-                </div>
-            </div> <!-- /.form-group -->
-            </div> <!-- /.box-body -->
-            </div> <!-- /.box -->
-              </div> <!--/.col (right) -->
-      </div> <!-- /.row -->
-      </section>
-    </form>
-  </div>
-  <footer class="main-footer"><b>Dibangunkan & Hakcipta Terpelihara</b><strong> &copy; 2020 <a href="http://www.jpkn.sabah.gov.my">JPKN</a>.</strong>
-  </footer>
-  </div><!--content wrapper-->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
+<!--
+Include Tailwind JIT CDN compiler
+More info: https://beyondco.de/blog/tailwind-jit-compiler-via-cdn
+-->
+<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+
+<!-- Specify a custom Tailwind configuration -->
+<script type="tailwind-config">
+{
+  theme: {
+    extend: {
+      colors: {
+        gray: colors.blueGray,
+      }
+    }
+  }
+}
 </script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
-</body>
-</html>
+
+<!-- Snippet -->
+<section class="flex flex-col justify-center antialiased bg-gray-50 text-gray-600 min-h-screen p-4">
+    <div class="h-full">
+        <!-- Card -->
+        <div class="max-w-xs mx-auto">
+            <div class="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden">
+                <!-- Image -->
+                <a class="block focus:outline-none focus-visible:ring-2" href="#0">
+                    <figure class="relative h-0 pb-[56.25%] overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src="https://res.cloudinary.com/dc6deairt/image/upload/v1638284256/course-img_tf0g8c.png" width="320" height="180" alt="Course">
+                    </figure>
+                </a>
+                <!-- Card Content -->
+                <div class="flex-grow flex flex-col p-5">
+                    <!-- Card body -->
+                    <div class="flex-grow">
+                        <!-- Header -->
+                        <header class="mb-3">
+                            <a class="block focus:outline-none focus-visible:ring-2" href="#0">
+                                <h3 class="text-[22px] text-gray-900 font-extrabold leading-snug">The Ultimate JavaScript Course</h3>
+                            </a>
+                        </header>
+                        <!-- Content -->
+                        <div class="mb-8">
+                            <p>The JavaScript course for everyone! Master JavaScript with projects, challenges and theory.</p>
+                        </div>
+                    </div>
+                    <!-- Card footer -->
+                    <div class="flex justify-end space-x-2">
+                        <a class="font-medium text-sm inline-flex items-center justify-center px-3 py-1.5 rounded leading-5 text-gray-500 hover:underline focus:outline-none focus-visible:ring-2" href="#0">Cancel</a>
+                        <a class="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-50 focus:outline-none focus-visible:ring-2 hover:bg-indigo-100 text-indigo-500" href="#0">Preview</a>
+                        <a class="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-indigo-500 focus:outline-none focus-visible:ring-2 hover:bg-indigo-600 text-white" href="#0">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- More components -->
+<div x-show="open" class="fixed bottom-0 right-0 w-full md:bottom-8 md:right-12 md:w-auto z-60" x-data="{ open: true }">
+    <div class="bg-gray-800 text-gray-50 text-sm p-3 md:rounded shadow-lg flex justify-between">
+        <div>👉 <a class="hover:underline ml-1" href="https://cruip.com/?ref=codepen-cruip-snippet-10" target="_blank">More components on Cruip.com</a></div>
+        <button class="text-gray-500 hover:text-gray-400 ml-5" @click="open = false">
+            <span class="sr-only">Close</span>
+            <svg class="w-4 h-4 flex-shrink-0 fill-current" viewBox="0 0 16 16">
+                <path d="M12.72 3.293a1 1 0 00-1.415 0L8.012 6.586 4.72 3.293a1 1 0 00-1.414 1.414L6.598 8l-3.293 3.293a1 1 0 101.414 1.414l3.293-3.293 3.293 3.293a1 1 0 001.414-1.414L9.426 8l3.293-3.293a1 1 0 000-1.414z" />
+            </svg>
+        </button>
+    </div>
+</div>
+    

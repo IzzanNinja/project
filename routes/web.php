@@ -67,3 +67,16 @@ Route::get('/pet_cetak', function () {
 });
 
 
+Route::get('/ptundaf', function () {
+    return view('layouts.ptundaf');
+})->name('ptundaf');
+Route::get('/pet.smk', function () {
+    return view('layouts.pet.smk');
+})->name('pet.smk');
+Route::get('/ptunsemak', function () {
+    return view('layouts.ptunsemak');
+})->name('ptunsemak');
+Route::get('/petsemak', function () {
+    return view('layouts.petsemak');
+})->name('petsemak');
+

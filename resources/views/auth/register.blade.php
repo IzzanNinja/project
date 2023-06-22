@@ -38,7 +38,7 @@
 
                                 <div class="form-outline mb-4">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                    <label class="form-label" for="form3Example3cg">Email Anda</label>
+                                    <label class="form-label" for="form3Example3cg">Email Anda
                                     <small>(contoh abc123@gmail.com)</small>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
