@@ -96,31 +96,19 @@
                 <td>Siap Bajak</td>
                 <td>:</td>
                 <td><select class="form-select"  name="bulan" style="max-width:30%;">
-                                    <option value="0">Sila Pilih...</option>
-                                    <option value="1"
-                  >Januari					        </option>
-                                    <option value="2"
-                  >Februari					        </option>
-                                    <option value="3"
-                  >Mac					        </option>
-                                    <option value="4"
-                  >April					        </option>
-                                    <option value="5"
-                  >Mei					        </option>
-                                    <option value="6"
-                  >Jun					        </option>
-                                    <option value="7"
-                  >Julai					        </option>
-                                    <option value="8"
-                  >Ogos					        </option>
-                                    <option value="9"
-                  >September					        </option>
-                                    <option value="10"
-                  >Oktober					        </option>
-                                    <option value="11"
-                  >November					        </option>
-                                    <option value="12"
-                  >Disember					        </option>
+                    <option value="0">Sila Pilih...</option>
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Mac</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Julai</option>
+                    <option value="8">Ogos</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Disember</option>
                                 </select></td></tr>
             <tr>
                 <td>Tuntutan (RM)</td>

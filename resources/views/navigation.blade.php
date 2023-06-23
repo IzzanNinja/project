@@ -248,13 +248,13 @@ zaraz.init)
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('carian') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Carian Status</p>
                     </a>
                 </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('carian') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Carian Laporan</p>
                         </a>

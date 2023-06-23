@@ -36,13 +36,10 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    </div>
                                 </div>
-                                <button class="btn btn-dark btn-outline-primary btn-lg px-5 mb-2" style="padding: 0.5rem 1rem; border-radius: 0.5rem; width: fit-content;" title="Klik untuk Log Masuk" aria-label="Log Masuk">Log Masuk</button>
-
-
+                                <button class="btn btn-dark btn-outline-primary btn-lg px-5 mb-3" title="Klik untuk Log Masuk" aria-label="Log Masuk">Log Masuk</button>
                                 <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="{{ route('password.request') }}">Lupa kata laluan? sila klik sini</a></p>
-                                <p class="mb-0">Untuk pengguna baru sila daftar dahulu <a href={{route('register')}} class="btn btn-outline-light btn-lg px-5 btn-success" onclick="openNewPage()">Daftar</a></p>
+                                <p class="mb-0">Untuk pengguna baru sila daftar dahulu <a href="http://ebajak.test/register" class="btn btn-outline-light btn-lg px-5 btn-success" onclick="openNewPage()">Daftar</a></p>
                             </form>
                         </div>
                     </div>
@@ -59,7 +56,6 @@
         </div>
     </section>
 @endsection
-
 
 
 

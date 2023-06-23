@@ -79,4 +79,7 @@ Route::get('/ptunsemak', function () {
 Route::get('/petsemak', function () {
     return view('layouts.petsemak');
 })->name('petsemak');
+Route::get('/carian', function () {
+    return view('layouts.carian');
+})->name('carian');
 
