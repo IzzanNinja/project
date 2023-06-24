@@ -1,7 +1,4 @@
 @extends('navigation')
-{{-- <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-</head> --}}
 @section('navigation')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -15,7 +12,9 @@
         </ol>
     </section>
 <!-- Main content -->
-    <form method="post" action="pet_act.php" id="pet" name="pet">
+<form method="POST" action="{{ route('daftar.store') }}">
+@csrf
+
     <section class="content">
     <div class="row ">
 
@@ -45,7 +44,7 @@
 
                     <!-- select -->
                     <label for="daerah">Daerah</label>
-                    <select class="form-control"  name="daerah">
+                    <select class="form-control"  name="daerah_id">
                       <option value="0">Sila pilih...</option>
                          <option value="32"
                           >Banggi					</option>
