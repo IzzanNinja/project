@@ -206,7 +206,7 @@ zaraz.init)
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('petsemak') }}" class="nav-link">
+                    <a href="{{ route('semakdaftar') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Semak Daftar</p>
                     </a>
@@ -224,13 +224,13 @@ zaraz.init)
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('ptundaf') }}" class="nav-link">
+                    {{-- <a href="{{ route('ptundaf') }}" class="nav-link"> --}}
                         <i class="far fa-circle nav-icon"></i>
                         <p>Daftar Tuntutan</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('ptunsemak') }}" class="nav-link">
+                    {{-- <a href="{{ route('ptunsemak') }}" class="nav-link"> --}}
                         <i class="far fa-circle nav-icon"></i>
                         <p>Semak Tuntutan</p>
                     </a>
@@ -248,13 +248,13 @@ zaraz.init)
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('carian') }}" class="nav-link">
+                    {{-- <a href="{{ route('carian') }}" class="nav-link"> --}}
                         <i class="far fa-circle nav-icon"></i>
                         <p>Carian Status</p>
                     </a>
                 </li>
                     <li class="nav-item">
-                        <a href="{{ route('carian') }}" class="nav-link">
+                        {{-- <a href="{{ route('carian') }}" class="nav-link"> --}}
                             <i class="far fa-circle nav-icon"></i>
                             <p>Carian Laporan</p>
                         </a>

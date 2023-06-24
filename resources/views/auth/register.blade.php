@@ -38,7 +38,7 @@
 
                                 <div class="form-outline mb-4">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                    <label class="form-label" for="form3Example3cg">Email Anda
+                                    <label class="form-label" for="form3Example3cg">Email Anda</label>
                                     <small>(contoh abc123@gmail.com)</small>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                                 </div>
 
                                 <p class="text-center text-muted mt-5 mb-0">Sudah Daftar?
-                                    <a href="http://ebajak.test/login" button type="button" class="btn btn-link btn-outline-primary">Log Masuk disini</button></a></p>
+                                    <a href="login" button type="button" class="btn btn-link btn-outline-primary">Log Masuk disini</button></a></p>
                             </div>
                         </div>
                     </div>

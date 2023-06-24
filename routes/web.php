@@ -1,31 +1,42 @@
-<?php
+    <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SetPasswordController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ApplicantController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+// Default route
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Routes for home functionality
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/create', [HomeController::class, 'create'])->name('todolist.create');
+    Route::post('/create', [HomeController::class, 'store'])->name('todolist.store');
+    Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('todolist.edit');
+    Route::post('/update', [HomeController::class, 'update'])->name('todolist.update');
+    Route::delete('/delete/{id}', [HomeController::class, 'delete'])->name('todolist.delete');
+    Route::get('/view', [HomeController::class, 'view'])->name('view');
+});
+
+// Routes for daftar functionality
+Route::middleware('auth')->group(function () {
+    Route::get('/daftar', [DaftarController::class, 'index'])->name('daftar');
+    Route::post('/store', [DaftarController::class, 'store'])->name('store');
+    Route::get('/daftar/{id}/edit', [DaftarController::class, 'edit'])->name('daftar.edit');
+});
+
+Route::get('/semakdaftar', [DaftarController::class, 'index'])->name('semakdaftar');
+
 
 
 // New User Registration
@@ -37,49 +48,17 @@ Route::get('set-password', [SetPasswordController::class, 'showSetPasswordForm']
 Route::post('set-password', [SetPasswordController::class, 'setPassword']);
 
 // Password Reset
-
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
-
-Route::get('/daftar', function () {
-    return view('layouts.daftar');
-})->name('daftar');
-
-Route::view('senaraitanah', 'senaraitanah');
-
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
-
-
-// Route::view('dashboard', 'Dashboard');
-
-// Registration routes
-Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+// Other routes...
 Route::get('/success', function () {
     return view('auth.success');
 });
 
-Route::get('/pet_cetak', function () {
-    return view('pet_cetak');
-});
+Route::view('senaraitanah', 'senaraitanah');
 
+// Registration routes
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/ptundaf', function () {
-    return view('layouts.ptundaf');
-})->name('ptundaf');
-Route::get('/pet.smk', function () {
-    return view('layouts.pet.smk');
-})->name('pet.smk');
-Route::get('/ptunsemak', function () {
-    return view('layouts.ptunsemak');
-})->name('ptunsemak');
-Route::get('/petsemak', function () {
-    return view('layouts.petsemak');
-})->name('petsemak');
-Route::get('/carian', function () {
-    return view('layouts.carian');
-})->name('carian');
 

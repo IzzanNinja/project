@@ -27,30 +27,144 @@
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <header class="main-header">
-            <nav class="navbar navbar-expand navbar-white navbar-light">
-                <ul class="navbar-nav ml-auto"> <!-- Add ml-auto class to align items to the right -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="profail.php">Profail ERWATI</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Log Keluar</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <!-- Rest of the content -->
-    </div>
-</body>
+<div class="wrapper">
 
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="img/doalogo.gif" alt="ebajakLogo" height="60" width="60">
+  </div>
 
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    {{-- <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="index3.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Contact</a>
+      </li>
+    </ul> --}}
 
+    <!-- Right navbar links -->
+    <ul class="nav ml-auto"> <!-- Add the "ml-auto" class here -->
+        <li class="nav-item">
+            <a class="nav-link" href="profail.php">Profail ERWATI</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="logout.php">Log Keluar</a>
+        </li>
+    </ul>
+</nav>
+
+{{-- </header>
+</div> --}}
+      {{-- <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-comments"></i>
+          <span class="badge badge-danger navbar-badge">3</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Brad Diesel
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div> --}}
+            <!-- Message End -->
+          {{-- </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  John Pierce
+                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">I got your message bro</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div> --}}
+            <!-- Message End -->
+          {{-- </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nora Silvester
+                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">The subject goes here</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+              </div>
+            </div> --}}
+            <!-- Message End -->
+          {{-- </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        </div>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">15</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <span class="dropdown-item dropdown-header">15 Notifications</span>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item"> --}}
+            {{-- <i class="fas fa-users mr-2"></i> 8 friend requests
+            <span class="float-right text-muted text-sm">12 hours</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-file mr-2"></i> 3 new reports
+            <span class="float-right text-muted text-sm">2 days</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li> --}}
+      {{-- <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul> --}}
+  {{-- </nav> --}}
+  <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('home') }}" class="brand-link">
+    <a href="index3.html" class="brand-link">
       <img src="img/doalogo.gif" alt="eBajak Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">eBajak</span>
     </a>
@@ -77,7 +191,7 @@
                with font-awesome or any other icon font library -->
                <li class="nav-header">MENU PETANI</li>
           <li class="nav-item menu">
-            <a href="#" class="nav-link active ">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fa fa-edit"></i>
               <p>
                 PETANI
@@ -86,7 +200,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active ">
+                <a href="{{ route('daftar') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar</p>
                 </a>
@@ -486,208 +600,30 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
-          Sistem Pembayaran Subsidi Pembajakan Sawah Padi
-          <small>Modul Pegawai Pertanian</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="index.php"><i class="fa fa-dashboard"></i> Laman Utama</a></li>
-        </ol>
-      </section>
-  <!-- Main content -->
-    <form method="post" action="pet_act.php" id="pet" name="pet">
+      <h1>
+        Sistem Pembayaran Subsidi Pembajakan Sawah Padi
+        <small>Modul Pegawai Pertanian</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="index.php"><i class="fa fa-dashboard"></i> Laman Utama</a></li>
+      </ol>
+    </section>    <!-- Main content -->
     <section class="content">
-       <div class="row ">
+    <h3>Salam Sejahtera...</h3>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center><h1>Klik untuk muat turun <a href="manual/manual_ebajak.pdf"  target="_blank">Manual eBajak</a></h1></center>
 
-       <!-- left column -->
-          <div class="col-md-6">
-            <!-- general form elements -->
-            <div class="box box-primary">
-              <div class="box-header with-border">
-                <h3 class="box-title">BUTIR-BUTIR PEMOHON (INDIVIDU)</h3>
-              </div>
-              <!-- /.box-header -->
-
-              <div class="box-body">
-                  <div class="form-group">
-                    <label for="pemohon">Nama Pemohon</label>
-                    <input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon">
-
-                    <label for="pendaftaran">No.Kad Pengenalan</label>
-                    <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan">
-
-                    <!-- textarea -->
-                    <label>Alamat</label>
-                    <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat"></textarea>
-
-                    <label for="poskod">Poskod</label>
-                    <input type="text" class="form-control" id="poskod" name="poskod" placeholder="Poskod">
-
-                    <!-- select -->
-                    <label for="daerah">Daerah</label>
-                    <select class="form-control"  name="daerah">
-                      <option value="0">Sila pilih...</option>
-                         <option value="32"
-                          >Banggi					</option>
-                         <option value="17"
-                          >Beaufort					</option>
-                         <option value="8"
-                          >Beluran					</option>
-                         <option value="38"
-                          >Kemabong					</option>
-                         <option value="13"
-                          >Keningau					</option>
-                         <option value="9"
-                          >Kinabatangan					</option>
-                         <option value="3"
-                          >Kota Belud					</option>
-                         <option value="1"
-                          >Kota Kinabalu					</option>
-                         <option value="22"
-                          >Kota Marudu					</option>
-                         <option value="18"
-                          >Kuala Penyu					</option>
-                         <option value="5"
-                          >Kudat					</option>
-                         <option value="23"
-                          >Kunak					</option>
-                         <option value="11"
-                          >Lahad Datu					</option>
-                         <option value="36"
-                          >Matunggong					</option>
-                         <option value="35"
-                          >Membakut					</option>
-                         <option value="34"
-                          >Menumbok					</option>
-                         <option value="15"
-                          >Nabawan					</option>
-                         <option value="40"
-                          >Paitan					</option>
-                         <option value="2"
-                          >Papar					</option>
-                         <option value="21"
-                          >Penampang					</option>
-                         <option value="26"
-                          >Pitas					</option>
-                         <option value="39"
-                          >Putatan					</option>
-                         <option value="6"
-                          >Ranau					</option>
-                         <option value="7"
-                          >Sandakan					</option>
-                         <option value="12"
-                          >Semporna					</option>
-                         <option value="19"
-                          >Sipitang					</option>
-                         <option value="37"
-                          >Sook					</option>
-                         <option value="14"
-                          >Tambunan					</option>
-                         <option value="33"
-                          >Tamparuli					</option>
-                         <option value="10"
-                          >Tawau					</option>
-                         <option value="30"
-                          >Telupid					</option>
-                         <option value="16"
-                          >Tenom					</option>
-                         <option value="31"
-                          >Tongod					</option>
-                         <option value="4"
-                          >Tuaran					</option>
-
-                    </select>
-
-                   <label for="notelrumah">No. Telefon</label>
-                    <input type="text" class="form-control" id="notel" name="notel" placeholder="No.Telefon">
-
-                   <label for="notel">Handphone</label>
-                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone">
-
-              </div> <!-- /.form-group -->
-            </div> <!-- /.box-body -->
-            </div> <!-- /.box -->
-              </div> <!--/.col (left) -->
-
-          <!-- right column -->
-          <div class="col-md-6">
-            <!-- general form elements -->
-            <div class="box box-primary">
-              <div class="box-header with-border"><h3 class="box-title">MAKLUMAT LAIN </h3></div>
-              <div class="form-group">
-              <!-- /.box-header -->
-
-                <div class="box-body">
-                <label>No.Kad Petani</label>
-                <div class="input-group date">
-                <input name="nokad" type="text" class="form-control" id="nokad">
-                </div>
-                <label>Tahun Permohonan</label>
-                <div class="input-group date">
-                <input name="tahunpohon" type="text" class="form-control" id="tahunpohon" value=2023>
-                </div>
-                  <BR>
-
-                  <!-- radio -->
-                  <div class="form-group">
-                  <label>Pendaftaran</label>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="rd_daftar" id="rd_daftar1" value=1 checked>
-                        Baru
-                     </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="rd_daftar" id="rd_daftar2" value=2>
-                        Lama
-                      </label>
-                    </div>
-                  </div>
-
-
-                  <p></p>
-                  <div class="form-group">
-                  <P><label for="Pemohon">Musim Penanaman</label></P>
-
-                  <!-- checkbox -->
-                  <div class="form-group">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="ch_musim" id="ch_musim" value=1>
-                        Luar Musim (Bulan Mac - Julai)</input>
-                      </label>
-                    </div>
-
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" name="ch_musim2" id="ch_musim2" value=1>
-                        Musim Utama (Bulan Ogos - Feb)</input>
-                      </label>
-                    </div>
-                </div>
-      <label>Tarikh</label>
-      <div class="input-group date">
-      <input name="tarikh" type="text" class="form-control" id="tarikh"/>
-          <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-      </div>
-
-                <div class="box-footer">
-                  <button type="submit" class="btn btn-primary" name="submit1" value="seterusnya">Simpan & Seterusnya</button>
-                </div>
-            </div> <!-- /.form-group -->
-            </div> <!-- /.box-body -->
-            </div> <!-- /.box -->
-              </div> <!--/.col (right) -->
-      </div> <!-- /.row -->
-      </section>
-    </form>
-  </div>
-  <footer class="main-footer"><b>Dibangunkan & Hakcipta Terpelihara</b><strong> &copy; 2020 <a href="http://www.jpkn.sabah.gov.my">JPKN</a>.</strong>
-  </footer>
-  </div><!--content wrapper-->
+    </section>
+    <!-- /.content -->
+</div>
+<footer class="main-footer"><b>Dibangunkan & Hakcipta Terpelihara</b><strong> &copy; 2020 <a href="http://www.jpkn.sabah.gov.my">JPKN</a>.</strong>
+</footer>
+</div><!--content wrapper-->
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

@@ -121,20 +121,8 @@
                    <label for="notelrumah">No. Telefon</label>
                     <input type="text" class="form-control" id="notel" name="notel" placeholder="No.Telefon">
 
-
-
-
-                        <label for="notel">Handphone</label>
-                        <div class="input-group">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                        </div>
-                        <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone">
-                        </div>
-
-
-
-
+                   <label for="notel">Handphone</label>
+                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone">
 
               </div> <!-- /.form-group -->
             </div> <!-- /.box-body -->
