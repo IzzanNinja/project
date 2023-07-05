@@ -1,5 +1,16 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-<html><head><title>JABATAN PERTANIAN SABAH, MALAYSIA (BORANG PERMOHONAN SUBSIDI BAJAK) </title>
+// Retrieve all daftar records for the logged in user
+$userId = Auth::id();
+$daftars = DB::table('daftar')->where('id', $userId)->get();
+?>
+<html>
+
+
+
+<head><title>JABATAN PERTANIAN SABAH, MALAYSIA (BORANG PERMOHONAN SUBSIDI BAJAK) </title>
     <style>@page { size: A4 }</style>
     </head>
     <body onLoad="printit()" bgcolor="#FFFFFF" text="#000000">
@@ -8,31 +19,31 @@
     <p align=right><font size=2>No.Kad Petani </font>
       <center><img src="img/doalogo.gif" WIDTH="57" HEIGHT="56"><br>
       <font size=2>JABATAN PERTANIAN SABAH<br></font>
-
+      @foreach ($daftars as $daftar)
         <font size="3"><b>BORANG PERMOHONAN SUBSIDI PEMBAJAKAN SAWAH PADI</b><br></FONT>
         <font size=2>(Diisi Dalam 2 Salinan )</font><br>
       <font size="3">Tahun: 2023<br>
       <font style="text-align:left;"><b>BUTIR-BUTIR PEMOHON (Diisi oleh pemohon)</b></font><br>
       <font size="2" style="text-align:center;"><i>Pendaftaran Baru
-                          <input type="checkbox" id="chkbaru" name="chkbaru" checked>
+                          <input type="checkbox" id="chkbaru" name="chkbaru" checked value="1" {{ $daftar->rd_daftar == 1 ? 'checked' : '' }}>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
-                        Pendaftaran Lama&nbsp; 					<input type="checkbox" id="chklama" name="chklama">
+                        Pendaftaran Lama&nbsp; 					<input type="checkbox" id="chklama" name="chklama" value="2" {{ $daftar->rd_daftar == 2 ? 'checked' : '' }}>
                         &nbsp;</td>	  </i></font></center>
 
       <table align="center" style="FONT-FAMILY: Arial Narrow; FONT-SIZE:14px" border="0" cellPadding="2" cellSpacing="1" width="90%">
         <tr>
-      <tr><td>1. Nama Pemohon:</td>
+      <tr><td>1. Nama Pemohon: {{ $daftar->pemohon }}</td>
             <td></td>
-        <tr><td>2. No. Kad Pengenalan:</td>
-            <td>3. No. Telefon/Handphone: </td>
-        <tr><td colspan=2>4. Alamat Perhubungan: ,&nbsp;&nbsp;
+        <tr><td>2. No. Kad Pengenalan:{{ $daftar->nokp }}</td>
+            <td>3. No. Telefon/Handphone: {{ $daftar->nohp }} </td>
+        <tr><td colspan=2>4. Alamat Perhubungan:{{ $daftar->alamat }} ,&nbsp;&nbsp;
 
         </td>
         <tr><td colspan=2>5. Musim Penanaman: Luar Musim&nbsp;
-                                            <input type="checkbox" id="chkmusim" name="chkmusim">Bulan Mac - Julai
+                                            <input type="checkbox" id="chkmusim" name="chkmusim" value="1" {{ $daftar->ch_musim ? 'checked' : '' }}>Bulan Mac - Julai
 
               &nbsp;&nbsp;&nbsp;&nbsp;
-                        Musim Utama&nbsp; 					<input type="checkbox" id="chkmusim2" name="chkmusim2">Bulan Ogos - Feb
+                        Musim Utama&nbsp; 					<input type="checkbox" id="chkmusim2" name="chkmusim2" value="1" {{ $daftar->ch_musim2 ? 'checked' : '' }}>Bulan Ogos - Feb
                         &nbsp;</td>
 
 
@@ -70,6 +81,7 @@
           <td align="middle" valign="top">
           <td align="middle" valign="top">
           <td align="left" valign="top">
+            @endforeach
 
       </table>
     <HR>

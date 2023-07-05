@@ -6,14 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "almasaeed2010/adminlte": "~3.1",
+        "almasaeed2010/adminlte": "~3.2",
+        "biscolab/laravel-recaptcha": "^6.0",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "jeroennoten/laravel-adminlte": "^3.9",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "3.4"
+        "laravel/ui": "3.4",
+        "mews/captcha": "^3.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
