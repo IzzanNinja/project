@@ -257,7 +257,7 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fa-regular fa-user"></i>
                                 <p>
-                                    Pendaftaran
+                                    Profil Petani
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -265,17 +265,12 @@
                                 <li class="nav-item">
                                     <a href="{{ route('daftar') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Petani</p>
+                                        <p>Kemaskini Profil Petani</p>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('senaraitanah') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Tanah</p>
-                                    </a>
-                                </li>
+
                             </ul>
 
 
@@ -312,12 +307,7 @@
                                         <p>Carian Tuntutan</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('semakindex') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Semak Daftar</p>
-                                    </a>
-                                </li>
+
                             </ul>
         </aside>
 

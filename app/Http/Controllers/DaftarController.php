@@ -11,13 +11,6 @@ class DaftarController extends Controller
     public function index()
     {
         return view('daftar');
-
-      // Retrieve all daftar records for the logged-in user
-      $daftars = DB::table('daftar')->where('user_id', Auth::id())->get();
-
-      // Pass the daftar records to the view
-      return view('daftar.index')->with('daftar', $daftars);
-
     }
 
     public function show($id = null)
@@ -40,29 +33,32 @@ class DaftarController extends Controller
             return view('daftar')->with('daftar', $daftar);
         }
     }
-    // public function show($id)
-    // {
-    //     // Retrieve the daftar record with the given id and user_id
-    //     $daftar = DB::select('SELECT * FROM daftar WHERE id = ? AND user_id = ?', [$id, Auth::id()]);
-
-    //     // Check if the daftar record exists
-    //     if (!$daftar) {
-    //         abort(404);
-    //     }
-
-    //     // Pass the daftar record to the view
-    //     return view('semakdaftar')->with('daftar', $daftar[0]);
-    // }
-
 
     public function semakindex()
     {
         return view('semakdaftar');
     }
 
+    public function cetakindex()
+    {
+        return view('pet_cetak');
+    }
+
     public function store(Request $request)
     {
+        $userId = Auth::id();
+
+        // Check if the user has already filled in the data
+        $existingDaftar = DB::table('daftar')
+            ->where('user_id', $userId)
+            ->first();
+
+        if ($existingDaftar) {
+            return redirect('/senaraitanah')->with('error', 'You have already filled in the data.');
+        }
+
         DB::table('daftar')->insert([
+            'user_id' => $userId,
             'pemohon' => $request->pemohon,
             'nokp' => $request->nokp,
             'alamat' => $request->alamat,
@@ -83,5 +79,30 @@ class DaftarController extends Controller
         return redirect('/daftar')->with('success', 'Data berhasil disimpan!');
     }
 
+    public function create(Request $request)
+    {
+        // Tallying ID of logged in user with the daftar table
+        $userId = Auth::id();
+
+        DB::table('daftar')->insert([
+            'user_id' => $userId,
+            // Set other column values of daftar as needed
+        ]);
+
+        // Perform any additional logic or redirect as needed
+        $userId = Auth::id();
+
+        DB::table('tanah')->insert([
+            'pohonid' => $userId,
+            // Set other column values of daftar as needed
+        ]);
+
+    }
+    public function showPetCetakForm()
+    {
+        $user = Auth::user();
+        $tanah = DB::table('tanah')->where('pohonid', $user->id)->first();
+        return view('pet_cetak', compact('user', 'tanah'));
+    }
 }
 

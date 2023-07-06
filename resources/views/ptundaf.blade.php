@@ -1,7 +1,6 @@
-<?php
-// Retrieve all daftar records for the logged in user
-$daftars = DB::select('SELECT * FROM daftar WHERE id = ?', [Auth::id()]);
-?>
+@php
+    use Illuminate\Support\Facades\DB;
+@endphp
 @extends('navigation')
 @section('navigation')
     <html>
@@ -51,18 +50,18 @@ $daftars = DB::select('SELECT * FROM daftar WHERE id = ?', [Auth::id()]);
                                 <table id="pemohon" class="table table-noborder table-hover">
                                     <tr>
 
-                                        @foreach ($daftars as $daftar)
+
                                             <td width="15%">1. Nama Pemohon</td>
                                             <td width="2%">:</td>
-                                            <td width="83%">{{ $daftar->pemohon }}</td>
-                                        @endforeach
+                                            <td width="83%"><input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon" value="{{ Auth::user()->name }}" readonly></td>
+
                                     </tr>
                                     <tr>
-                                        @foreach ($daftars as $daftar)
+
                                             <td>2. Kad Pengenalan</td>
                                             <td>:</td>
-                                            <td>{{ $daftar->nokp }}
-                                        @endforeach
+                                            <td><input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ Auth::user()->kad_pengenalan }}" readonly></td>
+
                                         <input type="hidden" name="tahun" id="tahun" class="form-control" value=2021>
                                         <input type="hidden" name="nokp" id="nokp" class="form-control"
                                             value=751027125135>
@@ -71,11 +70,11 @@ $daftars = DB::select('SELECT * FROM daftar WHERE id = ?', [Auth::id()]);
                                         </td>
                                     </tr>
                                     <tr>
-                                        @foreach ($daftars as $daftar)
+
                                             <td>3. Alamat Perhubungan</td>
                                             <td>:</td>
-                                            <td>{{ $daftar->alamat }}</td>
-                                        @endforeach
+                                            <td><input type="text" class="form-control" id="nokp" name="alamat" placeholder="alamat" value="{{ Auth::user()->alamat }}" readonly></td>
+
                                     </tr>
                                 </table>
                             </div>
@@ -86,17 +85,17 @@ $daftars = DB::select('SELECT * FROM daftar WHERE id = ?', [Auth::id()]);
                                 <tr>
                                     <td width="17%">No. Pendaftaran</td>
                                     <td width="2%">:</td>
-                                    <td width="81%">TBN: A035</td>
+                                    <td width="81%"><input type="text" class="form-control" id="user_id" name="user_id" placeholder="user_id" value="{{ Auth::user()->user_id }}" readonly></td>
                                 </tr>
                                 <tr>
                                     <td>Tarikh Permohonan</td>
                                     <td>:</td>
-                                    <td>09/02/2021</td>
+                                    <td><input type="text" class="form-control" id="tarikh" name="tarikh" placeholder="tarikh" value="{{ Auth::user()->tarikh }}" readonly></td></td>
                                 </tr>
                                 <tr>
                                     <td>No. Geran</td>
                                     <td>:</td>
-                                    <td>NT.14304306</td>
+                                    <td><input type="text" class="form-control" id="nogeran" name="nogeran" placeholder="No. Geran"></td></td>
                                 </tr>
                                 <tr>
                                     <td>Luas Permohonan (Ekar)</td>
@@ -112,7 +111,7 @@ $daftars = DB::select('SELECT * FROM daftar WHERE id = ?', [Auth::id()]);
                                     <td>Kampung</td>
                                     <td>:</td>
                                     <td>
-                                        Kg. Nambayan</td>
+                                        <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="lokasi" value="{{ $tanah->lokasi }}" readonly></td></td></td>
                                 </tr>
                                 <tr>
                                     <td>Siap Bajak</td>
@@ -146,12 +145,12 @@ $daftars = DB::select('SELECT * FROM daftar WHERE id = ?', [Auth::id()]);
                                 <tr>
                                     <td width="17%">Nama Penerima</td>
                                     <td width="2%">:</td>
-                                    <td width="81%">Abel Bin Duanis</td>
+                                    <td width="81%"><input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon" value="{{ Auth::user()->name }}" readonly></td>
                                 </tr>
                                 <tr>
                                     <td>No.Kad Pengenalan</td>
                                     <td>:</td>
-                                    <td>751027125135</td>
+                                    <td><input type="text" class="form-control" id="nokp" name="alamat" placeholder="alamat" value="{{ Auth::user()->alamat }}" readonly></td>
                                 </tr>
                                 <tr>
                                     <td>No Akaun Bank</td>

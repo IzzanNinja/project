@@ -55,8 +55,8 @@ Keputusan Carian Petani Untuk Disemak Bagi Tahun: 2022    </H3> --}}
                                             @endforeach
                                             <td>
                                             </td>
-                                            <td style="text-align:center;"><a href="{{ url('/daftar/' . $daftar->id) }}"
-                                                    class="btn btn-sm btn-info">Lihat</a></a></td>
+                                            <td style="text-align:center;"><a href="{{ route('pet_cetak', ['id' => Auth::id()]) }}" class="btn btn-sm btn-info">Cetak</a>
+                                                    </td>
                                         </tr>
 
                                         <tr>
