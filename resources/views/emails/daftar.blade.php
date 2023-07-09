@@ -43,23 +43,23 @@
 
             <div class="box-body">
                 <div class="form-group">
-                    <label for="pemohon">Nama Pemohon :</label>
+                    <label for="pemohon">Nama Pemohon</label>
                     <input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon" value="{{ Auth::user()->name }}" readonly>
 
-                    <label for="pendaftaran">No.Kad Pengenalan :</label>
+                    <label for="pendaftaran">No.Kad Pengenalan</label>
                     <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ Auth::user()->kad_pengenalan }}" readonly>
 
                     <!-- textarea -->
-                    <label>Alamat :</label>
-                    <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat" maxlength="255" required>{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('alamat') }}</textarea>
+                    <label>Alamat</label>
+                    <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat">{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('alamat') }}</textarea>
 
 
 
-                    <label for="poskod">Poskod :</label>
-                    <input type="text" class="form-control" id="poskod" name="poskod" placeholder="Poskod" pattern="[0-9]{5}" maxlength="5" required value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('poskod') }}">
+                    <label for="poskod">Poskod</label>  
+                    <input type="text" class="form-control" id="poskod" name="poskod" placeholder="Poskod" value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('poskod') }}">
 
                     <!-- select daerah-->
-                    <label for="daerah">Daerah :</label>
+                    <label for="daerah">Daerah</label>
                     <select class="form-control" name="daerah_id">
                         <option value="">Sila pilih...</option>
                         @foreach (DB::table('daerah')->get() as $daerah)
@@ -69,11 +69,11 @@
                         @endforeach
                     </select>
 
-                    <label for="notelrumah">No. Telefon :</label>
-                    <input type="text" class="form-control" id="notel" name="notel" placeholder="No.Telefon" data-inputmask="'mask': ['999-999-99999 ', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" placeholder="___-___-_____" pattern="[0-9]{1,11}" title="Sila masukkan nombor telefon lengkap" required value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('notel') }}">
+                    <label for="notelrumah">No. Telefon</label>
+                    <input type="text" class="form-control" id="notel" name="notel" placeholder="No.Telefon" value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('notel') }}">
 
-                    <label for="notel">No. Lain yang boleh dihubungi :</label>
-                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone" data-inputmask="'mask': ['999-999-99999 ', '+099 99 99 9999[9]-9999']" data-mask="" inputmode="text" placeholder="___-___-_____" pattern="[0-9]{1,11}" title="Sila masukkan nombor telefon lengkap" required value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('nohp') }}">
+                    <label for="notel">Handphone</label>
+                    <input type="text" class="form-control" id="nohp" name="nohp" placeholder="Handphone" value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('nohp') }}">
 
             </div> <!-- /.form-group -->
             </div> <!-- /.box-body -->
@@ -90,14 +90,14 @@
                     <div class="form-group">
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <label>No.Kad Petani</label><small>(jika ada)</small>
+                            <label>No.Kad Petani</label>
                             <div class="input-group date">
-                                <input type="text" class="form-control" placeholder="No. Kad Petani (jika ada)" name="nokad" id="nokad" value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('nokad') }}">
+                                <input type="text" class="form-control" placeholder="No. Kad Petani ATAU No. Kad Pengenalan" name="nokad" id="nokad" value="{{ DB::table('daftar')->where('user_id', Auth::user()->id)->value('nokad') }}">
                             </div>
-                            <label>Tahun Permohonan :</label>
+                            <label>Tahun Permohonan</label>
                             <div class="input-group date">
                                 <input name="tahunpohon" type="text" class="form-control" id="tahunpohon" value="{{ date('Y') }}">
-                            </div><p id="yearValidationMessage" style="color: red; display: none;">Tahun permohonan tidak boleh kurang daripada tahun 2023.</p>
+                            </div>
                             <br>
 
                 <!-- radio -->
@@ -136,11 +136,11 @@
                     </div>
                 </div>
 
-                <label for="tarikh" style="margin-bottom: 6px">Tarikh Memohon :</label>
+                <label for="tarikh" style="margin-bottom: 6px">Tarikh</label>
                 <div class="form-group">
-
+                    <label for="tarikh">Tarikh</label>
                     <input type="date" name="tarikh" id="tarikh" class="form-control" value="{{ $userData && $userData->tarikh ? $userData->tarikh : '' }}">
-                </div><p id="dateValidationMessage" style="color: red; display: none;">Tarikh tidak boleh sebelum tarikh semasa.</p>
+                </div>
 
                 <div class="box-footer">
                     {{-- <button type="submit" style="margin-top:1rem" class="btn btn-primary" name="submit1" value="seterusnya">Simpan & Seterusnya</button> --}}
@@ -163,46 +163,6 @@
 {{-- <script src="plugins/jquery/jquery.min.js"></script> , after commented this, logout dropout working herm--}}
 <!-- jQuery UI 1.11.4 -->
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#notel').inputmask('(999) 999-9999', {
-            greedy: false,
-            placeholder: '(___) ___-____'
-        });
-    });
-</script>
-<script>
-    const tahunPohonInput = document.getElementById('tahunpohon');
-    const yearValidationMessage = document.getElementById('yearValidationMessage');
-
-    tahunPohonInput.addEventListener('input', function() {
-        const inputYear = parseInt(this.value, 10);
-        const currentYear = new Date().getFullYear();
-
-        if (inputYear < 2023) {
-            yearValidationMessage.style.display = 'block';
-            this.setCustomValidity('Invalid');
-        } else {
-            yearValidationMessage.style.display = 'none';
-            this.setCustomValidity('');
-        }
-    });
-</script>
-<script>
-    const tarikhInput = document.getElementById('tarikh');
-
-    tarikhInput.addEventListener('input', function() {
-        const inputDate = new Date(this.value);
-        const currentDate = new Date();
-
-        if (inputDate.getTime() < currentDate.getTime()) {
-            this.value = currentDate.toISOString().split('T')[0];
-        }
-    });
-</script>
-
-
-
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)

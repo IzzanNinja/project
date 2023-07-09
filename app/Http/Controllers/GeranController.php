@@ -5,38 +5,83 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
+
 
 class GeranController extends Controller
-
 {
-    public function store(Request $request)
+    // ...
+
+    public function index()
     {
-        $userId = Auth::id();
+        $tanahList = DB::table('tanah')->get();
 
-        // Retrieve the form input values
-        $pemilikgeran = $request->input('pemilikgeran');
-        $nogeran = $request->input('nogeran');
-        $lokasi = $request->input('lokasi');
-        $luasGeran = $request->input('luasekar');
-        $luasDipohon = $request->input('luaspohon');
-        $pemilikan = $request->input('pemilikan');
+        return view('tanahindex', compact('tanahList'));
+    }
 
-        // Perform any validation if required
+    // ...
+  // ...
 
-        // Insert the data into the database
-        DB::table('tanah')->insert([
-            'pohonid' => $userId,
-            'pemilikgeran' => $pemilikgeran,
-            'nogeran' => $nogeran,
-            'lokasi' => $lokasi,
-            'luasekar' => $luasGeran,
-            'luaspohon' => $luasDipohon,
-            'pemilikan' => $pemilikan,
-            // Add other columns as needed
+  public function create()
+  {
+      return view('tanahindex');
+  }
+
+  public function store(Request $request)
+{
+    $userId = Auth::id();
+
+    // Check if the user has already filled in the data
+    $existingTanah = DB::table('tanah')->where('pohonid', $userId)->first();
+
+    if ($existingTanah) {
+        return redirect('/senaraitanah')->with('error', 'You have already filled in the data.');
+    }
+
+    // Insert the new tanah record
+    DB::table('tanah')->insert([
+        'bil' => $request->bil,
+        'pohonid' => $userId,
+        // Set values for other tanah properties
+    ]);
+
+    $tanahList = DB::table('tanah')->get();
+
+    return view('tanahindex', compact('tanahList'))->with('success', 'Data berhasil disimpan!');
+}
+
+    // ...
+
+    public function update(Request $request, $id)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'bil' => 'required',
+            'pohonid' => 'required',
+            // Add validation rules for other tanah properties
         ]);
 
-        // Redirect or perform any additional logic
+        // Update the tanah record
+        DB::table('tanah')->where('table_id', $id)->update([
+            'bil' => $request->bil,
+            'pohonid' => $request->pohonid,
+            // Update values for other tanah properties
+        ]);
 
-        return redirect()->back()->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('tanahindex');
+    }
+
+    // ...
+
+    public function destroy($id)
+    {
+        // Delete the tanah record
+        DB::table('tanah')->where('table_id', $id)->delete();
+
+        return redirect()->route('tanahindex');
     }
 }

@@ -71,10 +71,9 @@
                                     </tr>
                                     <tr>
 
-                                            <td>3. Alamat Perhubungan</td>
-                                            <td>:</td>
-                                            <td><input type="text" class="form-control" id="nokp" name="alamat" placeholder="alamat" value="{{ Auth::user()->alamat }}" readonly></td>
-
+                                        <td>3. Alamat Perhubungan</td>
+                                        <td>:</td>
+                                        <td><input type="text" class="form-control" id="nokp" name="alamat" placeholder="alamat" value="{{ DB::table('daftar')->where('user_id', Auth::id())->value('alamat') }}" readonly></td>
                                     </tr>
                                 </table>
                             </div>

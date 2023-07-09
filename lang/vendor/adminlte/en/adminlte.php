@@ -2,14 +2,14 @@
 
 return [
 
-    'full_name'                   => 'Full name',
+    'full_name'                   => 'Nama Penuh',
     'email'                       => 'Email',
-    'password'                    => 'Password',
-    'retype_password'             => 'Retype password',
-    'remember_me'                 => 'Remember Me',
-    'register'                    => 'Register',
-    'register_a_new_membership'   => 'Register a new membership',
-    'i_forgot_my_password'        => 'I forgot my password',
+    'password'                    => 'Kata Laluan',
+    'retype_password'             => 'Ulang Kata laluan',
+    'remember_me'                 => 'Ingatkan saya',
+    'register'                    => 'Daftar',
+    'register_a_new_membership'   => 'Daftar ahli baru',
+    'i_forgot_my_password'        => 'saya terlupa kata laluan saya',
     'i_already_have_a_membership' => 'I already have a membership',
     'sign_in'                     => 'Sign In',
     'log_out'                     => 'Log Out',

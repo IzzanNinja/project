@@ -1,56 +1,74 @@
 <html>
 
 <head>
-				<title>JABATAN PERTANIAN SABAH, MALAYSIA (BORANG PERMOHONAN SUBSIDI BAJAK) </title>
-				<style>
-								@page {
-												size: A4
-								}
-				</style>
+    <title>JABATAN PERTANIAN SABAH, MALAYSIA (BORANG PERMOHONAN SUBSIDI BAJAK) </title>
+    <style>
+        @page {
+            size: A4
+        }
+    </style>
 </head>
 
+<style>
+    /* Custom styles for disabled checkboxes */
+    input[type="checkbox"]:disabled {
+        opacity: 1; /* Set the opacity to 1 to make the checkbox fully visible */
+        filter: none; /* Remove the grayscale filter */
+        color: black; /* Set the color to black */
+    }
+</style>
+
 <body onLoad="printit()" bgcolor="#FFFFFF" text="#000000">
-				<form ACTION="pet_cetak.php" NAME="pet_cetak" ID="pet_cetak" METHOD="post" LANGUAGE="javascript" target="_new">
-								<p align=right>
-												<font size=2>Borang PP 13.1 <BR>Pindaan 3/2016</font>
-								<p align=right>
-												<font size=2>No.Kad Petani </font>
-												<center><img src="img/doalogo.gif" WIDTH="57" HEIGHT="56"><br>
-																<font size=2>JABATAN PERTANIAN SABAH<br></font>
+    <form ACTION="pet_cetak.php" NAME="pet_cetak" ID="pet_cetak" METHOD="post" LANGUAGE="javascript" target="_new">
+        <p align=right>
+            <font size=2>Borang PP 13.1 <BR>Pindaan 3/2016</font>
+        <p align=right>
+            <font size=2>No.Kad Petani {{ DB::table('daftar')->where('user_id', Auth::id())->value('nokad') }}</font>
+            <center><img src="img/doalogo.gif" WIDTH="57" HEIGHT="56"><br>
+                <font size=2>JABATAN PERTANIAN SABAH<br></font>
 
-																<font size="3"><b>BORANG PERMOHONAN SUBSIDI PEMBAJAKAN SAWAH PADI</b><br></FONT>
-																<font size=2>(Diisi Dalam 2 Salinan )</font><br>
-																<font size="3">Tahun: 2023<br>
-																				<font style="text-align:left;"><b>BUTIR-BUTIR PEMOHON (Diisi oleh pemohon)</b></font><br>
-																				<font size="2" style="text-align:center;"><i>Pendaftaran Baru
-																												<input type="checkbox" id="chkbaru" name="chkbaru" checked>
-																												&nbsp;&nbsp;&nbsp;&nbsp;
-																												Pendaftaran Lama&nbsp; <input type="checkbox" id="chklama" name="chklama">
-																												&nbsp;</td> </i></font>
-												</center>
+                <font size="3"><b>BORANG PERMOHONAN SUBSIDI PEMBAJAKAN SAWAH PADI</b><br></FONT>
+                <font size=2>(Diisi Dalam 2 Salinan )</font><br>
+                <font size="3">Tahun: 2023<br>
+                    <font style="text-align:left;"><b>BUTIR-BUTIR PEMOHON (Diisi oleh pemohon)</b></font><br>
+                    <font size="2" style="text-align:center;">
+                        <i>Pendaftaran Baru
+                            <input type="checkbox" id="chkbaru" name="chkbaru" {{ DB::table('daftar')->where('user_id', Auth::id())->value('rd_daftar') == 1 ? 'checked' : '' }} disabled>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            Pendaftaran Lama&nbsp;
+                            <input type="checkbox" id="chklama" name="chklama" {{ DB::table('daftar')->where('user_id', Auth::id())->value('rd_daftar') == 2 ? 'checked' : '' }} disabled>
+                            &nbsp;
+                        </i>
+                    </font>
+            </center>
 
-								<table align="center" style="FONT-FAMILY: Arial Narrow; FONT-SIZE:14px" border="0" cellPadding="2"
-												cellSpacing="1" width="90%">
-												<tr>
-												<tr>
-																<td>1. Nama Pemohon: {{ Auth::user()->name }}</td>
-																<td></td>
-												<tr>
-																<td>2. No. Kad Pengenalan: {{ Auth::user()->kad_pengenalan }}</td>
-																<td>3. No. Telefon/Handphone: {{ Auth::user()->nohp }}</td>
-												<tr>
-																<td colspan=2>4. Alamat Perhubungan:{{ Auth::user()->alamat }} ,&nbsp;&nbsp;
+            <table align="center" style="FONT-FAMILY: Arial Narrow; FONT-SIZE:14px" border="0" cellPadding="2"
+                cellSpacing="1" width="90%">
+                <tr>
+                <tr>
+                    <td>1. Nama Pemohon: {{ Auth::user()->name }}</td>
+                    <td></td>
+                <tr>
+                    <td>2. No. Kad Pengenalan: {{ Auth::user()->kad_pengenalan }}</td>
+                    <td>3. No. Telefon/Handphone: {{ DB::table('daftar')->where('user_id', Auth::id())->value('notel') }}{{ DB::table('daftar')->where('user_id', Auth::id())->value('nohp') }}</td>
+                <tr>
+                    <td colspan=2>4. Alamat Perhubungan:{{ DB::table('daftar')->where('user_id', Auth::id())->value('alamat') }}&nbsp;{{ DB::table('daftar')->where('user_id', Auth::id())->value('poskod') }}&nbsp;{{ DB::table('daftar')->where('user_id', Auth::id())->value('daerah_id') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=2>
+                        5. Musim Penanaman: Luar Musim
+                        <input type="checkbox" id="chkmusim" name="chkmusim" {{ DB::table('daftar')->where('user_id', Auth::id())->value('ch_musim') == 1 ? 'checked' : '' }} disabled>
+                        Bulan Mac - Julai
 
-																</td>
-												<tr>
-																<td colspan=2>5. Musim Penanaman: Luar Musim&nbsp;
-																				<input type="checkbox" id="chkmusim" name="chkmusim">Bulan Mac - Julai
-
-																				&nbsp;&nbsp;&nbsp;&nbsp;
-																				Musim Utama&nbsp; <input type="checkbox" id="chkmusim2" name="chkmusim2">Bulan Ogos - Feb
-																				&nbsp;
-																</td>
-
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        Musim Utama
+                        <input type="checkbox" id="chkmusim2" name="chkmusim2" {{ DB::table('daftar')->where('user_id', Auth::id())->value('ch_musim2') == 1 ? 'checked' : '' }} disabled>
+                        Bulan Ogos - Feb
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
 
 
 																<table align="center" style="FONT-FAMILY: Arial Narrow; FONT-SIZE:12px" border="1" cellpadding="2"
@@ -91,7 +109,7 @@
 												<tr>
 																<td align="left" valign="top" width="38%">
 																				(...............................................)<br>Tandatangan/Cop Ibu Jari Kanan
-																				Pemohon<br>Tarikh Permohonan: 01/01/1970
+																				Pemohon<br>Tarikh Permohonan: {{ DB::table('daftar')->where('user_id', Auth::id())->value('tarikh') }}
 																<td align="middle" valign="top" width="10%"><B><BR>COP<BR>JABATAN</B>
 																<td align="middle" valign="top" width="4%">
 																<td align="left" valign="top" width="38%">

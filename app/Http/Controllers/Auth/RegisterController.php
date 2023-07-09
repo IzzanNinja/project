@@ -43,20 +43,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'kad_pengenalan' => $data['kad_pengenalan'],
         ]);
-
-        return back()->with('success',);
     }
 
-
-// ADD CUSTOM FLASH MESSAGE
-protected function registered(Request $request, $user)
-{
-    $validatedData['password'] = Hash::make($request->password);
-
-    $user = User::create($validatedData);
-
-    return redirect('/dashboard')->with('success', 'Pendaftaran berjaya. Sila log masuk');
-}
-
+    protected function registered(Request $request, $user)
+    {
+        return redirect('/login')->with('success', 'Pendaftaran berjaya. Sila log masuk.');
+    }
 }

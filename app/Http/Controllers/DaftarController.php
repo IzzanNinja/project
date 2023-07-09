@@ -104,5 +104,41 @@ class DaftarController extends Controller
         $tanah = DB::table('tanah')->where('pohonid', $user->id)->first();
         return view('pet_cetak', compact('user', 'tanah'));
     }
+
+    public function edit()
+    {
+        $userData = DB::table('daftar')->where('user_id', Auth::user()->id)->first();
+
+        return view('daftar', compact('userData'));
+    }
+
+    public function update(Request $request)
+    {
+        $userId = Auth::id();
+
+    DB::table('daftar')->updateOrInsert(
+        ['user_id' => $userId],
+        [
+            'user_id' => $userId,
+            'pemohon' => $request->pemohon,
+            'nokp' => $request->nokp,
+            'alamat' => $request->alamat,
+            'poskod' => $request->poskod,
+            'daerah_id' => $request->daerah_id,
+            'notel' => $request->notel,
+            'nohp' => $request->nohp,
+            'nokad' => $request->nokad,
+            'tahunpohon' => $request->tahunpohon,
+            'rd_daftar' => $request->rd_daftar,
+            'ch_musim' => $request->ch_musim ? 1 : 0,
+            'ch_musim2' => $request->ch_musim2 ? 1 : 0,
+            'tarikh' => $request->tarikh,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]
+    );
+
+    return redirect('/daftar')->with('success', 'Data berhasil disimpan!');
+    }
 }
 
