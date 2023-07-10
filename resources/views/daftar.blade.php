@@ -135,12 +135,13 @@
                         </div>
                     </div>
                 </div>
-
                 <label for="tarikh" style="margin-bottom: 6px">Tarikh Memohon :</label>
                 <div class="form-group">
+                    <input type="date" name="tarikh" id="tarikh" class="form-control" value="{{ date('Y-m-d') }}" readonly>
+                </div>
+                <p id="dateValidationMessage" style="color: red; display: none;">Tarikh tidak boleh sebelum tarikh semasa.</p>
 
-                    <input type="date" name="tarikh" id="tarikh" class="form-control" value="{{ $userData && $userData->tarikh ? $userData->tarikh : '' }}">
-                </div><p id="dateValidationMessage" style="color: red; display: none;">Tarikh tidak boleh sebelum tarikh semasa.</p>
+
 
                 <div class="box-footer">
                     {{-- <button type="submit" style="margin-top:1rem" class="btn btn-primary" name="submit1" value="seterusnya">Simpan & Seterusnya</button> --}}

@@ -27,6 +27,11 @@
 
                             <div class="form-group">
                                 <label for="bil">Bil</label>
+                                <input type="text" class="form-control" id="table_id" name="table_id" placeholder="table_id" hidden>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bil">Bil</label>
                                 <input type="text" class="form-control" id="bil" name="bil" placeholder="Bil">
                             </div>
 
@@ -43,11 +48,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="no_geran">No.Geran</label>
-                                    <input type="text" class="form-control" id="no_geran" name="no_geran">
+                                    <input type="text" class="form-control" id="nogeran" name="nogeran">
                                 </div>
                                 <div class="form-group">
                                     <label for="lokasi_tanah">Lokasi Tanah</label>
-                                    <select class="form-control" id="lokasi_tanah" name="lokasi_tanah">
+                                    <select class="form-control" id="lokasi" name="lokasi">
                                         <option value="">Sila pilih...</option>
                                         @foreach (DB::table('lokasitanah')->get() as $lokasi)
                                             <option value="{{ $lokasi->kodlokasi }}">{{ $lokasi->namalokasi }}</option>
@@ -56,15 +61,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="luas_dalam_geran">Luas Dalam Geran (Ekar)</label>
-                                    <input type="text" class="form-control" id="luas_dalam_geran" name="luas_dalam_geran">
+                                    <input type="text" class="form-control" id="luasekar" name="luasekar">
                                 </div>
                                 <div class="form-group">
                                     <label for="luas_dipohon">Luas Dipohon/Musim (Ekar)</label>
-                                    <input type="text" class="form-control" id="luas_dipohon" name="luas_dipohon">
+                                    <input type="text" class="form-control" id="luaspohon" name="luaspohon">
                                 </div>
                                 <div class="form-group">
                                     <label for="pemilikan_tanah">Pemilikan Tanah</label>
-                                    <select class="form-select" id="pemilikan_tanah" name="pemilikan_tanah">
+                                    <select class="form-select" id="pemilikan" name="pemilikan">
                                         <option value="0">Sila Pilih...</option>
                                         <option value="1">Sendiri</option>
                                         <option value="2">Sewa</option>
