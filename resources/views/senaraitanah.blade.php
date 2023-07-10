@@ -9,7 +9,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Senarai Tanah</h1>
+        <h1>Daftar Tanah</h1>
     </section>
 
     <!-- Main content -->
@@ -18,7 +18,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Create Tanah</h3>
+
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -39,7 +39,7 @@
 
                                 <div class="form-group">
                                     <label for="nama_pemilik">Nama Pemilik</label>
-                                    <input type="text" class="form-control" id="nama_pemilik" name="nama_pemilik">
+                                    <input type="text" class="form-control" id="pemilikgeran" name="pemilikgeran">
                                 </div>
                                 <div class="form-group">
                                     <label for="no_geran">No.Geran</label>
@@ -72,7 +72,7 @@
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+
 
 
                             <!-- Add more form fields for other tanah properties -->

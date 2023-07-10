@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DaftarController;
-use App\Http\Controllers\GeranController;
+use App\Http\Controllers\TanahController;
 use App\Http\Controllers\TuntutanController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -18,27 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tanahindex', function () {
-    return view('tanahindex');
-});
-
-Route::get('/senaraitanah', function () {
-    return view('senaraitanah');
-});
 
 
 
 // Applying middleware
 Route::middleware('auth')->group(function () {
     // Protected routes here
-    Route::match(['GET', 'POST'], '/daftar', [DaftarController::class, 'edit'])->name('daftar'); //make it handle both GET (view) and POST (create, edit and store) method
+    Route::match(['GET', 'POST'], '/daftar', [DaftarController::class, 'edit'])->name('daftar'); // Make it handle both GET (view) and POST (create, edit, and store) method
+    Route::post('/senaraitanah/store', [TanahController::class, 'store'])->name('senaraitanah.store');
+    Route::get('/tanahindex', [TanahController::class, 'index'])->name('tanahindex'); // Define the tanahindex route with the TanahController's index method
+    Route::get('/senaraitanah', [TanahController::class, 'create'])->name('senaraitanah'); // Define the tanahindex route with the TanahController's index method
 
     Route::get('/cetakan', [DaftarController::class, 'cetakindex'])->name('pet_cetak');
     Route::get('/semakan', [DaftarController::class, 'semakindex'])->name('semakindex');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     // ...
 
-    Route::post('/senaraitanah/store', [GeranController::class, 'store'])->name('senaraitanah.store'); // Update the route name to 'senaraitanah.store'
 
     // ...
 
@@ -71,9 +66,6 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 
 // Subsidi Daftar Form Page
 // Route::get('/senaraitanah', [GeranController::class, 'index'])->name('tanahindex');
-
-
-
 
 Route::post('/upload', 'FileController@upload')->name('file.upload');
 Route::get('/pet_cetak', [DaftarController::class, 'showPetCetakForm'])->name('pet_cetak');

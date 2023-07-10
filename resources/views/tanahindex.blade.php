@@ -21,7 +21,8 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Senarai Tanah</h3>
+                        <a class="btn btn-success" style="float:right;" href="{{ route('senaraitanah') }}">Tambah Tanah Baru</a>
+
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -123,12 +124,13 @@
                             <th width="11%"></th>
                             <th width="11%"></th>
                         </tr>
-                        <div class="pagination-container">
-                            {{-- {{ $tanah->links() }} --}}
-                        </div>
+
+
+
 
                     </tfoot>
                 </table>
+                {{ $tanah->links() }}
 
                     </div>
                     <!-- /.box-body -->
