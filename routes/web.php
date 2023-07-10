@@ -25,6 +25,13 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     // Protected routes here
     Route::match(['GET', 'POST'], '/daftar', [DaftarController::class, 'edit'])->name('daftar');
+    Route::get('/tanah/{id}/edit', [TanahController::class, 'edit'])->name('edit-tanah');
+
+    Route::post('/senaraitanah', [TanahController::class, 'store'])->name('senaraitanah.store');
+    Route::put('/senaraitanah/{id}', [TanahController::class, 'update'])->name('senaraitanah.update');
+
+
+
     Route::post('/daftar/update', [DaftarController::class, 'update'])->name('daftar.update');
     Route::post('/senaraitanah/store', [TanahController::class, 'store'])->name('senaraitanah.store');
     Route::get('/tanahindex', [TanahController::class, 'index'])->name('tanahindex'); // Define the tanahindex route with the TanahController's index method

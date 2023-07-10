@@ -14,6 +14,7 @@
 
     <!-- Main content -->
     <section class="content">
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -22,13 +23,19 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form action="{{ route('senaraitanah.store') }}" method="POST">
+                        <form action="{{ isset($tanah) ? route('senaraitanah.update', $tanah->table_id) : route('senaraitanah.store') }}" method="POST">
                             @csrf
 
+                            <!-- Add a hidden input field to store the tanah record ID -->
+                            @if(isset($tanah))
+                                @method('PUT')
+                                <input type="hidden" name="id" value="{{ isset($tanah) ? $tanah->table_id : '' }}">
+
+                                @endif
+
                             <div class="form-group">
-                                <label for="bil">Bil</label>
-                                <input type="text" class="form-control" id="table_id" name="table_id" placeholder="table_id" hidden>
-                            </div>
+                                <label for="bil">Table ID</label>
+                                <input type="hidden" class="form-control" id="table_id" name="table_id" value="{{ isset($tanah) ? $tanah->table_id : '' }}">                            </div>
 
                             <div class="form-group">
                                 <label for="bil">Bil</label>
@@ -96,4 +103,29 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+
+<script src="dist/js/pages/dashboard.js"></script>
 @endsection
+

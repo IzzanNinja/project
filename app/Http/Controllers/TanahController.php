@@ -60,10 +60,21 @@ class TanahController extends Controller
 
 
 
-    public function update(Request $request, $id)
-    {
+  public function update(Request $request, $id)
+{
+    // Validate the form data
+    $validatedData = $request->validate([
+        'bil' => 'required',
+        'pohonid' => 'required',
+        'pemilikgeran' => 'required',
+        'nogeran' => 'required',
+        'lokasi' => 'required',
+        'luasekar' => 'required',
+        'luaspohon' => 'required',
+        'pemilikan' => 'required',
+    ]);
+}
 
-    }
 
     // ...
 
@@ -71,12 +82,23 @@ class TanahController extends Controller
     {
 
     }
-    public function edit()
-{
-    $tanah = DB::table('lokasitanah')->first();
-    $namalokasi = $tanah->namalokasi;
+    public function edit($id)
+    {
 
-    return view('ptundaf', compact('namalokasi'));
+
+
+
+            // Retrieve the tanah record with the given pohonid
+            $tanah = DB::table('tanah')->where('pohonid', $id)->first();
+
+            // Pass the retrieved tanah record to the view
+            return view('senaraitanah', compact('tanah'));
+        }
 }
 
-}
+
+
+
+
+
+

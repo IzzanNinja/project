@@ -1,6 +1,9 @@
 @php
     use Illuminate\Support\Facades\DB;
-    $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
+use Illuminate\Support\Facades\Auth;
+
+$tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
+
 
     // $userData = DB::table('tanah')->where('pohonid', Auth::user()->id)->first();
 @endphp
@@ -29,6 +32,8 @@
                         <table id="tanahTable" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th width="6%">Table ID</th>
+
                                     <th width="6%">Bil</th>
                                     <th width="25%">Pohon ID</th>
                                     <th width="25%">Pemilik Geran</th>
@@ -37,13 +42,16 @@
                                     <th width="10%">Luas Ekar</th>
                                     <th width="10%">Luas Pohon</th>
                                     <th width="15%">Pemilikan</th>
-                                    <th width="10%">No Petani</th>
-                                    <th width="10%">Tarikh</th>
+                                    <th width="10%">Tindakan</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($tanah as $item)
                                 <tr>
+                                    {{-- {{ var_dump($item) }} --}}
+                                    <td>{{ $item->table_id }}</td>
+
+
                                     <td>{{ $item->bil }}</td>
                                     <td>{{ $item->pohonid }}</td>
                                     <td>{{ $item->pemilikgeran }}</td>
@@ -52,8 +60,10 @@
                                     <td>{{ $item->luasekar }}</td>
                                     <td>{{ $item->luaspohon }}</td>
                                     <td>{{ $item->pemilikan }}</td>
-                                    <td>{{ $item->nopetani }}</td>
-                                    <td>{{ $item->tarikh }}</td>
+                                    <td>
+                                        <a href="{{ route('edit-tanah', ['id' => $item->pohonid]) }}" class="btn btn-primary">Edit</a>
+                                    </td>
+
                                     {{-- <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('bil') }}</td>
                                     <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('pohonid') }}</td>
                                     <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('pemilikgeran') }}</td>
