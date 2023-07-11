@@ -37,5 +37,5 @@ class SetPasswordController extends Controller
         $user->save();
 
         return redirect($this->redirectPath());
-}
+    }
 }

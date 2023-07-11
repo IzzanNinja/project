@@ -77,10 +77,13 @@ class CustomResetPasswordNotification extends ResetPassword
             $this->actionUrl = route('password.reset', $token);
         }
 
+
+
         public function toMail($notifiable)
         {
             return (new MailMessage)
-            ->subject('Notifikasi Reset Kata Laluan')
+            ->from('ebajak2023@gmail.com', 'Admin Sistem Petani eBajak')
+            ->subject('Notifikasi Set Semula Kata Laluan')
             ->markdown('custom_reset_password', ['actionUrl' => $this->actionUrl]);
             // ->line('You are receiving this email because we received a password reset request for your account.')
             // ->action('Reset Password', route('password.reset', $this->token))

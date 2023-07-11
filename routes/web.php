@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 
 // ...
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 
@@ -24,6 +21,10 @@ Route::get('/', function () {
 // Applying middleware
 Route::middleware('auth')->group(function () {
     // Protected routes here
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
     Route::match(['GET', 'POST'], '/daftar', [DaftarController::class, 'edit'])->name('daftar');
     Route::get('/tanah/{id}/edit', [TanahController::class, 'edit'])->name('edit-tanah');
 
@@ -69,4 +70,3 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 
 Route::post('/upload', 'FileController@upload')->name('file.upload');
 Route::get('/pet_cetak', [DaftarController::class, 'showPetCetakForm'])->name('pet_cetak');
-

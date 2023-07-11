@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
+    <title>Set Semula Kata Laluan</title>
 </head>
 <body>
     <div>
@@ -43,13 +43,12 @@
         </svg>
     </div>
     <div>
-        <h1>Reset Password</h1>
-        <p>You are receiving this email because we received a password reset request for your account.</p>
-        <p>
-            Click the button below to reset your password:
-            <a href="{{ $actionUrl }}">Reset Password</a>
+        <h1>Set Semula Kata Laluan</h1>
+        <p>Anda menerima e-mel ini kerana kami menerima permintaan set semula kata laluan bagi akaun anda.</p>
+        <p>Klik butang di bawah untuk set semula kata laluan anda :
+            <a href="{{ $actionUrl }}">Set Semula Kata Laluan</a>
         </p>
-        <p>If you did not request a password reset, no further action is required.</p>
+        <p>Jika anda tidak membuat permintaan set semula kata laluan ini, tiada tindakan lanjut diperlukan.</p>
     </div>
 </body>
 </html>

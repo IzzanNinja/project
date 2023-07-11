@@ -16,7 +16,8 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "laravel/ui": "3.4",
-        "mews/captcha": "^3.3"
+        "mews/captcha": "^3.3",
+        "php-flasher/flasher-noty-laravel": "^1.15"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
