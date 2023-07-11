@@ -82,11 +82,49 @@
 																								<th width="100" align="middle">Luas Dalam Geran (Ekar)
 																								<th width="100" align="middle">Luas Dipohon/Musim (Ekar)
 																								<th width="100" align="middle">Pemilikan Tanah
-																				<tr>
+
+
+                                                                                                    @php
+                                                                                                    use Illuminate\Support\Facades\DB;
+                                                                                                    $userId = Auth::id();
+                                                                                                    $tanah = DB::table('tanah')->where('pohonid', $userId)->paginate(5);
+                                                                                                @endphp
+
+                                                                                                @foreach($tanah as $item)
+                                                                                                    <tr>
+                                                                                                        <td class="text-center">{{ $item->bil }}</td>
+                                                                                                        <td class="text-center">{{ $item->pemilikgeran }}</td>
+                                                                                                        <td class="text-center">{{ $item->nogeran }}</td>
+                                                                                                        <td class="text-center">{{ $item->lokasi }}</td>
+                                                                                                        <td class="text-center">{{ $item->luasekar }}</td>
+                                                                                                        <td class="text-center">{{ $item->luaspohon }}</td>
+                                                                                                        <td class="text-center">{{ $item->pemilikgeran }}</td>
+
+
+
+
+
+
+
+{{--
 																								<th align="right" colspan="4">Jumlah Ekar&nbsp;
 																								<th width="100" align="middle">
-																								<th width="100" align="middle">
+																								<th width="100" align="middle"> --}}
 																				</tr>
+                                                                                @endforeach
+                                                                                <tr>
+                                                                                    <th width="6%" class="text-center"></th>
+                                                                                    <th width="25%" class="text-center"></th>
+                                                                                    <th width="11%" class="text-center"></th>
+                                                                                    <th width="15%" class="text-center">JUMLAH</th>
+                                                                                    <th width="15%" class="text-center">0</th>
+                                                                                    <th width="15%" class="text-center">0</th>
+                                                                                    <th width="15%" class="text-center"></th>
+
+
+
+
+                                                                                </tr>
 																</table>
 																</td>
 

@@ -33,7 +33,6 @@ Route::middleware('auth')->group(function () {
 
 
     Route::post('/daftar/update', [DaftarController::class, 'update'])->name('daftar.update');
-    Route::post('/senaraitanah/store', [TanahController::class, 'store'])->name('senaraitanah.store');
     Route::get('/tanahindex', [TanahController::class, 'index'])->name('tanahindex'); // Define the tanahindex route with the TanahController's index method
     Route::get('/senaraitanah', [TanahController::class, 'create'])->name('senaraitanah'); // Define the tanahindex route with the TanahController's index method
     Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');

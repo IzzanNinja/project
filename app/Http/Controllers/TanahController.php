@@ -32,6 +32,7 @@ class TanahController extends Controller
   {
       // Validate the form data
       $validatedData = $request->validate([
+        'table_id' => 'required',
           'bil' => 'required',
           'pohonid' => 'required',
           'pemilikgeran' => 'required',
@@ -44,6 +45,7 @@ class TanahController extends Controller
 
       // Create a new record in the 'tanah' table using the validated data
       $tanah = DB::table('tanah')->insertGetId([
+        'table_id' => $validatedData['table_id'],
           'bil' => $validatedData['bil'],
           'pohonid' => $validatedData['pohonid'],
           'pemilikgeran' => $validatedData['pemilikgeran'],

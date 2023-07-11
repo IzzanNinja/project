@@ -33,8 +33,9 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
                             <thead>
                                 <tr>
                                     <th width="6%">Table ID</th>
+                                    <th width="6%">Bilangan</th>
 
-                                    <th width="6%">Bil</th>
+                                    <th width="6%">Bil ID</th>
                                     <th width="25%">Pohon ID</th>
                                     <th width="25%">Pemilik Geran</th>
                                     <th width="15%">No Geran</th>
@@ -46,10 +47,14 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $counter = ($tanah->currentPage() - 1) * $tanah->perPage() + 1;
+                                @endphp
                                 @foreach($tanah as $item)
                                 <tr>
                                     {{-- {{ var_dump($item) }} --}}
                                     <td>{{ $item->table_id }}</td>
+                                    <td>{{ $counter++}}</td>
 
 
                                     <td>{{ $item->bil }}</td>
@@ -62,7 +67,14 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
                                     <td>{{ $item->pemilikan }}</td>
                                     <td>
                                         <a href="{{ route('edit-tanah', ['id' => $item->pohonid]) }}" class="btn btn-primary">Edit</a>
+
+                                        <a href="{{ route('pet_cetak', ['table_id' => isset($tanah->table_id) ? $tanah->table_id : '']) }}" class="btn btn-primary">PDF Cetak</a>
+
+                                        {{-- <a href="{{ route('pet_cetak', ['id' => $item->pohonid]) }}" class="btn btn-primary">PDF Cetak</a> --}}
+
+                                        <a href="{{ route('edit-tanah', ['id' => $item->pohonid]) }}" class="btn btn-primary">Tambah Geran</a>
                                     </td>
+
 
                                     {{-- <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('bil') }}</td>
                                     <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('pohonid') }}</td>
@@ -124,6 +136,9 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
                             <th width="6%"></th>
                             <th width="25%">JUMLAH</th>
                             <th width="11%"></th>
+                            <th width="15%"></th>
+                            <th width="15%"></th>
+                            <th width="15%"></th>
                             <th width="15%"></th>
                             <th width="15%"><input type="text" class="form-control"
                                     placeholder="Luas Geran" name="jumlahluasgeran" value=0>

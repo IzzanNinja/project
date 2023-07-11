@@ -11,7 +11,6 @@
     <section class="content-header">
         <h1>
             Sistem Pembayaran Subsidi Pembajakan Sawah Padi
-            {{-- <small>Modul Pegawai Pertanian</small> --}}
         </h1>
         <ol class="breadcrumb">
             <li><a href="home"><i class="fa fa-dashboard"></i> Laman Utama</a></li>

@@ -7,6 +7,11 @@
 
 @section('navigation')
 <div class="content-wrapper">
+
+    <div class="back-button">
+        <a href="{{ route('tanahindex') }}" class="btn btn-danger" style="margin-top: 15px;margin-left: 15px;">Kembali</a>
+    </div>
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>Daftar Tanah</h1>
@@ -30,16 +35,16 @@
                             @if(isset($tanah))
                                 @method('PUT')
                                 <input type="hidden" name="id" value="{{ isset($tanah) ? $tanah->table_id : '' }}">
-
-                                @endif
+                            @endif
 
                             <div class="form-group">
-                                <label for="bil">Table ID</label>
-                                <input type="hidden" class="form-control" id="table_id" name="table_id" value="{{ isset($tanah) ? $tanah->table_id : '' }}">                            </div>
+                                <label for="table_id">Table ID</label>
+                                <input type="text" class="form-control" id="table_id" name="table_id" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('table_id') }}">
+                            </div>
 
                             <div class="form-group">
                                 <label for="bil">Bil</label>
-                                <input type="text" class="form-control" id="bil" name="bil" placeholder="Bil">
+                                <input type="text" class="form-control" id="bil" name="bil" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('bil') }}">
                             </div>
 
                             <div class="form-group">
@@ -51,11 +56,11 @@
 
                                 <div class="form-group">
                                     <label for="nama_pemilik">Nama Pemilik</label>
-                                    <input type="text" class="form-control" id="pemilikgeran" name="pemilikgeran">
+                                    <input type="text" class="form-control" id="pemilikgeran" name="pemilikgeran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('pemilikgeran') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="no_geran">No.Geran</label>
-                                    <input type="text" class="form-control" id="nogeran" name="nogeran">
+                                    <input type="text" class="form-control" id="nogeran" name="nogeran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('nogeran') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="lokasi_tanah">Lokasi Tanah</label>
@@ -68,11 +73,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="luas_dalam_geran">Luas Dalam Geran (Ekar)</label>
-                                    <input type="text" class="form-control" id="luasekar" name="luasekar">
+                                    <input type="text" class="form-control" id="luasekar" name="luasekar" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luasekar') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="luas_dipohon">Luas Dipohon/Musim (Ekar)</label>
-                                    <input type="text" class="form-control" id="luaspohon" name="luaspohon">
+                                    <input type="text" class="form-control" id="luaspohon" name="luaspohon" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luaspohon') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="pemilikan_tanah">Pemilikan Tanah</label>
@@ -89,8 +94,32 @@
 
                             <!-- Add more form fields for other tanah properties -->
 
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <button type="submit" class="btn btn-success">Tambah Tanah</button>
                         </form>
+                        <script>
+                            window.addEventListener('DOMContentLoaded', (event) => {
+                                const tableIdInput = document.getElementById('table_id');
+
+                                // Check if the table_id input already has a value
+                                if (!tableIdInput.value) {
+                                    // Generate a new table_id
+                                    const previousTableId = localStorage.getItem('previousTableId');
+                                    let newTableId = previousTableId ? parseInt(previousTableId) + 1 : 1;
+
+                                    // Check if the newTableId is less than 94446
+                                    if (newTableId < 94446) {
+                                        newTableId = 94446; // Set the initial value to 94446
+                                    }
+
+                                    // Set the new table_id value
+                                    tableIdInput.value = newTableId;
+
+                                    // Store the new table_id in local storage for future use
+                                    localStorage.setItem('previousTableId', newTableId);
+                                }
+                            });
+                        </script>
+
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -106,7 +135,8 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
-</script>
+    </script>
+
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
