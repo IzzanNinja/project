@@ -1,15 +1,19 @@
 @php
-    use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+
+
 $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
-
-
-    // $userData = DB::table('tanah')->where('pohonid', Auth::user()->id)->first();
 @endphp
 
-
 @extends('navigation')
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
 @section('navigation')
 <div class="content-wrapper">
@@ -24,7 +28,8 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a class="btn btn-success" style="float:right;" href="{{ route('senaraitanah') }}">Tambah Tanah Baru</a>
+                        {{ $tanah->links() }}
+                        <a class="btn btn-success" style="float:right;margin-bottom: 15px;margin-right: 15px" href="{{ route('senaraitanah') }}">Tambah Tanah Baru</a>
 
                     </div>
                     <!-- /.box-header -->
@@ -52,82 +57,33 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
                                 @endphp
                                 @foreach($tanah as $item)
                                 <tr>
-                                    {{-- {{ var_dump($item) }} --}}
                                     <td>{{ $item->table_id }}</td>
                                     <td>{{ $counter++}}</td>
-
-
                                     <td>{{ $item->bil }}</td>
                                     <td>{{ $item->pohonid }}</td>
                                     <td>{{ $item->pemilikgeran }}</td>
                                     <td>{{ $item->nogeran }}</td>
-                                    <td>{{ $item->lokasi }}</td>
+                                    <td>{{ DB::table('lokasitanah')->where('kodlokasi', $item->lokasi)->value('namalokasi') }}</td>
                                     <td>{{ $item->luasekar }}</td>
                                     <td>{{ $item->luaspohon }}</td>
                                     <td>{{ $item->pemilikan }}</td>
-                                    <td>
-                                        <a href="{{ route('edit-tanah', ['id' => $item->pohonid]) }}" class="btn btn-primary">Edit</a>
+                                    <td style="text-align: center;">
+                                        <a href="{{ route('edit-tanah', ['id' => $item->pohonid]) }}" class="btn btn-warning" style="margin-bottom: 10px;">Edit</a>
 
-                                        <a href="{{ route('pet_cetak', ['table_id' => isset($tanah->table_id) ? $tanah->table_id : '']) }}" class="btn btn-primary">PDF Cetak</a>
+                                        <a href="{{ route('pet_cetak', ['table_id' => isset($tanah->table_id) ? $tanah->table_id : '']) }}" class="btn btn-info" style="margin-bottom: 10px;">PDF Cetak</a>
 
-                                        {{-- <a href="{{ route('pet_cetak', ['id' => $item->pohonid]) }}" class="btn btn-primary">PDF Cetak</a> --}}
+                                        <a href="{{ route('edit-tanah', ['id' => $item->pohonid]) }}" class="btn btn-primary" style="margin-bottom: 10px;">Tambah Geran</a>
 
-                                        <a href="{{ route('edit-tanah', ['id' => $item->pohonid]) }}" class="btn btn-primary">Tambah Geran</a>
+                                        <a href="{{ route('tanah.delete', ['id' => $item->table_id, 'success' => true]) }}" class="btn btn-danger" style="margin-bottom: 10px;" onclick="return confirm('Are you sure you want to delete this?')">Padam</a>
                                     </td>
 
 
-                                    {{-- <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('bil') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('pohonid') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('pemilikgeran') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('nogeran') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('lokasi') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('luasekar') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('luaspohon') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('pemilikan') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('nopetani') }}</td>
-                                    <td>{{ DB::table('tanah')->where('pohonid', Auth::user()->id)->value('tarikh') }}</td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
                             <tfoot>
 
-                                {{-- <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card card-default">
-                                            <div class="card-body">
-                                                <form action="/target" class="dropzone"
-                                                    id="myDropzone">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="btn-group w-100">
-                                                                <span
-                                                                    class="btn btn-success col fileinput-button">
-                                                                    <i class="fas fa-plus"></i>
-                                                                    <span>Tambah fail</span>
-                                                                </span>
-                                                                <button type="button"
-                                                                    class="btn btn-primary col start">
-                                                                    <i
-                                                                        class="fas fa-upload"></i>
-                                                                    <span>Mula Muatnaik</span>
-                                                                </button>
-                                                                <button type="button"
-                                                                    class="btn btn-warning col cancel">
-                                                                    <i
-                                                                        class="fas fa-times-circle"></i>
-                                                                    <span>Batal Muatnaik</span>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </th>
 
- --}}
 
 
 
