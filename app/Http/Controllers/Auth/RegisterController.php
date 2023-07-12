@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
@@ -24,6 +25,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
+
         return view('auth.register');
     }
 
@@ -51,4 +53,12 @@ class RegisterController extends Controller
     {
         return redirect('/login')->with('success', 'Pendaftaran berjaya. Sila log masuk.');
     }
+    // public function search(Request $request)
+    // {
+    //     $keyword = $request->input('keyword');
+    //     $petanibajak = DB::table('petanibajak')->where('nokp', 'LIKE', "%$keyword%")->get();
+
+    //     return view('search', compact('nokp', 'keyword'));
+    // }
+
 }

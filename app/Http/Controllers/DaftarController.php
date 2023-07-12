@@ -5,15 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\TanahController;
 
 class DaftarController extends Controller
 {
-    public function index()
-    {
-        return view('daftar');
-    }
-
     public function show($id = null)
     {
         if ($id) {
@@ -45,12 +39,6 @@ class DaftarController extends Controller
         return view('pet_cetak');
     }
 
-    public function store(Request $request)
-    {
-
-
-    }
-
     public function create(Request $request)
     {
         // Tallying ID of logged in user with the daftar table
@@ -66,7 +54,7 @@ class DaftarController extends Controller
 
         // DB::table('tanah')->insert([
         //     'pohonid' => $userId,
-        //     // Set other column values of daftar as needed
+            // Set other column values of daftar as needed
         // ]);
 
     }
@@ -79,39 +67,51 @@ class DaftarController extends Controller
 
     public function edit()
     {
-        $userData = DB::table('daftar')->where('user_id', Auth::user()->id)->first();
+        $userData = DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->first();
 
-
-        return view('daftar', compact('userData', ));
+        return view('daftar', compact('userData'));
     }
 
     public function update(Request $request)
     {
-        $userId = Auth::id();
+        $petanibajakId = Auth::id();
 
-    DB::table('daftar')->updateOrInsert(
-        ['user_id' => $userId],
+    DB::table('petanibajak')->updateOrInsert(
+        ['petanibajak_id' => $petanibajakId],
         [
-            'user_id' => $userId,
-            'pemohon' => $request->pemohon,
+            'petanibajak_id' => $petanibajakId,
+            'nama' => $request->nama,
             'nokp' => $request->nokp,
             'alamat' => $request->alamat,
             'poskod' => $request->poskod,
-            'daerah_id' => $request->daerah_id,
-            'notel' => $request->notel,
-            'nohp' => $request->nohp,
-            'nokad' => $request->nokad,
+            'daerah' => $request->daerah,
+            'telrumah' => $request->telrumah,
+            'telhp' => $request->telhp,
+            'nopetani' => $request->nopetani,
             'tahunpohon' => $request->tahunpohon,
-            'rd_daftar' => $request->rd_daftar,
-            'ch_musim' => $request->ch_musim ? 1 : 0,
-            'ch_musim2' => $request->ch_musim2 ? 1 : 0,
-            'tarikh' => $request->tarikh,
-            'created_at' => now(),
-            'updated_at' => now()
+            'baru' => $request->baru,
+            'musim' => $request->musim ? 1 : 0,
+            'musim2' => $request->musim2 ? 1 : 0,
+            'tarpohon' => $request->tarpohon,
+            // 'created_at' => now(),
+            // 'updated_at' => now()
         ]
     );
 
-    return redirect('/daftar')->with('success', 'Data berhasil disimpan!');
-    }
-}
+    // return redirect('/daftar')->with('success', 'Data berhasil disimpan!');
+    return back()->with('success', 'Data berhasil disimpan!');
 
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('nokp');
+        $petanibajak = DB::table('petanibajak')->where('nokp', $keyword)->get();
+
+        return view('search', compact('petanibajak', 'keyword'));
+    }
+
+
+
+}
+    

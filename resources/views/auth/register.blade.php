@@ -11,18 +11,11 @@
                     <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                         <div class="card" style="border-radius: 15px;">
                             <div class="card-body p-5">
+
+
                                 <h2 class="text-uppercase text-center mb-5">Daftar Pengguna Baru</h2>
 
-                                <div class="form-outline mb-4">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus minlength="3" maxlength="255">
-                                    <label class="form-label" for="form3Example1cg">Nama Penuh</label>
-                                    <small>(Sila Isi Nama Penuh seperti dalam Kad Pengenalan)</small>
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                                
 
                                 <div class="form-group">
                                     <label for="kad_pengenalan" class="col-md-4 col-form-label text-md-right">{{ __('Kad Pengenalan') }}</label>
@@ -32,6 +25,19 @@
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
+                                    @enderror
+                                </div>
+
+
+
+                                <div class="form-outline mb-4">
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus minlength="3" maxlength="255">
+                                    <label class="form-label" for="form3Example1cg">Nama Penuh</label>
+                                    <small>(Sila Isi Nama Penuh seperti dalam Kad Pengenalan)</small>
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
 
@@ -77,5 +83,15 @@
         </div>
     </section>
 </form>
+
+<script>$('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var recipient = button.data('whatever') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-title').text('New message to ' + recipient)
+    modal.find('.modal-body input').val(recipient)
+  })</script>
 
 @endsection

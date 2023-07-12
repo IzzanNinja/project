@@ -18,6 +18,12 @@ $item = DB::table('daerah')->first();
             size: A4
         }
     </style>
+	    {{-- <script>
+			function convertToUpperCase(elementId) {
+				var element = document.getElementById(elementId);
+				element.value = element.value.toUpperCase();
+			}
+		</script> --}}
 </head>
 
 <style>

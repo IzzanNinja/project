@@ -16,6 +16,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/search', [DaftarController::class, 'search'])->name('search');
+
+
 // Applying middleware
 Route::middleware('auth')->group(function () {
     // Protected routes here
@@ -27,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::match(['GET', 'POST'], '/daftar', [DaftarController::class, 'edit'])->name('daftar'); // Make it handle both GET (view) and POST (create, edit, and store) method
     Route::get('/cetakan', [DaftarController::class, 'cetakindex'])->name('pet_cetak');
     Route::get('/semakan', [DaftarController::class, 'semakindex'])->name('semakindex');
+
+
 
     Route::get('/tanah/{id}/edit', [TanahController::class, 'edit'])->name('edit-tanah');
     Route::post('/senaraitanah', [TanahController::class, 'store'])->name('senaraitanah.store');
