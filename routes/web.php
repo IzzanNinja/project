@@ -16,8 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/search', [DaftarController::class, 'search'])->name('search');
-
+Route::get('check-nokp/{nokp}', [RegisterController::class, 'checkNOKP']);
 
 // Applying middleware
 Route::middleware('auth')->group(function () {
@@ -27,31 +26,24 @@ Route::middleware('auth')->group(function () {
     // Route for handling and displaying the edit form
     Route::get('/daftar/edit', [DaftarController::class, 'edit'])->name('daftar.edit');
     Route::post('/daftar/update', [DaftarController::class, 'update'])->name('daftar.update');
-    Route::match(['GET', 'POST'], '/daftar', [DaftarController::class, 'edit'])->name('daftar'); // Make it handle both GET (view) and POST (create, edit, and store) method
+    Route::match(['GET', 'POST'], '/daftar', [DaftarController::class, 'edit'])->name('daftar');
     Route::get('/cetakan', [DaftarController::class, 'cetakindex'])->name('pet_cetak');
-    Route::get('/semakan', [DaftarController::class, 'semakindex'])->name('semakindex');
-
-
 
     Route::get('/tanah/{id}/edit', [TanahController::class, 'edit'])->name('edit-tanah');
     Route::post('/senaraitanah', [TanahController::class, 'store'])->name('senaraitanah.store');
     Route::put('/senaraitanah/{id}', [TanahController::class, 'update'])->name('senaraitanah.update');
-    Route::get('/tanahindex', [TanahController::class, 'index'])->name('tanahindex'); // Define the tanahindex route with the TanahController's index method
-    Route::get('/senaraitanah', [TanahController::class, 'create'])->name('senaraitanah'); // Define the tanahindex route with the TanahController's index method
+    Route::get('/tanahindex', [TanahController::class, 'index'])->name('tanahindex');
+    Route::get('/senaraitanah', [TanahController::class, 'create'])->name('senaraitanah');
     Route::get('/tanah/{id}/delete', [TanahController::class, 'delete'])->name('tanah.delete');
-
 
     Route::get('/carian', function () {
         return view('carian');
     })->name('carian');
 
+
 });
 
 Auth::routes();
-
-// New User Registration
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
 
 // Password Setting
 Route::get('set-password', [SetPasswordController::class, 'showSetPasswordForm'])->name('set.password');
@@ -66,3 +58,8 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 Route::post('/upload', 'FileController@upload')->name('file.upload');
 Route::get('/pet_cetak', [DaftarController::class, 'showPetCetakForm'])->name('pet_cetak');
 Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');
+
+// Registration Routes
+Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('register', [RegisterController::class, 'register'])->name('register');
+

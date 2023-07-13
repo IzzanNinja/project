@@ -7,10 +7,8 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\RedirectResponse;
 
 class RegisterController extends Controller
 {
@@ -25,7 +23,6 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-
         return view('auth.register');
     }
 
@@ -35,7 +32,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'kad_pengenalan' => ['required', 'numeric', 'digits:12', 'unique:users'],
+            'nokp' => ['required', 'string', 'regex:/^[0-9]{12}$/'],
         ]);
     }
 
@@ -45,20 +42,13 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'kad_pengenalan' => $data['kad_pengenalan'],
+            'nokp' => $data['nokp'],
         ]);
     }
 
-    protected function registered(Request $request, $user)
+    public function checkNOKP($nokp)
     {
-        return redirect('/login')->with('success', 'Pendaftaran berjaya. Sila log masuk.');
+        $user = User::where('nokp', $nokp)->exists();
+        return response()->json(['exists' => $user]);
     }
-    // public function search(Request $request)
-    // {
-    //     $keyword = $request->input('keyword');
-    //     $petanibajak = DB::table('petanibajak')->where('nokp', 'LIKE', "%$keyword%")->get();
-
-    //     return view('search', compact('nokp', 'keyword'));
-    // }
-
 }
