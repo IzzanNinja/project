@@ -51,4 +51,5 @@ class RegisterController extends Controller
         $user = User::where('nokp', $nokp)->exists();
         return response()->json(['exists' => $user]);
     }
+
 }

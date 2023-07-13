@@ -67,4 +67,4 @@ Route::post('/upload', 'FileController@upload')->name('file.upload');
 Route::get('/pet_cetak', [DaftarController::class, 'showPetCetakForm'])->name('pet_cetak');
 Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');
 
-Route::get('check-nokp/{nokp}', [RegisterController::class, 'checkNOKP']);
+Route::get('/check-nokp/{nokp}', [RegisterController::class, 'checkNOKP']);

@@ -67,43 +67,30 @@
         function checkNOKP() {
             var nokp = document.getElementById('nokp').value;
 
-            // Check if nokp is not empty
-            if (nokp.trim() !== '') {
-                // Existing NOKP found, show user info and enable registration button
-                document.getElementById('user-info').style.display = 'block';
-                document.getElementById('register-btn').style.display = 'block';
-            } else {
-                // NOKP is empty, hide user info and disable registration button
-                document.getElementById('user-info').style.display = 'none';
-                document.getElementById('register-btn').style.display = 'none';
-                alert('Please provide a valid NOKP.');
-            }
+            // Send an AJAX request to check if NOKP exists
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.exists) {
+                            // Existing NOKP found, show user info and enable registration button
+                            document.getElementById('user-info').style.display = 'block';
+                            document.getElementById('register-btn').style.display = 'block';
+                        } else {
+                            // NOKP not found, hide user info and disable registration button
+                            document.getElementById('user-info').style.display = 'none';
+                            document.getElementById('register-btn').style.display = 'none';
+                            alert('NOKP not found. Please provide a valid NOKP.');
+                        }
+                    } else {
+                        console.log('Error: ' + xhr.status);
+                    }
+                }
+            };
+            xhr.open('GET', '/check-nokp/' + nokp);
+            xhr.send();
         }
     </script>
-
-
-        {{-- // function checkNOKP() {
-        //     var nokp = document.getElementById('nokp').value;
-
-        //     // Simulate NOKP check
-        //     if (nokpExists(nokp)) {
-        //         // Existing NOKP found, show user info and enable registration button
-        //         document.getElementById('user-info').style.display = 'block';
-        //         document.getElementById('register-btn').style.display = 'block';
-        //     } else {
-        //         // NOKP not found, hide user info and disable registration button
-        //         document.getElementById('user-info').style.display = 'none';
-        //         document.getElementById('register-btn').style.display = 'none';
-        //         alert('NOKP not found. Please provide a valid NOKP.');
-        //     }
-        // }
-
-        // // Function to check if NOKP exists (Replace with your own logic)
-        // function nokpExists(nokp) {
-        //     // Simulate NOKP existence check
-        //     // Replace this with your own logic to check NOKP on the server-side
-        //     var existingNOKPs = ['1234567890', '9876543210', '5678901234'];
-        //     return existingNOKPs.includes(nokp);
-        // } --}}
 
 @endsection
