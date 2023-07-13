@@ -13,7 +13,7 @@
                                     <h2 class="text-uppercase text-center mb-5">Daftar Pengguna Baru</h2>
 
                                     <div class="form-group">
-                                        <label for="nokp" class="col-md-4 col-form-label text-md-right">{{ __('NOKP') }}</label>
+                                        <label for="nokp" class="col-md-4 col-form-label text-md-right">{{ __('Kad Pengenalan') }}</label>
                                         <div class="input-group">
                                             <input id="nokp" type="text" class="form-control @error('nokp') is-invalid @enderror" name="nokp" value="{{ old('nokp') }}" required autofocus>
                                             <div class="input-group-append">
@@ -67,25 +67,43 @@
         function checkNOKP() {
             var nokp = document.getElementById('nokp').value;
 
-            // Simulate NOKP check
-            if (nokpExists(nokp)) {
+            // Check if nokp is not empty
+            if (nokp.trim() !== '') {
                 // Existing NOKP found, show user info and enable registration button
                 document.getElementById('user-info').style.display = 'block';
                 document.getElementById('register-btn').style.display = 'block';
             } else {
-                // NOKP not found, hide user info and disable registration button
+                // NOKP is empty, hide user info and disable registration button
                 document.getElementById('user-info').style.display = 'none';
                 document.getElementById('register-btn').style.display = 'none';
-                alert('NOKP not found. Please provide a valid NOKP.');
+                alert('Please provide a valid NOKP.');
             }
         }
-
-        // Function to check if NOKP exists (Replace with your own logic)
-        function nokpExists(nokp) {
-            // Simulate NOKP existence check
-            // Replace this with your own logic to check NOKP on the server-side
-            var existingNOKPs = ['1234567890', '9876543210', '5678901234'];
-            return existingNOKPs.includes(nokp);
-        }
     </script>
+
+
+        {{-- // function checkNOKP() {
+        //     var nokp = document.getElementById('nokp').value;
+
+        //     // Simulate NOKP check
+        //     if (nokpExists(nokp)) {
+        //         // Existing NOKP found, show user info and enable registration button
+        //         document.getElementById('user-info').style.display = 'block';
+        //         document.getElementById('register-btn').style.display = 'block';
+        //     } else {
+        //         // NOKP not found, hide user info and disable registration button
+        //         document.getElementById('user-info').style.display = 'none';
+        //         document.getElementById('register-btn').style.display = 'none';
+        //         alert('NOKP not found. Please provide a valid NOKP.');
+        //     }
+        // }
+
+        // // Function to check if NOKP exists (Replace with your own logic)
+        // function nokpExists(nokp) {
+        //     // Simulate NOKP existence check
+        //     // Replace this with your own logic to check NOKP on the server-side
+        //     var existingNOKPs = ['1234567890', '9876543210', '5678901234'];
+        //     return existingNOKPs.includes(nokp);
+        // } --}}
+
 @endsection

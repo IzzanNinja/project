@@ -45,7 +45,7 @@
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pemohon" value="{{ Auth::user()->name }}" readonly>
 
                     <label for="pendaftaran">No.Kad Pengenalan :</label>
-                    <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ Auth::user()->kad_pengenalan }}" readonly>
+                    <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ Auth::user()->nokp }}" readonly>
 
                     <!-- textarea -->
                     <label>Alamat :</label>

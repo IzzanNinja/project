@@ -22,7 +22,7 @@ class User extends Authenticatable
 
     public function username()
     {
-        return 'kad_pengenalan';
+        return 'nokp';
     }
 
     /**
@@ -32,7 +32,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'kad_pengenalan',
+        'nokp',
         'email',
         'password',
     ];
