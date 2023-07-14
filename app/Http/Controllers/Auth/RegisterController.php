@@ -32,7 +32,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'nokp' => ['required', 'string', 'regex:/^[0-9]{12}$/'],
+            'nokp' => ['required', 'string', 'regex:/^[0-9]{6}[-\s]?[0-9]{2}[-\s]?[0-9]{4}$/'],
         ]);
     }
 
@@ -48,8 +48,13 @@ class RegisterController extends Controller
 
     public function checkNOKP($nokp)
     {
-        $user = User::where('nokp', $nokp)->exists();
-        return response()->json(['exists' => $user]);
+        $user = User::where('nokp', $nokp)->first(); // Retrieve the user with the given NOKP
+
+        if ($user) {
+            return response()->json(['exists' => true]);
+        } else {
+            return response()->json(['exists' => false]);
+        }
     }
 
 }

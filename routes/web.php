@@ -5,16 +5,16 @@ use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\TanahController;
 use App\Http\Controllers\TuntutanController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SetPasswordController;
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController; // Add this line
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/check-nokp/{nokp}', [RegisterController::class, 'checkNOKP']);
 
 // Applying middleware
 Route::middleware('auth')->group(function () {
@@ -66,4 +66,3 @@ Route::post('/upload', 'FileController@upload')->name('file.upload');
 Route::get('/pet_cetak', [DaftarController::class, 'showPetCetakForm'])->name('pet_cetak');
 Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');
 
-Route::get('/check-nokp/{nokp}', [RegisterController::class, 'checkNOKP']);

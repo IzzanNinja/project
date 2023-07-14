@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <section class="vh-100 bg-image" style="background-image: url('{{ asset('img/padionlykabur.jpg') }}'); background-size: cover;">
@@ -64,33 +66,40 @@
     </form>
 
     <script>
-        function checkNOKP() {
-            var nokp = document.getElementById('nokp').value;
+       function checkNOKP() {
+    var nokp = document.getElementById('nokp').value;
 
-            // Send an AJAX request to check if NOKP exists
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.exists) {
-                            // Existing NOKP found, show user info and enable registration button
-                            document.getElementById('user-info').style.display = 'block';
-                            document.getElementById('register-btn').style.display = 'block';
-                        } else {
-                            // NOKP not found, hide user info and disable registration button
-                            document.getElementById('user-info').style.display = 'none';
-                            document.getElementById('register-btn').style.display = 'none';
-                            alert('NOKP not found. Please provide a valid NOKP.');
-                        }
-                    } else {
-                        console.log('Error: ' + xhr.status);
-                    }
+    // Send an AJAX request to check if NOKP exists
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.exists) {
+                    // Existing NOKP found, show user info and enable registration button
+                    document.getElementById('user-info').style.display = 'block';
+                    document.getElementById('register-btn').style.display = 'block';
+                } else {
+                    // NOKP not found, hide user info and disable registration button
+                    document.getElementById('user-info').style.display = 'none';
+                    document.getElementById('register-btn').style.display = 'none';
+                    alert('NOKP not found. Please provide a valid NOKP.');
                 }
-            };
-            xhr.open('GET', '/check-nokp/' + nokp);
-            xhr.send();
+            } else {
+                console.log('Error: ' + xhr.status);
+            }
         }
+    };
+
+    // Get the CSRF token value from the page
+    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    xhr.open('GET', '/check-nokp/' + nokp);
+    // Set the CSRF token in the request headers
+    xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+    xhr.send();
+}
+
     </script>
 
 @endsection
