@@ -46,7 +46,7 @@
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama Pemohon" value="{{ Auth::user()->name }}" readonly>
 
                     <label for="pendaftaran">No.Kad Pengenalan :</label>
-                    <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ Auth::user()->kad_pengenalan }}" readonly>
+                    <input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ Auth::user()->nokp }}" readonly>
 
                     <!-- textarea -->
                     <label>Alamat :</label>
@@ -140,7 +140,7 @@
                 {{-- <p id="dateValidationMessage" style="color: red; display: none;">Tarikh tidak boleh sebelum tarikh semasa.</p> --}}
 
                 <div class="box-footer">
-                    <button type="submit" style="margin-top:2rem" class="btn btn-primary">Simpan</button>
+                    <button type="submit" style="margin-top:2rem" class="btn btn-primary">Kemaskini</button>
                 </div>
                 </div> <!-- /.form-group -->
                 </div> <!-- /.box-body -->

@@ -28,6 +28,9 @@
                                             </span>
                                         @enderror
                                     </div>
+                                    <br>
+
+
 
                                     <div id="user-info" style="display: none;">
                                         <div class="form-outline mb-4">
@@ -81,9 +84,9 @@
                     document.getElementById('register-btn').style.display = 'block';
                 } else {
                     // NOKP not found, hide user info and disable registration button
-                    document.getElementById('user-info').style.display = 'none';
-                    document.getElementById('register-btn').style.display = 'none';
-                    alert('NOKP not found. Please provide a valid NOKP.');
+                    document.getElementById('user-info').style.display = 'block';
+                    document.getElementById('register-btn').style.display = 'block';
+                    alert('No Kad Pengenalan belum wujud. Sila daftar pengguna baru.');
                 }
             } else {
                 console.log('Error: ' + xhr.status);

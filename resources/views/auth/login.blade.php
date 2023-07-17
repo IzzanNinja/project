@@ -19,7 +19,7 @@
                                 <h2 class="fw-bold mb-2">eBajak</h2>
                                 <p class="text-black-50 mb-5">Sistem Subsidi Petani</p>
                                 <div class="form-outline form-white mb-4">
-                                    <label for="nokp" class="col-md-4 col-form-label text-md-right">{{('nokp')}}</label>
+                                    <label for="nokp" class="col-md-4 col-form-label text-md-right">{{('No Kad Pengenalan')}}</label>
                                     <input id="nokp" type="text" class="form-control @error('nokp') is-invalid @enderror" name="nokp" value="{{ old('nokp') }}" required autocomplete="nokp" autofocus aria-label="Kad Pengenalan" aria-describedby="nokp_error">
                                     <small>(Masukkan nombor kad pengenalan anda tanpa tanda '-')</small>
                                     @error('nokp')

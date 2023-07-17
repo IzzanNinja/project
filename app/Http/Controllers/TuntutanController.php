@@ -15,4 +15,8 @@ class TuntutanController extends Controller
 
         return view('ptundaf', compact('daftar', 'tanah'));
     }
+
+
+
+    
 }

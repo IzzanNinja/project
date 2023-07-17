@@ -20,6 +20,8 @@
                         <div class="table-responsive" style="height: 800px; overflow: auto;">
                             <table class="table table-striped projects">
                                 <thead>
+                                    {{ $tanah->links() }}
+
                                     <tr>
                                         <th style="width: 1%">Bil</th>
                                         <th width="25%">Pemilik Geran</th>
@@ -50,7 +52,7 @@
                                             <span class="badge badge-danger">Belum Tuntut</span>
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="#">
+                                            <a class="btn btn-info btn-sm" href=http://ebajak.test/ptundaf2>
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                         </td>
@@ -58,6 +60,8 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $tanah->links() }}
+
                         </div>
                     </div>
                 </div>
