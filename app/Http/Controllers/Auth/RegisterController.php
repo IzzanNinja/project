@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 class RegisterController extends Controller
 {
@@ -36,15 +38,24 @@ class RegisterController extends Controller
             'nokp' => ['required', 'string', 'regex:/^[0-9]{6}[-\s]?[0-9]{2}[-\s]?[0-9]{4}$/'],
         ]);
     }
-
     protected function create(array $data)
     {
-        return User::create([
+        // Check if NOKP already exists in the users table
+        // $existingUser = User::where('nokp', $data['nokp'])->first();
+        // if ($existingUser) {
+        //     throw ValidationException::withMessages([
+        //         'nokp' => 'Kad pengenalan sudah wujud. Sila log masuk',
+        //     ])->redirectTo('login');
+        // }
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'nokp' => $data['nokp'],
         ]);
+
+        // return $user;
     }
     public function checkNOKP($nokp)
 {
