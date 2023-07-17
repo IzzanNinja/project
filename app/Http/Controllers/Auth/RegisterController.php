@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -45,16 +46,27 @@ class RegisterController extends Controller
             'nokp' => $data['nokp'],
         ]);
     }
-
     public function checkNOKP($nokp)
-    {
-        $user = User::where('nokp', $nokp)->first(); // Retrieve the user with the given NOKP
+{
+    $user = DB::table('petanibajak')->where('nokp', $nokp)->first();
 
-        if ($user) {
-            return response()->json(['exists' => true]);
-        } else {
-            return response()->json(['exists' => false]);
-        }
+    if ($user) {
+        return response()->json(['exists' => true]);
+    } else {
+        return response()->json(['exists' => false]);
     }
+}
+
+
+    // public function checkNOKP($nokp)
+    // {
+    //     $user = User::where('nokp', $nokp)->first(); // Retrieve the user with the given NOKP
+
+    //     if ($user) {
+    //         return response()->json(['exists' => true]);
+    //     } else {
+    //         return response()->json(['exists' => false]);
+    //     }
+    // }
 
 }
