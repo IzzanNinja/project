@@ -163,6 +163,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -189,9 +191,10 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
-    ])->toArray(),
+        // Other aliases
+    ])->merge([
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,    ])->toArray(),
+
 
 ];

@@ -82,6 +82,8 @@
                     // Existing NOKP found, show user info and enable registration button
                     document.getElementById('user-info').style.display = 'block';
                     document.getElementById('register-btn').style.display = 'block';
+                    alert('No Kad Pengenalan sudah wujud. Sila daftar nama, email dan kata laluan baru.');
+
                 } else {
                     // NOKP not found, hide user info and disable registration button
                     document.getElementById('user-info').style.display = 'block';

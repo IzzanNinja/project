@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TanahController extends Controller
 {
@@ -132,9 +133,20 @@ class TanahController extends Controller
         $latestTableId = DB::table('tanah')->max('table_id');
         return response()->json(['latestTableId' => $latestTableId + 1]);
     }
+
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            // Process the uploaded file here
+            // Example: Save the file to storage
+            $request->file('file')->store('uploads');
+            // You can perform additional actions as per your requirements
+        }
+
+        // Redirect back to the previous page or any other appropriate action
+        return back()->with('success', 'Geran berjaya ditambah');
+    }
 }
-
-
 
 
 
