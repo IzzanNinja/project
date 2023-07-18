@@ -24,9 +24,10 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
 
     <!-- Main content -->
     <section class="content">
+
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
+                <a class="btn btn-success float-left mr-2 mb-3" href="{{ route('senaraitanah') }}">Tambah Tanah Baru</a>                {{ $tanah->links() }}<div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
