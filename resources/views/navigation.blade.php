@@ -168,7 +168,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('daftar') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Kemaskini Profil Petani</p>
+                                        <p>Butiran Petani</p>
                                     </a>
                                 </li>
                             </ul>
@@ -230,7 +230,7 @@
             <strong>Put Necessary Footer Here.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Put Necessary Version</b> e.g; 3.2.0
+                <b>Versi</b>1.0
             </div>
         </footer>
 

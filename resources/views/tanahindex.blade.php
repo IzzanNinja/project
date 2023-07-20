@@ -48,10 +48,10 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
                                 <td>{{ $item->pemilikgeran }}</td>
                                 <td>{{ $item->nogeran }}</td>
                                 <td><span class="badge bg-danger">Belum Tuntut</span></td>
-                                <td>                                         <a href="{{ route('edit-tanah', ['id' => $item->table_id]) }}" class="btn btn-warning" style="margin-bottom: 10px;">Edit</a>
+                                <td>                                         <a href="{{ route('edit-tanah', ['id' => $item->table_id]) }}" class="btn btn-warning" style="margin-bottom: 10px;" onclick=" return confirm('Sila kemaskini data geran tanah')">Edit</a>
 
                                     <a href="{{ route('pet_cetak', ['table_id' => isset($tanah->table_id) ? $tanah->table_id : '']) }}" class="btn btn-info" style="margin-bottom: 10px;">PDF Cetak</a>
-                                     <a href="{{ route('tanah.delete', ['id' => $item->table_id, 'success' => true]) }}" class="btn btn-danger" style="margin-bottom: 10px;" onclick="return confirm('Are you sure you want to delete this?')">Padam</a>
+
 
                                      <a href="#" class="btn btn-primary" style="margin-bottom: 10px;" id="uploadButton">Tambah Geran</a></td>
                             </tr>
@@ -61,9 +61,9 @@ $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
                                         <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
-                                                <input type="file" name="file">
+                                                <input type="file" name="file" accept=".pdf" required>
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Upload File</button>
+                                            <button type="submit" class="btn btn-primary">Muatnaik fail</button> <small>*PDF sahaja</small>
                                         </form>
 
                                     </div>

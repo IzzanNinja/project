@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'nokp' => $data['nokp'],
         ]);
 
-        // return $user;
+        return $user;
     }
     public function checkNOKP($nokp)
 {

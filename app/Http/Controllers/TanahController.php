@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+
 
 class TanahController extends Controller
 {
@@ -134,18 +136,40 @@ class TanahController extends Controller
         return response()->json(['latestTableId' => $latestTableId + 1]);
     }
 
-    public function upload(Request $request)
-    {
-        if ($request->hasFile('file')) {
-            // Process the uploaded file here
-            // Example: Save the file to storage
-            $request->file('file')->store('uploads');
-            // You can perform additional actions as per your requirements
-        }
 
-        // Redirect back to the previous page or any other appropriate action
-        return back()->with('success', 'Geran berjaya ditambah');
+    public function upload(Request $request)
+{
+    // Validate the uploaded file
+    $validator = Validator::make($request->all(), [
+        'file' => 'required|mimes:pdf|max:2048', // PDF and maximum 2MB
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
     }
+
+    // Process the file upload
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+
+        // You may want to generate a unique name for the file
+        $filename = uniqid('geran_') . '.' . $file->getClientOriginalExtension();
+
+        // Store the file in the 'public' disk (you may need to configure the filesystems.php for this)
+        $path = $file->storeAs('geran_files', $filename, 'public');
+
+        // Save the file path in the database or any other processing you want to do
+        // For example, if you have a 'gerans' table with a 'file_path' column, you can do:
+        // $geran = new Geran;
+        // $geran->file_path = $path;
+        // $geran->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'File uploaded successfully.');
+    }
+
+    return redirect()->back()->withErrors(['file' => 'File upload failed.'])->withInput();
+}
 }
 
 
