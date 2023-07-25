@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable; // Update this use statement
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -38,46 +38,20 @@ class RegisterController extends Controller
             'nokp' => ['required', 'string', 'regex:/^[0-9]{6}[-\s]?[0-9]{2}[-\s]?[0-9]{4}$/'],
         ]);
     }
-    protected function create(array $data)
-    {
-        // Check if NOKP already exists in the users table
-        // $existingUser = User::where('nokp', $data['nokp'])->first();
-        // if ($existingUser) {
-        //     throw ValidationException::withMessages([
-        //         'nokp' => 'Kad pengenalan sudah wujud. Sila log masuk',
-        //     ])->redirectTo('login');
-        // }
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'nokp' => $data['nokp'],
-        ]);
-
-        return $user;
-    }
-    public function checkNOKP($nokp)
+   /**
+ * Handle creating a new user instance after a valid registration.
+ *
+ * @param  array  $data
+ * @return \Illuminate\Contracts\Auth\Authenticatable
+ */
+protected function create(array $data)
 {
-    $user = DB::table('petanibajak')->where('nokp', $nokp)->first();
-
-    if ($user) {
-        return response()->json(['exists' => true]);
-    } else {
-        return response()->json(['exists' => false]);
-    }
+    return User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'nokp' => $data['nokp'],
+    ]);
 }
-
-
-    // public function checkNOKP($nokp)
-    // {
-    //     $user = User::where('nokp', $nokp)->first(); // Retrieve the user with the given NOKP
-
-    //     if ($user) {
-    //         return response()->json(['exists' => true]);
-    //     } else {
-    //         return response()->json(['exists' => false]);
-    //     }
-    // }
-
 }
