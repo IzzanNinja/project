@@ -6,16 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;// Add this line to import the correct Request class
 
 class LoginController extends Controller
 {
+    use AuthenticatesUsers;
+
     public function username()
     {
         return 'nokp';
     }
-
-    use AuthenticatesUsers;
 
     protected function credentials(Request $request)
     {
@@ -38,6 +37,6 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         $welcomeMessage = 'Selamat Datang, ' . $user->name ;
-        Session::flash('success', $welcomeMessage);
+        session()->flash('success', $welcomeMessage);
     }
 }

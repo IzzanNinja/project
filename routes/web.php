@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/check-nokp/{nokp}', [RegisterController::class, 'checkNOKP']);
+Route::post('/check-nokp', [RegisterController::class, 'checkNokp'])->name('check-nokp');
 
 // Applying middleware
 Route::middleware('auth')->group(function () {
