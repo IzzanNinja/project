@@ -37,23 +37,19 @@ class RegisterController extends Controller
         // Check if 'nokp' exists in the 'petanibajak' table
         $existingNokp = DB::table('petanibajak')->where('nokp', $data['nokp'])->first();
 
-        if ($existingNokp) {
-            // If 'nokp' exists, retrieve the corresponding 'nama'
-            $nama = $existingNokp->nama;
+        // If 'nokp' exists, retrieve the corresponding 'nama'
+        $nama = $existingNokp ? $existingNokp->nama : $data['name'];
 
-            // Create the user in the 'users' table and store 'nokp', 'nama', 'name', 'email', and 'password'
-            return User::create([
-                'nokp' => $data['nokp'],
-                'nama' => $nama,
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-            ]);
-        } else {
-            // If 'nokp' does not exist, throw a ValidationException with the error message
-            throw ValidationException::withMessages(['nokp' => 'No Kad Pengenalan not found.']);
-        }
+        // Create the user in the 'users' table and store 'nokp', 'nama', 'name', 'email', and 'password'
+        return User::create([
+            'nokp' => $data['nokp'],
+            'nama' => $nama,
+            'name' => $data['name'], // We still use the provided 'name' value directly from the registration form
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
     }
+
 
     public function checkNokp(Request $request)
     {

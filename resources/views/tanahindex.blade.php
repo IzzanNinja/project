@@ -24,6 +24,8 @@ $lastYear = $currentYear - 1;
     </div>
 @endif
 
+
+
 @section('navigation')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -33,7 +35,6 @@ $lastYear = $currentYear - 1;
 
         <!-- Main content -->
         <section class="content">
-
             <div class="card">
                 <div class="card-body">
                     <a class="btn btn-success float-left mr-2 mb-3" href="{{ route('senaraitanah') }}">Tambah Tanah Baru</a>
@@ -54,47 +55,42 @@ $lastYear = $currentYear - 1;
                                 @php
                                     $counter = 1;
                                 @endphp
-                                @foreach ($tanah as $item)
-                                    <tr data-widget="expandable-table" aria-expanded="false">
-                                        <td>{{ $counter++ }}</td>
-                                        <td>{{ $item->pemilikgeran }}</td>
-                                        <td>{{ $item->nogeran }}</td>
-                                        <td><span class="badge bg-danger">Belum Tuntut</span></td>
-                                        <td>{{ date('Y', strtotime($item->tarikh)) }}</td>
-                                        <td> <a href="{{ route('edit-tanah', ['id' => $item->table_id]) }}"
-                                                class="btn btn-warning" style="margin-bottom: 10px;"
-                                                onclick=" return confirm('Sila kemaskini data geran tanah')">Edit</a>
-
-                                            <a href="{{ route('pet_cetak', ['table_id' => isset($item->table_id) ? $item->table_id : '']) }}"
-                                                class="btn btn-info" style="margin-bottom: 10px;">PDF Cetak</a>
-
-
-                                            <a href="#" class="btn btn-primary" style="margin-bottom: 10px;"
-                                                id="uploadButton">Tambah Geran</a>
-                                        </td>
-                                    </tr>
-                                    <tr class="expandable-body d-none">
-                                        <td colspan="5">
-                                            <div>
-                                                <form action="{{ route('upload') }}" method="POST"
-                                                    enctype="multipart/form-data">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <input type="file" name="file" accept=".pdf" required>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Muatnaik fail</button>
-                                                    <small>*PDF sahaja</small>
-                                                </form>
-
+                            @foreach ($tanah as $index => $item)
+                            <tr data-toggle="collapse" data-target="#expandableRow{{ $index }}" aria-expanded="false" aria-controls="expandableRow{{ $index }}">
+                                <td>{{ $counter++ }}</td>
+                                <td>{{ $item->pemilikgeran }}</td>
+                                <td>{{ $item->nogeran }}</td>
+                                <td><span class="badge bg-danger">Belum Tuntut</span></td>
+                                <td>{{ date('Y', strtotime($item->tarikh)) }}</td>
+                                <td>
+                                    <a href="{{ route('edit-tanah', ['id' => $item->table_id]) }}" class="btn btn-warning" style="margin-bottom: 10px;" onclick="return confirm('Sila kemaskini data geran tanah')">Edit</a>
+                                    <a href="{{ route('pet_cetak', ['table_id' => isset($item->table_id) ? $item->table_id : '' ]) }}" class="btn btn-info" style="margin-bottom: 10px;">PDF Cetak</a>
+                                    <!-- Add data-toggle and data-target attributes with the unique identifier -->
+                                    <a href="#" class="btn btn-primary" style="margin-bottom: 10px;">Tambah Geran</a>
+                                </td>
+                            </tr>
+                            <tr class="collapse" id="expandableRow{{ $index }}">
+                                <td colspan="5">
+                                    <div>
+                                        <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="file" name="file" accept=".pdf" required>
                                             </div>
-                                            <div>
-                                                <p>
-                                                    something to put here for future reference etc </p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <button type="submit" class="btn btn-primary">Muatnaik fail</button>
+                                            <small>*PDF sahaja</small>
+                                        </form>
+                                    </div>
+                                    <div>
+                                        <p>something to put here for future reference etc</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+
                             </tbody>
+
+
                         </table>
                     </div>
                 </div>
@@ -104,3 +100,4 @@ $lastYear = $currentYear - 1;
     </div>
     <!-- /.content-wrapper -->
 @endsection
+

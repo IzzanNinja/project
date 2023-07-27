@@ -1,7 +1,19 @@
 @php
     use Illuminate\Support\Facades\DB;
-    $userData = DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->first();
-    $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->paginate(10);
+    use Illuminate\Support\Facades\Auth;
+
+    // Get the logged-in user's nokp
+$nokp = Auth::user()->nokp;
+
+// Get the current year and the last year
+$currentYear = date('Y');
+$lastYear = $currentYear - 1;
+
+// Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is between the current and last year
+    $tanah = DB::table('tanah')
+        ->where('nokppetani', $nokp)
+        ->whereBetween(DB::raw('YEAR(tarikh)'), [$lastYear, $currentYear])
+        ->get();
 @endphp
 
 @extends('navigation')
@@ -20,8 +32,6 @@
                         <div class="table-responsive" style="height: 800px; overflow: auto;">
                             <table class="table table-striped projects">
                                 <thead>
-                                    {{ $tanah->links() }}
-
                                     <tr>
                                         <th style="width: 1%">Bil</th>
                                         <th width="25%">Pemilik Geran</th>
@@ -36,12 +46,11 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                    $counter = ($tanah->currentPage() - 1) * $tanah->perPage() + 1;
+                                    $counter = 1; // Start the counter
                                     @endphp
                                     @foreach($tanah as $item)
                                     <tr>
-                                        {{-- {{ var_dump($item) }} --}}
-                                        <td>{{ $counter++}}</td>
+                                        <td>{{ $counter++ }}</td>
                                         <td>{{ $item->pemilikgeran }}</td>
                                         <td>{{ $item->nogeran }}</td>
                                         <td>{{ DB::table('lokasitanah')->where('kodlokasi', $item->lokasi)->value('namalokasi') }}</td>
@@ -52,7 +61,7 @@
                                             <span class="badge badge-danger">Belum Tuntut</span>
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href=http://ebajak.test/ptundaf2>
+                                            <a class="btn btn-info btn-sm" href="http://ebajak.test/ptundaf2">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                         </td>
@@ -60,8 +69,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $tanah->links() }}
-
                         </div>
                     </div>
                 </div>
@@ -69,7 +76,6 @@
         </div>
     </section>
 </div>
-
 
 <script>
     $.widget.bridge('uibutton', $.ui.button)

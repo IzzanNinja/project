@@ -1,9 +1,23 @@
 @php
     use Illuminate\Support\Facades\DB;
-    $userData = DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->first();
-    $tanah = DB::table('tanah')->where('pohonid', Auth::user()->id)->first();
-    $lokasitanah = DB::table('lokasitanah')->where('kodlokasi', $tanah->lokasi)->first();
+    use Illuminate\Support\Facades\Auth;
 
+    // Get the logged-in user's nokp
+    $nokp = Auth::user()->nokp;
+
+    // Get the current year and the last year
+    $currentYear = date('Y');
+    $lastYear = $currentYear - 1;
+
+    // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is between the current and last year
+    $tanah = DB::table('tanah')
+        ->where('nokppetani', $nokp)
+        ->whereBetween(DB::raw('YEAR(tarikh)'), [$lastYear, $currentYear])
+        ->first();
+
+    $petanibajak = DB::table('petanibajak')
+        ->where('nokp', $nokp)
+        ->first();
 @endphp
 
 @extends('navigation')
@@ -51,14 +65,14 @@
 
                                             <td width="15%">1. Nama Pemohon</td>
                                             <td width="2%">:</td>
-                                            <td width="83%"><input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon" value="{{ DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->value('nama') }}" readonly></td>
+                                            <td width="83%"><input type="text" class="form-control" id="pemohon" name="pemohon" placeholder="Nama Pemohon" value="{{ $petanibajak->nama }}" readonly></td>
 
                                     </tr>
                                     <tr>
 
                                             <td>2. Kad Pengenalan</td>
                                             <td>:</td>
-                                            <td><input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->value('nokp') }}" readonly></td>
+                                            <td><input type="text" class="form-control" id="nokp" name="nokp" placeholder="No.Kad Pengenalan" value="{{ $petanibajak->nokp }}" readonly></td>
 
                                         {{-- <input type="hidden" name="tahun" id="tahun" class="form-control" value=2021>
                                         <input type="hidden" name="nokp" id="nokp" class="form-control"
@@ -71,7 +85,7 @@
 
                                         <td>3. Alamat Perhubungan</td>
                                         <td>:</td>
-                                        <td><input type="text" class="form-control" id="nokp" name="alamat" placeholder="alamat" value="{{ DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->value('alamat') }} {{ DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->value('poskod') }}" readonly></td>
+                                        <td><input type="text" class="form-control" id="nokp" name="alamat" placeholder="alamat" value="{{ $petanibajak->alamat }} {{ $petanibajak->poskod }}" readonly></td>
                                     </tr>
                                 </table>
                             </div>
@@ -93,7 +107,7 @@
                                 <tr>
                                     <td>No. Geran</td>
                                     <td>:</td>
-                                    <td><input type="text" class="form-control" id="nogeran" name="nogeran" placeholder="No. Geran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('nogeran') }}" readonly></td></td>
+                                    <td><input type="text" class="form-control" id="nogeran" name="nogeran" placeholder="No. Geran" value="{{ $tanah->nogeran }}" readonly></td></td>
                                 </tr>
                                 <tr>
                                     <td>Luas Permohonan (Ekar)</td>
@@ -101,7 +115,7 @@
                                     <td>
                                         <div class="input-group">
                                             <input type="text" name="luas" id="luas" class="form-control"
-                                                value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luaspohon') }}" readonly>
+                                                value="{{ $tanah->luaspohon }}" readonly>
                                         </div>
                                     </td>
                                 </tr>
