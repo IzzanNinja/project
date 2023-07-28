@@ -60,11 +60,11 @@ $lastYear = $currentYear - 1;
                                 <td>{{ $counter++ }}</td>
                                 <td>{{ $item->pemilikgeran }}</td>
                                 <td>{{ $item->nogeran }}</td>
-                                <td><span class="badge bg-danger">Belum Tuntut</span></td>
+                                <td><span class="badge bg-danger">Belum Tambah Geran</span></td>
                                 <td>{{ date('Y', strtotime($item->tarikh)) }}</td>
                                 <td>
                                     <a href="{{ route('edit-tanah', ['id' => $item->table_id]) }}" class="btn btn-warning" style="margin-bottom: 10px;" onclick="return confirm('Sila kemaskini data geran tanah')">Edit</a>
-                                    <a href="{{ route('pet_cetak', ['table_id' => isset($item->table_id) ? $item->table_id : '' ]) }}" class="btn btn-info" style="margin-bottom: 10px;">PDF Cetak</a>
+                                    <a href="{{ route('pet_cetak', ['table_id' => isset($item->table_id) ? $item->table_id : '' ]) }}" class="btn btn-info" style="margin-bottom: 10px;" onclick="return confirm('Teruskan ke Cetakan Borang PP13.1')">PDF Cetak</a>
                                     <!-- Add data-toggle and data-target attributes with the unique identifier -->
                                     <a href="#" class="btn btn-primary" style="margin-bottom: 10px;">Tambah Geran</a>
                                 </td>
