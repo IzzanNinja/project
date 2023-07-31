@@ -121,13 +121,13 @@ class TanahController extends Controller
     public function index2()
     {
         // Call the getLatestTableId() method to fetch the latest table_id value
-        // $latestTableId = $this->getLatestTableId();
+        $latestTableId = $this->getLatestTableId();
 
         // Fetch the user_id value
-        $user_id = DB::table('tanah')->where('nokppetani', Auth::user()->nokppetani)->value('nokppetani');
+        $user_id = DB::table('petanibajak')->where('petanibajak_id', Auth::user()->id)->value('petanibajak_id');
 
         // Pass the latestTableId and user_id variables to the view
-        return view('senaraitanah', compact('user_id'));
+        return view('senaraitanah', compact('latestTableId', 'user_id'));
     }
 
     public function getLatestTableId()

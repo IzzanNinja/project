@@ -26,51 +26,54 @@
                         <form action="{{ route('senaraitanah.update', ['petanibajak_id' => Auth::user()->id]) }}" method="POST">
                             @csrf
 
-                            {{-- <div class="form-group">
-                                <label for="table_id">Table ID</label>
+                            <div class="form-group">
+                                {{-- <label for="table_id">Table ID</label> --}}
                                 <input type="text" class="form-control" id="table_id" name="table_id" value="{{ $latestTableId }}" readonly style="display: none;">
-                            </div> --}}
-
-                            <div class="form-group">
-                                <label for="nokppetani">NOKP Petani</label>
-                                <input type="text" class="form-control" id="nokppetani" name="nokppetani" value="{{ Auth::user()->nokp }}" readonly>
                             </div>
 
+                            <div class="form-group">
+                                <label for="pohonid">Pohon ID</label>
+                                <input type="text" class="form-control" id="pohonid" name="pohonid" value="{{ $user_id }}" readonly>
+                            </div>
 
-                            <div class="form-group">
-                                <label for="nama_pemilik">Nama Pemilik</label>
-                                <input type="text" class="form-control" id="pemilikgeran" name="pemilikgeran" value="{{ $user_id->pemilikgeran }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="no_geran">No.Geran</label>
-                                <input type="text" class="form-control" id="nogeran" name="nogeran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('nogeran') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="lokasi_tanah">Lokasi Tanah</label>
-                                <select class="form-control" id="lokasi" name="lokasi">
-                                    <option value="">Sila pilih...</option>
-                                    @foreach (DB::table('lokasitanah')->get() as $lokasi)
-                                        <option value="{{ $lokasi->kodlokasi }}">{{ $lokasi->namalokasi }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="luas_dalam_geran">Luas Dalam Geran (Ekar)</label>
-                                <input type="text" class="form-control" id="luasekar" name="luasekar" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luasekar') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="luas_dipohon">Luas Dipohon/Musim (Ekar)</label>
-                                <input type="text" class="form-control" id="luaspohon" name="luaspohon" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luaspohon') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="pemilikan_tanah">Pemilikan Tanah</label>
-                                <select class="form-select" id="pemilikan" name="pemilikan">
-                                    <option value="0">Sila Pilih...</option>
-                                    <option value="1">Sendiri</option>
-                                    <option value="2">Sewa</option>
-                                    <option value="3">Tuntut Waris</option>
-                                </select>
-                            </div>
+
+                                <div class="form-group">
+                                    <label for="nama_pemilik">Nama Pemilik</label>
+                                    <input type="text" class="form-control" id="pemilikgeran" name="pemilikgeran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('pemilikgeran') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="no_geran">No.Geran</label>
+                                    <input type="text" class="form-control" id="nogeran" name="nogeran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('nogeran') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lokasi_tanah">Lokasi Tanah</label>
+                                    <select class="form-control" id="lokasi" name="lokasi">
+                                        <option value="">Sila pilih...</option>
+                                        @foreach (DB::table('lokasitanah')->get() as $lokasi)
+                                            <option value="{{ $lokasi->kodlokasi }}">{{ $lokasi->namalokasi }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="luas_dalam_geran">Luas Dalam Geran (Ekar)</label>
+                                    <input type="text" class="form-control" id="luasekar" name="luasekar" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luasekar') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="luas_dipohon">Luas Dipohon/Musim (Ekar)</label>
+                                    <input type="text" class="form-control" id="luaspohon" name="luaspohon" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luaspohon') }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pemilikan_tanah">Pemilikan Tanah</label>
+                                    <select class="form-select" id="pemilikan" name="pemilikan">
+                                        <option value="0">Sila Pilih...</option>
+                                        <option value="1">Sendiri</option>
+                                        <option value="2">Sewa</option>
+                                        <option value="3">Tuntut Waris</option>
+                                    </select>
+                                </div>
+
+
+
 
                             <!-- Add more form fields for other tanah properties -->
 

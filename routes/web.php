@@ -40,22 +40,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/get-latest-table-id', [TanahController::class, 'getLatestTableId']);//retrieve the latest table id
 
-
     //Route ptundaf blade
     Route::post('/ptundaf/store', [TuntutanController::class, 'store'])->name('ptundaf.store');
     Route::post('/ptundaf/{petanibajak_id}', [TuntutanController::class, 'update'])->name('ptundaf.update');
     Route::match(['GET', 'POST'], '/ptundaf', [TuntutanController::class, 'index2'])->name('ptundaf'); // Define the tanahindex route with the TanahController's index method
 
-    Route::get('/get-latest-table-id', [TanahController::class, 'getLatestTableId']);
     Route::post('/upload', [TanahController::class, 'upload'])->name('upload');
-
-
-
 
     Route::get('/carian', function () {
         return view('carian');
     })->name('carian');
-
 });
 
 Auth::routes();
@@ -65,7 +59,6 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])->nam
 Route::post('register', [RegisterController::class, 'register']);
 Route::get('/refresh-math-captcha', [RegisterController::class, 'refreshMathCaptcha'])->name('refresh.math.captcha');
 
-
 // Password Setting
 Route::get('set-password', [SetPasswordController::class, 'showSetPasswordForm'])->name('set.password');
 Route::post('set-password', [SetPasswordController::class, 'setPassword']);
@@ -74,7 +67,6 @@ Route::post('set-password', [SetPasswordController::class, 'setPassword']);
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
 // Subsidi Daftar Form Page
-
 Route::get('/pet_cetak', [DaftarController::class, 'showPetCetakForm'])->name('pet_cetak');
 Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');
 
