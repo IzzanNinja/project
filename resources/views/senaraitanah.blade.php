@@ -12,6 +12,8 @@
         <h1>Daftar Tanah</h1>
     </section>
 
+
+
     <!-- Main content -->
     <section class="content">
 
@@ -23,17 +25,23 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form action="{{ route('senaraitanah.update', ['petanibajak_id' => Auth::user()->id]) }}" method="POST">
-                            @csrf
-
+                         <!-- Your form for adding new tanah -->
+        <form action="{{ route('senaraitanah.store') }}" method="POST">
+            @csrf
                             <div class="form-group">
                                 {{-- <label for="table_id">Table ID</label> --}}
                                 <input type="text" class="form-control" id="table_id" name="table_id" value="{{ $latestTableId }}" readonly style="display: none;">
                             </div>
 
                             <div class="form-group">
-                                <label for="pohonid">Pohon ID</label>
-                                <input type="text" class="form-control" id="pohonid" name="pohonid" value="{{ $user_id }}" readonly>
+                                <label for="tarikh">Tarikh</label>
+                                <input type="date" class="form-control" id="tarikh" name="tarikh"  required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="pohonid">NO KP Petani</label>
+                                <input type="text" class="form-control" id="nokppetani" name="nokppetani" value="{{ Auth::user()->nokp }}" readonly>
                             </div>
 
 

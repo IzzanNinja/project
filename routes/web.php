@@ -35,8 +35,8 @@ Route::middleware('auth')->group(function () {
 
     //Route senaraitanah blade
     Route::post('/senaraitanah/store', [TanahController::class, 'store'])->name('senaraitanah.store');
-    Route::post('/senaraitanah/{petanibajak_id}', [TanahController::class, 'update'])->name('senaraitanah.update');
-    Route::match(['GET', 'POST'], '/senaraitanah', [TanahController::class, 'index2'])->name('senaraitanah'); // Define the tanahindex route with the TanahController's index method
+    Route::match(['GET', 'POST'], '/senaraitanah/create', [TanahController::class, 'create'])->name('senaraitanah.create');
+    Route::get('/senaraitanah', [TanahController::class, 'index2'])->name('senaraitanah'); // Define the tanahindex route with the TanahController's index method
 
     Route::get('/get-latest-table-id', [TanahController::class, 'getLatestTableId']);//retrieve the latest table id
 
