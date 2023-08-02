@@ -5,14 +5,16 @@
     // Get the logged-in user's nokp
 $nokp = Auth::user()->nokp;
 
-// Get the current year and the last year
-$currentYear = date('Y');
-$lastYear = $currentYear - 1;
+// Get the last year the data exists in the 'tanah' table
+$lastYearQuery = DB::table('tanah')
+    ->where('nokppetani', $nokp)
+    ->orderBy('tarikh', 'desc') // Order the results by 'tarikh' in descending order
+    ->value(DB::raw('YEAR(tarikh)')); // Get the year value of the first row's 'tarikh' column (last year data exists)
 
-// Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is between the current and last year
-    $tanah = DB::table('tanah')
-        ->where('nokppetani', $nokp)
-        ->whereBetween(DB::raw('YEAR(tarikh)'), [$lastYear, $currentYear])
+    // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is in the last year
+$tanah = DB::table('tanah')
+    ->where('nokppetani', $nokp)
+    ->whereYear('tarikh', $lastYearQuery)
         ->get();
 @endphp
 
@@ -61,7 +63,8 @@ $lastYear = $currentYear - 1;
                                             <span class="badge badge-danger">Belum Tuntut</span>
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a class="btn btn-info btn-sm" href="http://ebajak.test/ptundaf2">
+                                            <a href="{{ route('ptundaf.edit', ['id' => $item->table_id]) }}" class="btn btn-warning" style="margin-bottom: 10px;">Edit</a>
+
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                         </td>
