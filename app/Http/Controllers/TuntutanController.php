@@ -12,7 +12,7 @@ class TuntutanController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $daftar = DB::table('daftar')->where('user_id', $user->id)->first();
+        $daftar = DB::table('petanibajak')->where('petanibajak_id', $user->id)->first();
         $tanah = DB::table('tanah')->where('pohonid', $user->id)->first();
 
         return view('ptundaf', compact('daftar', 'tanah'));
@@ -47,8 +47,6 @@ class TuntutanController extends Controller
                 'bulan' => null,
                 'tuntutan' => null,
                 'akaun' => null,
-
-
 
                 'tahunpohon' => null,
 
@@ -142,17 +140,39 @@ class TuntutanController extends Controller
             'tuntutan' => $request->tuntutan,
             'akaun' => $request->akaun,
 
-
-
-
-
-
-
-
             ]);
 
             return back()->with('success', 'Data berhasil disimpan!');
         }
     }
 
+    public function changeDate($id)
+    {
+        // Find the Tuntutan record based on the given ID
+        $tuntutan = DB::table('tanah')->where('table_id', $id)->first();
+        $lasttableId = DB::table('tanah')->max('table_id');
+        $tableId = $lasttableId + 1;
+
+        if ($tuntutan) {
+            // Convert the Tuntutan record to an array
+            $tuntutanArray = (array) $tuntutan;
+
+            // Set the 'tarikh' column value to the current date
+            $tuntutanArray['tarikh'] = date('Y-m-d');
+
+            // Set the new value for the 'table_id' column
+            $tuntutanArray['table_id'] = $tableId;
+
+            // Insert the duplicated Tuntutan record with the updated 'tarikh' value
+            $newId = DB::table('tanah')->insertGetId($tuntutanArray);
+
+            if ($newId) {
+                // Redirect or perform any other actions as needed
+                return redirect()->back()->with('success', 'Sila kemaskini data di bahagian Tuntutan.');
+            }
+        }
+
+        // Handle the case when the Tuntutan record is not found
+        return redirect()->back()->with('error', 'Tuntutan not found.');
+    }
 }

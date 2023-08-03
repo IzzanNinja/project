@@ -12,7 +12,7 @@
         </div>
 
         <section class="content">
-            <div class="container-fluid">   
+            <div class="container-fluid">
 
                 @if (session('success'))
                     <div class="alert alert-success">

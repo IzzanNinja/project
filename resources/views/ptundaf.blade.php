@@ -3,19 +3,15 @@
     use Illuminate\Support\Facades\Auth;
 
     // Get the logged-in user's nokp
-$nokp = Auth::user()->nokp;
+    $nokp = Auth::user()->nokp;
 
-// Get the last year the data exists in the 'tanah' table
-$lastYearQuery = DB::table('tanah')
-    ->where('nokppetani', $nokp)
-    ->orderBy('tarikh', 'desc') // Order the results by 'tarikh' in descending order
-    ->value(DB::raw('YEAR(tarikh)')); // Get the year value of the first row's 'tarikh' column (last year data exists)
+    // Get the current year
+    $currentDate = date('Y-m-d');
 
     // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is in the last year
-$tanah = DB::table('tanah')
-    ->where('nokppetani', $nokp)
-    ->whereYear('tarikh', $lastYearQuery)
-        ->get();
+    $tanah = DB::table('tanah')
+            ->whereDate('tarikh', $currentDate)
+            ->get();
 @endphp
 
 @extends('navigation')
@@ -36,6 +32,8 @@ $tanah = DB::table('tanah')
                                 <thead>
                                     <tr>
                                         <th style="width: 1%">Bil</th>
+                                        <th style="width: 1%">ID Geran</th>
+
                                         <th width="25%">Pemilik Geran</th>
                                         <th width="15%">No Geran</th>
                                         <th width="10%">Lokasi</th>
@@ -53,6 +51,7 @@ $tanah = DB::table('tanah')
                                     @foreach($tanah as $item)
                                     <tr>
                                         <td>{{ $counter++ }}</td>
+                                        <td>{{$item->bil }}</td>
                                         <td>{{ $item->pemilikgeran }}</td>
                                         <td>{{ $item->nogeran }}</td>
                                         <td>{{ DB::table('lokasitanah')->where('kodlokasi', $item->lokasi)->value('namalokasi') }}</td>
@@ -80,27 +79,4 @@ $tanah = DB::table('tanah')
     </section>
 </div>
 
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js?v=3.2.0"></script>
-<script src="dist/js/demo.js"></script>
 @endsection

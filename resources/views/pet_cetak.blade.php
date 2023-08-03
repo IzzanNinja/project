@@ -16,21 +16,21 @@
             <font size="2">Borang PP 13.1 <BR>Pindaan 3/2016</font>
         </p>
         <p align="right">
-            <font size="2">No.Kad Petani {{ DB::table('petanibajak')->where('nokp', Auth::user()->nokp)->orderByDesc('nopetani')->value('nopetani') }}</font>
+            <font size="2">No.Kad Petani {{ $petanibajakData->nopetani }}</font>
         </p>
         <center>
             <img src="img/doalogo.gif" WIDTH="57" HEIGHT="56"><br>
             <font size="2">JABATAN PERTANIAN SABAH<br></font>
             <font size="3"><b>BORANG PERMOHONAN SUBSIDI PEMBAJAKAN SAWAH PADI</b></font><br>
             <font size="2">(Diisi Dalam 2 Salinan)</font><br>
-            <font size="3">Tahun: 2023<br></font>
+            <font size="3">Tahun: {{ $petanibajakData->tahunpohon }}<br></font>
             <font style="text-align:left;"><b>BUTIR-BUTIR PEMOHON (Diisi oleh pemohon)</b></font><br>
             <font size="2" style="text-align:center;">
                 <i>Pendaftaran Baru
-                    <input type="checkbox" id="chkbaru" name="chkbaru" {{ DB::table('petanibajak')->where('nokp', Auth::id())->value('baru') == 1 ? 'checked' : '' }} disabled>
+                    <input type="checkbox" id="chkbaru" name="chkbaru" {{ $petanibajakData->baru == 1 ? 'checked' : '' }} style="opacity: 1; cursor: not-allowed; pointer-events: none;">
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     Pendaftaran Lama&nbsp;
-                    <input type="checkbox" id="chklama" name="chklama" {{ DB::table('petanibajak')->where('nokp', Auth::id())->value('baru') == 2 ? 'checked' : '' }} disabled>
+                    <input type="checkbox" id="chklama" name="chklama" {{ $petanibajakData->baru == 2 ? 'checked' : '' }} style="opacity: 1; cursor: not-allowed; pointer-events: none;">
                     &nbsp;
                 </i>
             </font>
@@ -40,29 +40,26 @@
                 cellSpacing="1" width="90%">
                 <tr>
                 <tr>
-                    <td>1. Nama Pemohon: {{ Auth::user()->nama }}</td>
+                    <td>1. Nama Pemohon: {{ $petanibajakData->nama }}</td>
                     <td></td>
                 <tr>
-                    <td>2. No. Kad Pengenalan: {{ Auth::user()->nokp }}</td>
-                    <td>3. No. Telefon/Handphone: {{ DB::table('petanibajak')->where('nokp', Auth::user()->nokp)->value('telhp') }}</td>
+                    <td>2. No. Kad Pengenalan: {{ $petanibajakData->nokp }}</td>
+                    <td>3. No. Telefon/Handphone: {{ $petanibajakData->telrumah }} ,&nbsp;{{$petanibajakData->telhp }}</td>
                 <tr>
                     <td colspan="2">
-                        4. Alamat Perhubungan:{{ DB::table('petanibajak')->where('nokp', request()->input('nokp'))->value('alamat') }}&nbsp;{{ DB::table('petanibajak')->where('nokp', request()->input('nokp'))->value('poskod') }}&nbsp;
-                        @php
-                        $item = DB::table('daerah')->first();
-                        @endphp {{ DB::table('daerah')->where('koddaerah', $item->koddaerah)->value('namadaerah') }}
+                        4. Alamat Perhubungan: {{ $petanibajakData->alamat }}&nbsp;{{ $petanibajakData->poskod }}&nbsp;{{ $daerah }}
                     </td>
 
                 </tr>
                 <tr>
                     <td colspan=2>
                         5. Musim Penanaman: Luar Musim
-                        <input type="checkbox" id="chkmusim" name="chkmusim" {{ DB::table('petanibajak')->where('nokp', Auth::id())->value('musim') == 1 ? 'checked' : '' }} disabled>
+                        <input type="checkbox" id="chkmusim" name="chkmusim" {{ $petanibajakData->musim == 1 ? 'checked' : '' }} style="opacity: 1; cursor: not-allowed; pointer-events: none;">
                         Bulan Mac - Julai
 
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         Musim Utama
-                        <input type="checkbox" id="chkmusim2" name="chkmusim2" {{ DB::table('petanibajak')->where('nokp', Auth::id())->value('musim2') == 1 ? 'checked' : '' }} disabled>
+                        <input type="checkbox" id="chkmusim2" name="chkmusim2" {{ $petanibajakData->musim2 == 1 ? 'checked' : '' }} style="opacity: 1; cursor: not-allowed; pointer-events: none;">
                         Bulan Ogos - Feb
                         &nbsp;
                     </td>
@@ -133,7 +130,7 @@
 												<tr>
 																<td align="left" valign="top" width="38%">
 																				(...............................................)<br>Tandatangan/Cop Ibu Jari Kanan
-																				Pemohon<br>Tarikh Permohonan: {{ DB::table('daftar')->where('user_id', Auth::id())->value('tarikh') }}
+																				Pemohon<br>Tarikh Permohonan: {{ $tarikhPohon }}
 																<td align="middle" valign="top" width="10%"><B><BR>COP<BR>JABATAN</B>
 																<td align="middle" valign="top" width="4%">
 																<td align="left" valign="top" width="38%">

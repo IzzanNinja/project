@@ -12,20 +12,17 @@
         <h1>Daftar Tanah</h1>
     </section>
 
-
-
     <!-- Main content -->
     <section class="content">
-
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-
                     </div>
+
                     <!-- /.box-header -->
                     <div class="box-body">
-                         <!-- Your form for adding new tanah -->
+                        <!-- Your form for adding new tanah -->
         <form action="{{ route('senaraitanah.store') }}" method="POST">
             @csrf
                             <div class="form-group">
@@ -47,11 +44,11 @@
 
                                 <div class="form-group">
                                     <label for="nama_pemilik">Nama Pemilik</label>
-                                    <input type="text" class="form-control" id="pemilikgeran" name="pemilikgeran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('pemilikgeran') }}">
+                                    <input type="text" class="form-control" id="pemilikgeran" name="pemilikgeran">
                                 </div>
                                 <div class="form-group">
                                     <label for="no_geran">No.Geran</label>
-                                    <input type="text" class="form-control" id="nogeran" name="nogeran" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('nogeran') }}">
+                                    <input type="text" class="form-control" id="nogeran" name="nogeran">
                                 </div>
                                 <div class="form-group">
                                     <label for="lokasi_tanah">Lokasi Tanah</label>
@@ -64,11 +61,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="luas_dalam_geran">Luas Dalam Geran (Ekar)</label>
-                                    <input type="text" class="form-control" id="luasekar" name="luasekar" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luasekar') }}">
+                                    <input type="text" class="form-control" id="luasekar" name="luasekar">
                                 </div>
                                 <div class="form-group">
                                     <label for="luas_dipohon">Luas Dipohon/Musim (Ekar)</label>
-                                    <input type="text" class="form-control" id="luaspohon" name="luaspohon" value="{{ DB::table('tanah')->where('table_id', Auth::user()->id)->value('luaspohon') }}">
+                                    <input type="text" class="form-control" id="luaspohon" name="luaspohon">
                                 </div>
                                 <div class="form-group">
                                     <label for="pemilikan_tanah">Pemilikan Tanah</label>

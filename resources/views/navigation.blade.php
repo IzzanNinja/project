@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eBajak | Dashboard</title>
 
-    {{-- <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"> --}}
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
-    {{-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> --}}
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/combined.css') }}">
@@ -85,7 +85,7 @@
                     @auth {{-- to make sure this part is skipped if session are timed out for the user --}}
                         <a class="nav-link dropdown-toggle" href="#" id="logoutDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->nama }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="logoutDropdown">
                             <form id="logout-form" method="POST" action="{{ route('logout') }}">
@@ -100,7 +100,7 @@
 
                 </li>
         </nav>
-        
+
 
         <aside class="main-sidebar sidebar-dark-primary elevation-2">
 
@@ -110,6 +110,7 @@
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
                     <div class="image">
+                        <a href="{{ route ('home') }}">
                         <svg class="flex" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"
                             xmlns:bx="https://boxy-svg.com" alt="Logo" width="40" height="40">
                             <g transform="matrix(1, 0, 0, 1, -219.201312, -71.125489)">
@@ -145,7 +146,9 @@
                                 </g>
                             </g>
                         </svg>
+                        </a>
                     </div>
+
                     <div class="info">
                         <a href="{{ route('home') }}">eBajak</a>
                     </div>
@@ -221,6 +224,44 @@
         </aside>
 
         <main class="py-4" style="margin-left: 30px;margin-right: 30px;">
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var preloader = document.getElementById("preloader");
+                    preloader.style.display = "none";
+                });
+            </script>
+
+            <script src="plugins/jquery/jquery.min.js"></script>
+
+            <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+
+            <script>
+                $.widget.bridge('uibutton', $.ui.button)
+            </script>
+
+            <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <script src="plugins/chart.js/Chart.min.js"></script>
+
+            <script src="plugins/sparklines/sparkline.js"></script>
+
+            <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+            <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+
+            <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+
+            <script src="plugins/moment/moment.min.js"></script>
+            <script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+            <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
+            <script src="plugins/summernote/summernote-bs4.min.js"></script>
+
+            <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+            <script src="dist/js/adminlte.js?v=3.2.0"></script>
+
+            <script src="dist/js/pages/dashboard.js"></script>
             @yield('navigation')
         </main>
 
@@ -240,44 +281,7 @@
 
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var preloader = document.getElementById("preloader");
-            preloader.style.display = "none";
-        });
-    </script>
-
-    <script src="plugins/jquery/jquery.min.js"></script>
-
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="plugins/chart.js/Chart.min.js"></script>
-
-    <script src="plugins/sparklines/sparkline.js"></script>
-
-    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-
-    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <script src="plugins/summernote/summernote-bs4.min.js"></script>
-
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-
-    <script src="dist/js/adminlte.js?v=3.2.0"></script>
-
-    <script src="dist/js/pages/dashboard.js"></script>
+    @yield('scripts')
 </body>
 
 </html>

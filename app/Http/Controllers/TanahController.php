@@ -28,38 +28,54 @@ class TanahController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Validate the form data
-    $validatedData = $request->validate([
-        'table_id' => 'required',
-        'pemilikgeran' => 'required',
-        'nogeran' => 'required',
-        'lokasi' => 'required',
-        'luasekar' => 'required',
-        'luaspohon' => 'required',
-        'pemilikan' => 'required',
-        'tarikh' => 'required|date',
-    ]);
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'table_id' => 'required',
+            'pemilikgeran' => 'required',
+            'nogeran' => 'required',
+            'lokasi' => 'required',
+            'luasekar' => 'required',
+            'luaspohon' => 'required',
+            'pemilikan' => 'required',
+            'tarikh' => 'required|date',
+        ]);
 
-    // Get the logged-in user's ID (auth ID)
-    $nokppetani = Auth::user()->nokp;
-    // Create a new record in the 'tanah' table using the validated data and the logged-in user's ID
-    DB::table('tanah')->insert([
-        'table_id' => $validatedData['table_id'],
-        'nokppetani' => $nokppetani,
-        'pemilikgeran' => $validatedData['pemilikgeran'],
-        'nogeran' => $validatedData['nogeran'],
-        'lokasi' => $validatedData['lokasi'],
-        'luasekar' => $validatedData['luasekar'],
-        'luaspohon' => $validatedData['luaspohon'],
-        'pemilikan' => $validatedData['pemilikan'],
-        'tarikh' => $validatedData['tarikh'],
-        // Add any other fields that need to be inserted
-    ]);
+        // Get the logged-in user's ID (auth ID)
+        $nokppetani = Auth::user()->nokp;
+        $pohonId = DB::table('petanibajak')->where('nokp', $nokppetani)->latest('tarpohon')->value('pohonid');
+        $stesen = DB::table('petanibajak')->where('nokp', $nokppetani)->latest('tarpohon')->value('stesen');
+        $tahunpohon = DB::table('petanibajak')->where('nokp', $nokppetani)->latest('tarpohon')->value('tahunpohon');
 
-    // Redirect the user to the 'tanahindex' page after storing the data
-    return redirect()->route('tanahindex');
-}
+        // Find the maximum bil value for the current user
+        $maxBil = DB::table('tanah')
+            ->where('nokppetani', $nokppetani)
+            ->max('bil');
+
+        // Calculate the new bil value
+        $newBil = $maxBil ? $maxBil + 1 : 1;
+
+        // Create a new record in the 'tanah' table using the validated data and the logged-in user's ID
+        DB::table('tanah')->insert([
+            'table_id' => $validatedData['table_id'],
+            'bil' => $newBil,
+            'pohonid' => $pohonId,
+            'nokppetani' => $nokppetani,
+            'stesen' => $stesen,
+            'tahunpohon' => $tahunpohon,
+            'pemilikgeran' => $validatedData['pemilikgeran'],
+            'nogeran' => $validatedData['nogeran'],
+            'lokasi' => $validatedData['lokasi'],
+            'luasekar' => $validatedData['luasekar'],
+            'luaspohon' => $validatedData['luaspohon'],
+            'pemilikan' => $validatedData['pemilikan'],
+            'tarikh' => $validatedData['tarikh'],
+            // Add any other fields that need to be inserted
+        ]);
+
+        // Redirect the user to the 'tanahindex' page after storing the data
+        return redirect()->route('tanahindex')->with('success', 'Data berhasil disimpan!');
+    }
 
 
     public function delete($id)
@@ -85,11 +101,8 @@ class TanahController extends Controller
         // Call the getLatestTableId() method to fetch the latest table_id value
         $latestTableId = $this->getLatestTableId();
 
-        // Fetch the user_id value
-        $user_id = DB::table('tanah')->where('nokppetani', Auth::user()->id)->value('nokppetani');
-
         // Pass the latestTableId and user_id variables to the view
-        return view('senaraitanah', compact('latestTableId', 'user_id'));
+        return view('senaraitanah', compact('latestTableId'));
     }
 
     public function getLatestTableId()
