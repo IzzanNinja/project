@@ -5,28 +5,37 @@
     // Get the logged-in user's nokp
     $nokp = Auth::user()->nokp;
 
+    // Fetch data from 'petanibajak' table for the logged-in user
+    $petanibajak = DB::table('petanibajak')
+        ->where('nokp', $nokp, 'desc')
+        ->first(); // Assuming you expect only one row for the logged-in user
+
     // Get the current year
     $currentYear = date('Y');
 
     // Fetch latest data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' year is the current year
     $tanah = DB::table('tanah')
         ->select('tanah.*', 'pemilikgeran', 'nogeran', 'luaspohon', 'bil')
-        ->where('tanah.nokppetani', $nokp)
-        ->whereYear('tanah.tarikh', $currentYear)
-        ->latest('tarikh') // Order by 'tarikh' column in descending order (latest date first)
-        ->first();
+        ->where('nokppetani', $nokp)
+        ->whereYear('tarikh', $currentYear)
+        ->latest('tarikh')
+        ->get();
 
+    // Define the $tarikhMemohon variable inside the @php block (assuming it's the current date)
+    $tarikhMemohon = date('Y-m-d');
 
+    // Initialize arrays to store the data for the iterations
+    $locationNames = [];
+    $nogerans = [];
 
-    // Get the location name from the 'lokasi' field of the latest 'tanah' record
-    if ($tanah) {
-        $locationName = $tanah->lokasi;
-        $nogeran = $tanah->nogeran;
-    } else {
-        $locationName = ''; // Handle the case when no 'tanah' record is found
-        $nogeran = '';
+    // Iterate through the $tanah collection to access each row's properties
+    foreach ($tanah as $item) {
+        $locationNames[] = $item->lokasi;
+        $nogerans[] = $item->nogeran;
     }
 @endphp
+
+
 
 @extends('navigation')
 @section('navigation')
@@ -68,7 +77,7 @@
                                         <td width="5%">:</td>
                                         <td width="70%"><input type="text" class="form-control" id="nama"
                                                 name="nama" placeholder="Nama Pemohon"
-                                                value="{{ $userData && $userData->nama ? $userData->nama : Auth::user()->nama }}"
+                                                value="{{Auth::user()->nama }}"
                                                 readonly></td>
 
                                     </tr>
@@ -77,7 +86,7 @@
                                         <td>:</td>
                                         <td><input type="text" class="form-control" id="nokp" name="nokp"
                                                 placeholder="No.Kad Pengenalan"
-                                                value="{{ $userData && $userData->nokp ? $userData->nokp : Auth::user()->nokp }}"
+                                                value="{{ Auth::user()->nokp }}"
                                                 readonly></td>
                                     </tr>
                                     <tr>
@@ -85,7 +94,7 @@
                                         <td width="5%">:</td>
                                         <td width="70%"><input type="text" class="form-control" id="user_id"
                                                 name="user_id" placeholder="user_id"
-                                                value="{{ $userData && $userData->nopetani ? $userData->nopetani : Auth::user()->nopetani }}"
+                                                value="{{ $item->nopetani }}"
                                                 readonly></td>
                                     </tr>
                                     <tr>
@@ -93,7 +102,7 @@
                                         <td>:</td>
                                         <td><input type="text" class="form-control" id="nokp" name="alamat"
                                                 placeholder="alamat"
-                                                value="{{ $userData && $userData->alamat ? $userData->alamat : Auth::user()->alamat }} {{ $userData && $userData->nama ? $userData->poskod : Auth::user()->poskod }}"
+                                                value="{{ Auth::user()->alamat }} {{ Auth::user()->poskod }}"
                                                 readonly></td>
                                     </tr>
                                     <tr>
@@ -129,7 +138,7 @@
                                     <td width="5%">:</td>
                                     <td width="70%"><input type="text" class="form-control" id="nama" name="nama"
                                             placeholder="Nama Pemohon"
-                                            value="{{ $tanah->pemilikgeran }}"
+                                            value="{{ $item->pemilikgeran }}"
                                             readonly></td>
                                 </tr>
                                 <tr>
@@ -137,7 +146,7 @@
                                     <td width="5%">:</td>
                                     <td width="70%"><input type="text" class="form-control" id="nama" name="nama"
                                             placeholder="Nama Pemohon"
-                                            value="{{ $tanah->bil}}"
+                                            value="{{ $item->bil}}"
                                             readonly></td>
                                 </tr>
                                 <tr>
@@ -159,7 +168,7 @@
                                     <td>No. Geran</td>
                                     <td>:</td>
                                     <td><input type="text" class="form-control" id="nogeran" name="nogeran"
-                                            placeholder="No. Geran" value="{{ $tanah ? $tanah->nogeran : '' }}"
+                                            placeholder="No. Geran" value="{{ $item->nogeran }}"
                                             readonly></td>
                                 </tr>
                                 <tr>
@@ -168,7 +177,7 @@
                                     <td>
                                         <div class="input-group">
                                             <input type="text" name="luas" id="luas" class="form-control"
-                                                value="{{ $tanah && $tanah->luaspohon ? $tanah->luaspohon : Auth::user()->luaspohon }}"
+                                                value="{{ $item->luaspohon }}"
                                                 readonly>
                                         </div>
                                     </td>
@@ -178,7 +187,7 @@
                                     <td>:</td>
                                     <td>
                                         <input type="text" class="form-control" id="lokasi" name="lokasi"
-                                            value="{{ $locationName }}" readonly>
+                                            value="{{ $item->lokasi}}" readonly>
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,7 +225,7 @@
                                     <td>
                                         <div class="input-group">
                                             <input type="text" name="tuntutan" id="tuntutan" class="form-control"
-                                                value="{{ $tanah->luaspohon * 200 }}" >
+                                                value="{{ $item->luaspohon * 200 }}" >
                                         </div>
                                     </td>
                                 </tr>

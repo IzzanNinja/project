@@ -17,13 +17,18 @@ class TuntutanController extends Controller
 
         return view('ptundaf', compact('daftar', 'tanah'));
     }
-    public function edit($id = null)//this function is used to retrieve the petanibajak record
+    public function edit($bil = null)
     {
         // Retrieve the $userData object
         $userData = DB::table('petanibajak')
-        ->where('nokp', Auth::user()->nokp)
-        ->orderBy('tarpohon', 'desc')
-        ->first();
+            ->join('tanah', 'petanibajak.nokp', '=', 'tanah.nokppetani')
+            ->where('petanibajak.nokp', Auth::user()->nokp)
+            ->orderBy('petanibajak.tarpohon', 'desc')
+            ->select('petanibajak.*','tanah.pemilikgeran', 'tanah.nogeran', 'tanah.luaspohon', 'tanah.stesen', 'tanah.bil as id')
+            ->get();
+
+
+
 
         // Check if $userData is null, if so, create an empty object
         if (!$userData) {
@@ -54,10 +59,9 @@ class TuntutanController extends Controller
             ];
         }
 
-        // Create a new variable to hold the formatted date value
-        $tarikhMemohon = $userData ? Carbon::parse($userData->tarpohon)->toDateString() : '';
 
-        return view('ptundaf2', compact('userData', 'tarikhMemohon'));
+
+        return view('ptundaf2', compact('userData'));
     }
 
     public function update(Request $request)//this function is used to update the petanibajak record

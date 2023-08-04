@@ -11,7 +11,7 @@
     // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is in the last year
     $tanah = DB::table('tanah')
             ->whereDate('tarikh', $currentDate)
-            ->get();
+            ->get(); // Use ->get() to fetch multiple rows
 @endphp
 
 @extends('navigation')
@@ -54,8 +54,8 @@
                                         <td>{{$item->bil }}</td>
                                         <td>{{ $item->pemilikgeran }}</td>
                                         <td>{{ $item->nogeran }}</td>
-                                        <td>{{ DB::table('lokasitanah')->where('kodlokasi', $item->lokasi)->value('namalokasi') }}</td>
-                                        <td>{{ $item->luasekar }}</td>
+                                        <td>{{ $item->lokasi }}</td>
+                                     <td>{{ $item->luasekar }}</td>
                                         <td>{{ $item->luaspohon }}</td>
                                         <td>{{ DB::table('pemilikan')->where('kodmilik', $item->pemilikan)->value('deskripsi') }}</td>
                                         <td class="project-state">
@@ -78,5 +78,21 @@
         </div>
     </section>
 </div>
+<!-- JavaScript function to handle the bil selection -->
+<script>
+    // Select all elements with class 'edit-btn'
+    const editButtons = document.querySelectorAll('.edit-btn');
+
+    // Attach a click event listener to each 'Edit' button
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Get the 'bil' value from the data attribute 'data-bil'
+            const selectedBil = this.getAttribute('data-bil');
+
+            // Redirect to the edit page for the selected bil
+            window.location.href = "{{ route('ptundaf.edit', ['id' => '']) }}/" + selectedBil;
+        });
+    });
+
 
 @endsection
