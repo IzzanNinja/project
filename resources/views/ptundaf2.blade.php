@@ -59,8 +59,7 @@
         </section>
 
         <!-- Main content -->
-        <form action="{{ route('ptundaf.edit', ['petanibajak_id' => Auth::user()->id]) }}" method="POST">
-            @csrf
+
             <section class="content container-fluid">
 
                 <div class="row">
@@ -94,7 +93,7 @@
                                         <td width="5%">:</td>
                                         <td width="70%"><input type="text" class="form-control" id="user_id"
                                                 name="user_id" placeholder="user_id"
-                                                value="{{ $item->nopetani }}"
+                                                value="{{ $petanibajak->nopetani }}"
                                                 readonly></td>
                                     </tr>
                                     <tr>
@@ -102,109 +101,101 @@
                                         <td>:</td>
                                         <td><input type="text" class="form-control" id="nokp" name="alamat"
                                                 placeholder="alamat"
-                                                value="{{ Auth::user()->alamat }} {{ Auth::user()->poskod }}"
+                                                value="{{ $petanibajak->alamat }} {{ $petanibajak->poskod }}"
                                                 readonly></td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <label for="daerah">Daerah :</label>
-                                        </td>
+                                        <td>4. Daerah</td>
                                         <td>:</td>
-                                        <td>
-                                            <select class="form-control" name="daerah">
-                                                <option value="">Sila pilih...</option>
-                                                @foreach (DB::table('daerah')->get() as $daerah)
-                                                    <option value="{{ $daerah->koddaerah }}"
-                                                        {{ DB::table('petanibajak')->where('nokp', Auth::user()->nokp)->value('daerah') == $daerah->koddaerah ? 'selected' : '' }}>
-                                                        {{ $daerah->namadaerah }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <br>
-                                        </td>
+                                        <td><input type="text" class="form-control" id="daerah" name="daerah"
+                                                placeholder="daerah"
+                                                value="{{ $petanibajak->daerah }}"
+                                                readonly></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
 
                         <!-- Maklumat Geran -->
-                        <div class="box box-primary">
-                            <table width="100%" class="table table-bordered table-hover" id="geran">
-                                <tr>
-                                    <th colspan="3">Maklumat Geran</th>
-                                </tr>
-                                <tr>
-                                    <td width="25%">Nama Pemilik Geran</td>
-                                    <td width="5%">:</td>
-                                    <td width="70%"><input type="text" class="form-control" id="nama" name="nama"
-                                            placeholder="Nama Pemohon"
-                                            value="{{ $item->pemilikgeran }}"
-                                            readonly></td>
-                                </tr>
-                                <tr>
-                                    <td width="25%">Bil Geran</td>
-                                    <td width="5%">:</td>
-                                    <td width="70%"><input type="text" class="form-control" id="nama" name="nama"
-                                            placeholder="Nama Pemohon"
-                                            value="{{ $item->bil}}"
-                                            readonly></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="stesen">Jabatan :</label></td>
-                                    <td>:</td>
-                                    <td>
-                                        <select class="form-control" name="stesen">
-                                            <option value="">Sila pilih...</option>
-                                            @foreach (DB::table('stesen')->get() as $stesen)
-                                                <option value="{{ $stesen->stationcode }}"
-                                                    {{ DB::table('petanibajak')->where('nokp', Auth::user()->nokp)->value('stesen') == $stesen->stationcode ? 'selected' : '' }}>
-                                                    {{ $stesen->stationdesc }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>No. Geran</td>
-                                    <td>:</td>
-                                    <td><input type="text" class="form-control" id="nogeran" name="nogeran"
-                                            placeholder="No. Geran" value="{{ $item->nogeran }}"
-                                            readonly></td>
-                                </tr>
-                                <tr>
-                                    <td>Luas Permohonan (Ekar)</td>
-                                    <td>:</td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input type="text" name="luas" id="luas" class="form-control"
-                                                value="{{ $item->luaspohon }}"
-                                                readonly>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Kampung</td>
-                                    <td>:</td>
-                                    <td>
-                                        <input type="text" class="form-control" id="lokasi" name="lokasi"
-                                            value="{{ $item->lokasi}}" readonly>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Tahun Pohon</td>
-                                    <td>:</td>
-                                    <td>
-                                        <input type="text" class="form-control" id="tahunpohon" name="tahunpohon"
-                                            value="{{ \Carbon\Carbon::now()->format('Y') }}" readonly>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+<div class="box box-primary">
+    <table width="100%" class="table table-bordered table-hover" id="geran">
+        <tr>
+            <th colspan="3">Maklumat Geran</th>
+        </tr>
+        @if($tanah)
+            @php
+                $specificItem = $tanah->first(); // Get the first item from the collection
+            @endphp
+            <tr>
+                <td width="25%">Nama Pemilik Geran</td>
+                <td width="5%">:</td>
+                <td width="70%"><input type="text" class="form-control" id="nama" name="nama"
+                        placeholder="Nama Pemohon"
+                        value="{{ $specificItem->pemilikgeran }}"
+                        readonly></td>
+            </tr>
+            <tr>
+                <td width="25%">Bil Geran</td>
+                <td width="5%">:</td>
+                <td width="70%"><input type="text" class="form-control" id="bil" name="bil"
+                        placeholder="Bil"
+                        value="{{ $specificItem->bil }}"
+                        readonly></td>
+            </tr>
+            <tr>
+                <td width="25%">Jabatan</td>
+                <td width="5%">:</td>
+                <td width="70%"><input type="text" class="form-control" id="stesen" name="stesen"
+                        placeholder="Bil"
+                        value="{{ $specificItem->stesen }}"
+                        readonly></td>
+            </tr>
+
+            <tr>
+                <td>No. Geran</td>
+                <td>:</td>
+                <td><input type="text" class="form-control" id="nogeran" name="nogeran"
+                        placeholder="No. Geran" value="{{ $specificItem->nogeran }}"
+                        readonly></td>
+            </tr>
+            <tr>
+                <td>Luas Permohonan (Ekar)</td>
+                <td>:</td>
+                <td>
+                    <div class="input-group">
+                        <input type="text" name="luas" id="luas" class="form-control"
+                            value="{{ $specificItem->luaspohon }}"
+                            readonly>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Kampung</td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control" id="lokasi" name="lokasi"
+                        value="{{ $specificItem->lokasi }}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>Tahun Pohon</td>
+                <td>:</td>
+                <td>
+                    <input type="text" class="form-control" id="tahunpohon" name="tahunpohon"
+                        value="{{ $specificItem->tahunpohon }}" readonly>
+                </td>
+            </tr>
+        @endif
+    </table>
+</div>
 
                         <!-- Maklumat Tuntutan -->
                         <div class="box box-primary">
                             <table width="100%" class="table table-bordered table-hover" id="bayaran">
-                                <tr>
+                                <form action="{{ route('tuntutan.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="tanah_id" value="{{ $item->table_id }}">
+                                    <tr>
                                     <th colspan="3">Maklumat Tuntutan</th>
                                 </tr>
                                 <tr>
@@ -268,7 +259,7 @@
                                     <td>:</td>
                                     <td>
                                         <input type="date" class="form-control" id="tarpohon" name="tarpohon"
-                                            value="{{ $tarikhMemohon }}">
+                                            required>
                                     </td>
                                 </tr>
                             </table>

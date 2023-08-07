@@ -38,11 +38,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-latest-table-id', [TanahController::class, 'getLatestTableId']);//retrieve the latest table id
 
     //Route ptundaf blade
-    Route::post('/ptundaf/update', [TuntutanController::class, 'update'])->name('ptundaf.update');
-    Route::match(['GET', 'POST'], '/ptundaf/edit', [TuntutanController::class, 'edit'])->name('ptundaf.edit');
     Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');
       // Define the route for displaying the search form (GET request)
 Route::get('/carian ', [TuntutanController::class, 'showSearchForm'])->name('carian');
+
+Route::get('/tanah/{table_id}', [TuntutanController::class, 'showTanah'])->name('ptundaf.edit');
+Route::post('/tuntutan', [TuntutanController::class, 'storeTuntutan'])->name('tuntutan.store');
+
 
 // Define the route for handling the search request (POST request)
 Route::match(['GET', 'POST'], '/carian', [TuntutanController::class, 'search'])->name('carian');

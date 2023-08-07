@@ -33,157 +33,93 @@ class TuntutanController extends Controller
 
         return view('ptundaf', compact('tanah'));
     }
+// Function to show the view with necessary data
+public function showTanah($table_id)
+{
+    // Get the logged-in user's nokp
+    $nokp = Auth::user()->nokp;
 
-    public function edit($bil = null)//this function is used to retrieve the petanibajak record
-    {
-        // Retrieve the $userData object
-        $userData = DB::table('petanibajak')
-        ->join('tanah', 'petanibajak.nokp', '=', 'tanah.nokppetani')
-        ->where('petanibajak.nokp', Auth::user()->nokp)
-        ->orderBy('petanibajak.tarpohon', 'desc')
-        ->select('petanibajak.*','tanah.pemilikgeran', 'tanah.nogeran', 'tanah.luaspohon', 'tanah.stesen', 'tanah.bil as id')
-        ->get();
+    // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'table_id' matches the provided $table_id
+    $tanah = DB::table('tanah')
+        ->where('nokppetani', $nokp)
+        ->where('table_id', $table_id)
+        ->first();
 
-        // Check if $userData is null, if so, create an empty object
-        if (!$userData) {
-            $userData = (object) [
-                'nama' => null,
-                'nokp' => null,
-                'nopetani' => null,
-                'pohonid' => null,
+        // //if dd correct data pula cilakak
+        // dd($nokp, $table_id, $tanah);
 
-                'alamat' => null,
-                'poskod' => null,
-
-                'daerah' => null,
-                'musim' => null,
-                'musim2' => null,
-                'stesen' => null,
-
-                'nogeran' => null,
-                'luaspohon' => null,
-                'lokasi' => null,
-                'bulan' => null,
-                'tuntutan' => null,
-                'akaun' => null,
-
-                'tahunpohon' => null,
-
-                'tarpohon' => null,
-            ];
-        }
-
-        return view('ptundaf2', compact('userData'));
+    // Check if the $tanah is found
+    if (!$tanah) {
+        // If the $tanah is not found, redirect back with an error message
+        return redirect()->back()->with('error', 'Data not found.');
     }
 
-    public function update(Request $request)//this function is used to update the petanibajak record
+    // Retrieve the 'nama' value for the 'nokppetani' in the 'users' table
+    $nama = DB::table('users')->where('nokp', $tanah->nokppetani)->value('nama');
+
+    // Retrieve the 'namalokasi' value for the 'lokasi' in the 'tanah' record
+    $tanah->lokasi = DB::table('lokasitanah')->where('id', $tanah->lokasi)->value('namalokasi');
+
+    // Retrieve the 'deskripsi' value for the 'pemilikan' in the 'tanah' record
+    $tanah->deskripsi = DB::table('pemilikan')->where('kodmilik', $tanah->pemilikan)->value('deskripsi');
+
+    return view('ptundaf2', compact('nama', 'tanah'));
+}
+
+
+
+    // Function to store the tuntutan data
+    public function storeTuntutan(Request $request)
     {
-        // Retrieve the existing data for the authenticated user
-        $existingData = DB::table('petanibajak')
-            ->where('nokp', Auth::user()->nokp)
-            ->where('tahunpohon', $request->tahunpohon)
-            ->first();
+        // Validate the input data
+        $request->validate([
+            'bulan' => 'required',
+            'tuntutan' => 'required',
+            'akaun' => 'required',
+            'bank' => 'required',
+            'daerah' => 'required',
+            'tarpohon' => 'required',
+            'tanah_id' => 'required|exists:tanah,table_id',
+        ]);
 
-        if ($existingData) {
-            // Update the existing row
-            DB::table('petanibajak')
-                ->where('nokp', Auth::user()->nokp)
-                ->where('tahunpohon', $request->tahunpohon)
-                ->update([
+        // Store the tuntutan data in the database
+        DB::table('tuntutan')->insert([
+            'bulan' => $request->input('bulan'),
+            'tuntutan' => $request->input('tuntutan'),
+            'akaun' => $request->input('akaun'),
+            'bank' => $request->input('bank'),
+            'daerah' => $request->input('daerah'),
+            'tarpohon' => $request->input('tarpohon'),
+            'tanah_id' => $request->input('tanah_id'),
+        ]);
 
-                    'musim' => $request->musim ? 1 : 0,
-                    'musim2' => $request->musim2 ? 1 : 0,
-                    'stesen' => $request->stesen,
-
-                'nogeran' => $request->nogeran,
-                'luaspohon' => $request->luaspohon,
-                'lokasi' => $request->lokasi,
-                'bulan' => $request->bulan,
-                'tuntutan' => $request->tuntutan,
-                'akaun' => $request->akaun,
-
-
-
-                'tahunpohon' => $request->tahunpohon,
-
-
-
-                    'tarpohon' => $request->tarpohon,
-                ]);
-
-            return back()->with('success', 'Data berhasil diperbaharui!');
-        } else {
-            // Retrieve the last petanibajak_id
-            $lastPetanibajakId = DB::table('petanibajak')->orderBy('petanibajak_id', 'desc')->value('petanibajak_id');
-
-            // Retrieve the last pohonid for the given stesen
-            $lastPohonId = DB::table('petanibajak')
-            ->where('stesen', $request->stesen)
-            ->orderBy('pohonid', 'desc')
-            ->value('pohonid');
-
-            // Generate the new petanibajak_id
-            $petanibajakId = $lastPetanibajakId + 1;
-
-            // Generate the new pohonid
-            $pohonId = $lastPohonId + 1;
-
-            // Insert a new row
-            DB::table('petanibajak')->insert([
-                'petanibajak_id' => $petanibajakId,
-                'pohonid' => $pohonId,
-                'nokp' => Auth::user()->nokp,
-                'nama' => $request->nama,
-                'jantina' => $request->jantina,
-                'alamat' => $request->alamat,
-                'poskod' => $request->poskod,
-                'daerah' => $request->daerah,
-                'telrumah' => $request->telrumah,
-                'telhp' => $request->telhp,
-                'nopetani' => $request->nopetani,
-                'tahunpohon' => $request->tahunpohon,
-                'baru' => $request->baru,
-                'musim' => $request->musim ? 1 : 0,
-                'musim2' => $request->musim2 ? 1 : 0,
-                'stesen' => $request->stesen,
-                'tarpohon' => $request->tarpohon,
-
-
-            'nogeran' => $request->nogeran,
-            'luaspohon' => $request->luaspohon,
-            'lokasi' => $request->lokasi,
-            'bulan' => $request->bulan,
-            'tuntutan' => $request->tuntutan,
-            'akaun' => $request->akaun,
-
-            ]);
-
-            return back()->with('success', 'Data berhasil disimpan!');
-        }
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Tuntutan data has been stored successfully.');
     }
 
     public function changeDate($id)
     {
-        // Find the Tuntutan record based on the given ID
-        $tuntutan = DB::table('tanah')->where('table_id', $id)->first();
-        $lasttableId = DB::table('tanah')->max('table_id');
-        $tableId = $lasttableId + 1;
+        // Find the Tanah record based on the given ID
+        $tanah = DB::table('tanah')->where('table_id', $id)->first();
 
-        if ($tuntutan) {
-            // Convert the Tuntutan record to an array
-            $tuntutanArray = (array) $tuntutan;
+        if ($tanah) {
+            // Create a new array with the same data as the original record
+            $newTanah = (array) $tanah;
 
             // Set the 'tarikh' column value to the current date
-            $tuntutanArray['tarikh'] = date('Y-m-d');
+            $newTanah['tarikh'] = date('Y-m-d');
+
+            // Get the maximum table_id from the 'tanah' table
+            $newTableId = DB::table('tanah')->max('table_id') + 1;
 
             // Set the new value for the 'table_id' column
-            $tuntutanArray['table_id'] = $tableId;
+            $newTanah['table_id'] = $newTableId;
 
-            // Insert the duplicated Tuntutan record with the updated 'tarikh' value
-            $newId = DB::table('tanah')->insertGetId($tuntutanArray);
+            // Insert the duplicated Tanah record with the updated 'tarikh' value and new 'table_id'
+            DB::table('tanah')->insert($newTanah);
         }
 
-        // Handle the case when the Tuntutan record is not found
+        // Redirect back with a success message
         return redirect()->back()->with('success', 'Sila kemaskini data di bahagian Tuntutan.');
     }
 
@@ -197,20 +133,26 @@ class TuntutanController extends Controller
     $searchKeyword = $request->input('tahun');
     $tahunpohon = $request->input('tahun');
 
-
-    $searchResults = DB::table('tanah')
-    ->where('tanah.nokppetani', $user->nokp) // Filter by the user's nokp
-    ->where(function ($query) use ($tahunpohon) {
-        $query->where('tahunpohon', 'like', '%' . $tahunpohon . '%') // Assuming 'tarpohon' contains full datetime (e.g., 2023-08-07 12:30:00)
-        ->orWhere('tahunpohon', $tahunpohon);})
-    ->orderBy('tanah.tahunpohon', 'desc')
-    ->select('tanah.*', 'tahunpohon', 'pemilikgeran', 'nogeran', 'luaspohon', 'amaunlulus')
-    ->get();
-
-
-        // Pass the search results back to the 'carian' view
-        return view('carian', compact('searchResults'));
+    // Check if the "tahun" input is not empty before executing the search query
+    if (!empty($tahunpohon)) {
+        $searchResults = DB::table('tanah')
+            ->join('stesen', 'tanah.stesen', '=', 'stesen.stationcode')
+            ->where('tanah.nokppetani', $user->nokp)
+            ->where(function ($query) use ($tahunpohon) {
+                $query->where('tanah.tahunpohon', 'like', '%' . $tahunpohon . '%')
+                    ->orWhere('tanah.tahunpohon', $tahunpohon);
+            })
+            ->orderBy('tanah.tahunpohon', 'desc')
+            ->select('tanah.*', 'tanah.tahunpohon', 'tanah.pemilikgeran', 'stesen.stationdesc', 'tanah.nogeran', 'tanah.luaspohon', 'tanah.amaunlulus')
+            ->get();
+    } else {
+        // If the "tahun" input is empty, set an empty collection for searchResults
+        $searchResults = collect();
     }
+
+    return view('carian', compact('searchResults'));
+}
+
 
 }
 
