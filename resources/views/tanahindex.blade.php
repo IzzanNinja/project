@@ -1,16 +1,3 @@
-@php
-    use Illuminate\Support\Facades\DB;
-    use Illuminate\Support\Facades\Auth;
-
-    // Get the logged-in user's nokp
-$nokp = Auth::user()->nokp;
-
-    // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is in the last year
-    $tanah = DB::table('tanah')
-        ->where('nokppetani', $nokp)
-        ->get();
-@endphp
-
 @extends('navigation')
 
 @if (session('success'))
@@ -68,6 +55,8 @@ $nokp = Auth::user()->nokp;
                                                         <th class="text-center">Bil</th>
                                                         <th class="text-center">Pemilik Geran</th>
                                                         <th class="text-center">No Geran</th>
+                                                        <th class="text-center">Lokasi</th>
+                                                        <th class="text-center">Pemilikan</th>
                                                         <th class="text-center">Status</th>
                                                         <th class="text-center">Tindakan</th>
                                                     </tr>
@@ -82,6 +71,8 @@ $nokp = Auth::user()->nokp;
                                                                 <td class="text-center">{{ $counter++ }}</td>
                                                                 <td class="text-center">{{ $item->pemilikgeran }}</td>
                                                                 <td class="text-center">{{ $item->nogeran }}</td>
+                                                                <td class="text-center">{{ $item->lokasi }}</td>
+                                                                <td class="text-center">{{ $item->deskripsi }}</td>
                                                                 <td class="text-center"><span class="badge bg-danger">Belum Tambah Geran</span></td>
                                                                 <td class="text-center">
                                                                     <a href="{{ route('tanah.delete', ['id' => $item->table_id, 'success' => true]) }}"
@@ -89,9 +80,14 @@ $nokp = Auth::user()->nokp;
                                                                         onclick="return confirm('Anda pasti untuk memadam geran tanah ini?')">Padam</a>
                                                                     <a href="#" class="btn btn-primary" style="margin-bottom: 10px;"
                                                                         onclick="toggleRowExpansion(event, '{{ $index }}')">Tambah Geran</a>
-                                                                        <a href="{{ route('tanah.changeDate', ['id' => $item->table_id, 'success' => true]) }}"
-                                                                            class="btn btn-secondary" style="margin-bottom: 10px;"
-                                                                            onclick="return confirm('Anda pasti untuk membuat tuntutan?')">Hantar untuk Tuntut</a>
+                                                                    @if (date('Y', strtotime($item->tarikh)) != date('Y'))
+                                                                    <a href="{{ route('tanah.changeDate', ['id' => $item->table_id, 'success' => true]) }}"
+                                                                        class="btn btn-secondary" style="margin-bottom: 10px;"
+                                                                        onclick="return confirm('Anda pasti untuk membuat tuntutan?')">Hantar untuk Tuntut</a>
+                                                                    @else
+                                                                        <a href="#" class="btn btn-secondary disabled" style="margin-bottom: 10px;"
+                                                                            onclick="return false;">Hantar untuk Tuntut</a>
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                             <tr class="collapse" id="expandableRow{{ $index }}">
@@ -210,4 +206,5 @@ $nokp = Auth::user()->nokp;
             }
         }
     </script>
+
 @endsection

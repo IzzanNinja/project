@@ -5,30 +5,44 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+// use Carbon\Carbon;
 
 class TuntutanController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        $daftar = DB::table('petanibajak')->where('petanibajak_id', $user->id)->first();
-        $tanah = DB::table('tanah')->where('pohonid', $user->id)->first();
+        // Get the logged-in user's nokp
+        $nokp = Auth::user()->nokp;
 
-        return view('ptundaf', compact('daftar', 'tanah'));
+        // Show the current year
+        $Date = date('Y');
+
+        // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' is in the last year
+        $tanah = DB::table('tanah')
+                ->whereYear('tarikh', $Date)
+                ->where('nokppetani', $nokp)
+                ->get();
+
+        // Retrieve the 'namalokasi' value for each 'lokasi' in the 'tanah' collection
+        //map() method to iterate through the collection to include the 'namalokasi' into the $item
+        $tanahWithLokasi = $tanah->map(function ($item) {
+        $item->lokasi = DB::table('lokasitanah')->where('id', $item->lokasi)->value('namalokasi');
+        $item->deskripsi = DB::table('pemilikan')->where('kodmilik', $item->pemilikan)->value('deskripsi');
+        return $item;
+        });
+
+        return view('ptundaf', compact('tanah'));
     }
-    public function edit($bil = null)
+
+    public function edit($bil = null)//this function is used to retrieve the petanibajak record
     {
         // Retrieve the $userData object
         $userData = DB::table('petanibajak')
-            ->join('tanah', 'petanibajak.nokp', '=', 'tanah.nokppetani')
-            ->where('petanibajak.nokp', Auth::user()->nokp)
-            ->orderBy('petanibajak.tarpohon', 'desc')
-            ->select('petanibajak.*','tanah.pemilikgeran', 'tanah.nogeran', 'tanah.luaspohon', 'tanah.stesen', 'tanah.bil as id')
-            ->get();
-
-
-
+        ->join('tanah', 'petanibajak.nokp', '=', 'tanah.nokppetani')
+        ->where('petanibajak.nokp', Auth::user()->nokp)
+        ->orderBy('petanibajak.tarpohon', 'desc')
+        ->select('petanibajak.*','tanah.pemilikgeran', 'tanah.nogeran', 'tanah.luaspohon', 'tanah.stesen', 'tanah.bil as id')
+        ->get();
 
         // Check if $userData is null, if so, create an empty object
         if (!$userData) {
@@ -58,8 +72,6 @@ class TuntutanController extends Controller
                 'tarpohon' => null,
             ];
         }
-
-
 
         return view('ptundaf2', compact('userData'));
     }
@@ -169,14 +181,41 @@ class TuntutanController extends Controller
 
             // Insert the duplicated Tuntutan record with the updated 'tarikh' value
             $newId = DB::table('tanah')->insertGetId($tuntutanArray);
-
-            if ($newId) {
-                // Redirect or perform any other actions as needed
-                return redirect()->back()->with('success', 'Sila kemaskini data di bahagian Tuntutan.');
-            }
         }
 
         // Handle the case when the Tuntutan record is not found
-        return redirect()->back()->with('error', 'Tuntutan not found.');
+        return redirect()->back()->with('success', 'Sila kemaskini data di bahagian Tuntutan.');
     }
+
+    public function showSearchForm()
+    {
+        return view('carian'); // Replace 'search_form' with the name of your Blade view for the search form
+    }
+    public function search(Request $request)
+{
+    $user = Auth::user();
+    $searchKeyword = $request->input('tahun');
+    $tahunpohon = $request->input('tahun');
+
+
+    $searchResults = DB::table('tanah')
+    ->where('tanah.nokppetani', $user->nokp) // Filter by the user's nokp
+    ->where(function ($query) use ($tahunpohon) {
+        $query->where('tahunpohon', 'like', '%' . $tahunpohon . '%') // Assuming 'tarpohon' contains full datetime (e.g., 2023-08-07 12:30:00)
+        ->orWhere('tahunpohon', $tahunpohon);})
+    ->orderBy('tanah.tahunpohon', 'desc')
+    ->select('tanah.*', 'tahunpohon', 'pemilikgeran', 'nogeran', 'luaspohon', 'amaunlulus')
+    ->get();
+
+
+        // Pass the search results back to the 'carian' view
+        return view('carian', compact('searchResults'));
+    }
+
 }
+
+
+
+
+
+
