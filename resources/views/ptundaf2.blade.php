@@ -7,13 +7,13 @@
 
     // Fetch data from 'petanibajak' table for the logged-in user
     $petanibajak = DB::table('petanibajak')
-        ->where('nokp', $nokp, 'desc')
+        ->where('nokp', $nokp)
         ->first(); // Assuming you expect only one row for the logged-in user
 
     // Get the current year
     $currentYear = date('Y');
 
-    // Fetch latest data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' year is the current year
+    // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' year is the current year
     $tanah = DB::table('tanah')
         ->select('tanah.*', 'pemilikgeran', 'nogeran', 'luaspohon', 'bil')
         ->where('nokppetani', $nokp)
@@ -21,18 +21,14 @@
         ->latest('tarikh')
         ->get();
 
-    // Define the $tarikhMemohon variable inside the @php block (assuming it's the current date)
-    $tarikhMemohon = date('Y-m-d');
+    // Get the last segment of the URL path, which should be the table_id
+    $tableId = request()->segment(count(request()->segments()));
 
-    // Initialize arrays to store the data for the iterations
-    $locationNames = [];
-    $nogerans = [];
+    // Debug: Output the value of $tableId
+    // dd($tableId);
 
-    // Iterate through the $tanah collection to access each row's properties
-    foreach ($tanah as $item) {
-        $locationNames[] = $item->lokasi;
-        $nogerans[] = $item->nogeran;
-    }
+    // Find the specific item in $tanah where the table_id matches
+    $specificItem = $tanah->where('table_id', $tableId)->first();
 @endphp
 
 
@@ -122,16 +118,36 @@
         <tr>
             <th colspan="3">Maklumat Geran</th>
         </tr>
-        @if($tanah)
-            @php
-                $specificItem = $tanah->first(); // Get the first item from the collection
-            @endphp
+
+
+{{--
+        @php
+        // Get the value of 'table_id' from the URL's query parameters
+        $tableId = request()->query('table_id');
+
+        // Find the item in $tanah where the table_id matches
+        $specificItem = $tanah->where('table_id', $tableId)->first();
+
+dd($specificItem);
+    @endphp
+        @if ($specificItem) --}}
+
+
+
             <tr>
                 <td width="25%">Nama Pemilik Geran</td>
                 <td width="5%">:</td>
                 <td width="70%"><input type="text" class="form-control" id="nama" name="nama"
                         placeholder="Nama Pemohon"
                         value="{{ $specificItem->pemilikgeran }}"
+                        readonly></td>
+            </tr>
+            <tr>
+                <td width="25%">Pemilikan Geran</td>
+                <td width="5%">:</td>
+                <td width="70%"><input type="text" class="form-control" id="pemilikan" name="pemilikan"
+                        placeholder="Nama Pemohon"
+                        value="{{ $specificItem->pemilikan }}"
                         readonly></td>
             </tr>
             <tr>
@@ -155,7 +171,8 @@
                 <td>No. Geran</td>
                 <td>:</td>
                 <td><input type="text" class="form-control" id="nogeran" name="nogeran"
-                        placeholder="No. Geran" value="{{ $specificItem->nogeran }}"
+                        placeholder="No. Geran"
+                        value="{{ $specificItem->nogeran }}"
                         readonly></td>
             </tr>
             <tr>
@@ -164,7 +181,7 @@
                 <td>
                     <div class="input-group">
                         <input type="text" name="luas" id="luas" class="form-control"
-                            value="{{ $specificItem->luaspohon }}"
+                        value="{{ $specificItem->luaspohon }}"
                             readonly>
                     </div>
                 </td>
@@ -174,7 +191,8 @@
                 <td>:</td>
                 <td>
                     <input type="text" class="form-control" id="lokasi" name="lokasi"
-                        value="{{ $specificItem->lokasi }}" readonly>
+                    value="{{ $specificItem->lokasi }}"
+                    readonly>
                 </td>
             </tr>
             <tr>
@@ -182,10 +200,10 @@
                 <td>:</td>
                 <td>
                     <input type="text" class="form-control" id="tahunpohon" name="tahunpohon"
-                        value="{{ $specificItem->tahunpohon }}" readonly>
+                    value="{{ $specificItem->tahunpohon }}"
+                    readonly>
                 </td>
             </tr>
-        @endif
     </table>
 </div>
 
@@ -194,7 +212,6 @@
                             <table width="100%" class="table table-bordered table-hover" id="bayaran">
                                 <form action="{{ route('tuntutan.store') }}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="tanah_id" value="{{ $item->table_id }}">
                                     <tr>
                                     <th colspan="3">Maklumat Tuntutan</th>
                                 </tr>
@@ -216,7 +233,7 @@
                                     <td>
                                         <div class="input-group">
                                             <input type="text" name="tuntutan" id="tuntutan" class="form-control"
-                                                value="{{ $item->luaspohon * 200 }}" >
+                                                value="{{ $specificItem->luaspohon * 200 }}" >
                                         </div>
                                     </td>
                                 </tr>

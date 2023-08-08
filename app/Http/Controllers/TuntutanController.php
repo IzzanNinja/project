@@ -41,8 +41,10 @@ public function showTanah($table_id)
 
     // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'table_id' matches the provided $table_id
     $tanah = DB::table('tanah')
+
         ->where('nokppetani', $nokp)
         ->where('table_id', $table_id)
+
         ->first();
 
         // //if dd correct data pula cilakak
@@ -63,7 +65,7 @@ public function showTanah($table_id)
     // Retrieve the 'deskripsi' value for the 'pemilikan' in the 'tanah' record
     $tanah->deskripsi = DB::table('pemilikan')->where('kodmilik', $tanah->pemilikan)->value('deskripsi');
 
-    return view('ptundaf2', compact('nama', 'tanah'));
+    return view('ptundaf2', compact('nama','table_id', 'tanah'));
 }
 
 
