@@ -73,6 +73,7 @@ public function showTanah($table_id)
     // Function to store the tuntutan data
     public function storeTuntutan(Request $request)
     {
+        // dd($request->all());
         // Validate the input data
         $request->validate([
             'bulan' => 'required',
