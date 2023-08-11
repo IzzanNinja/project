@@ -70,35 +70,35 @@ public function showTanah($table_id)
 
 
 
-    // Function to store the tuntutan data
-    public function storeTuntutan(Request $request)
-    {
-        // dd($request->all());
-        // Validate the input data
-        $request->validate([
-            'bulan' => 'required',
-            'tuntutan' => 'required',
-            'akaun' => 'required',
-            'bank' => 'required',
-            'daerah' => 'required',
-            'tarpohon' => 'required',
-            'tanah_id' => 'required|exists:tanah,table_id',
-        ]);
+  // Function to store the tuntutan data
+public function storeTuntutan(Request $request)
+{
+    // Validate the input data
+    $request->validate([
+        'bulanbajak' => 'required',
+        'amaun' => 'required',
+        'noakaun' => 'required',
+        'bank' => 'required',
+        'bankcwgn' => 'required',
+        'tartuntut' => 'required',
+        'table_id' => 'required|exists:tanah,table_id',
+    ]);
 
-        // Store the tuntutan data in the database
-        DB::table('tuntutan')->insert([
-            'bulan' => $request->input('bulan'),
-            'tuntutan' => $request->input('tuntutan'),
-            'akaun' => $request->input('akaun'),
+    DB::table('tanah')
+        ->where('table_id', $request->input('table_id'))
+        ->update([
+            'bulanbajak' => $request->input('bulanbajak'),
+            'amaun' => $request->input('amaun'),
+            'noakaun' => $request->input('noakaun'),
             'bank' => $request->input('bank'),
-            'daerah' => $request->input('daerah'),
-            'tarpohon' => $request->input('tarpohon'),
-            'tanah_id' => $request->input('tanah_id'),
+            'bankcwgn' => $request->input('bankcwgn'),
+            'tartuntut' => $request->input('tartuntut'),
         ]);
 
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Tuntutan data has been stored successfully.');
-    }
+    // Redirect to the 'ptundaf' route with a success message
+    return redirect()->route('ptundaf')->with('success', 'Tuntutan data has been stored successfully.');
+}
+
 
     public function changeDate($id)
     {
