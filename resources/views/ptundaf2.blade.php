@@ -15,7 +15,7 @@ $currentYear = date('Y');
 
 // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' year is the current year
     $tanah = DB::table('tanah')
-        ->select('tanah.*', 'pemilikgeran', 'nogeran', 'luaspohon', 'bil')
+        ->select('tanah.*', 'pemilikgeran', 'nogeran', 'luaspohon', 'bil', 'noakaun')
         ->where('nokppetani', $nokp)
         ->whereYear('tarikh', $currentYear)
         ->latest('tarikh')
@@ -201,33 +201,49 @@ $currentYear = date('Y');
 
 
 
-                                <td>Siap Bajak</td>
-                                <td>:</td>
-                                <td>
-                                    <select class="form-control" name="bulanbajak" id="bulanbajak">
-                                        <option value="">Sila pilih...</option>
-                                        @foreach (DB::table('bulan')->get() as $bulan)
-                                            <option value="{{ $bulan->kodbulan }}">{{ $bulan->bulan }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                </tr>
-                                <tr>
-                                    <td>Tuntutan (RM)</td>
-                                    <td>:</td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input type="text" name="amaun" id="amaun" class="form-control"
-                                                value="{{ $specificItem->luaspohon * 200 }}">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
+                                    <tr>
+                                        <td>Siap Bajak</td>
+                                        <td>:</td>
+                                        <td>
+                                            <select class="form-control" name="bulanbajak" id="bulanbajak">
+                                                <option value="">Sila pilih...</option>
+                                                <option value="1">Januari</option>
+                                                <option value="2">Februari</option>
+                                                <option value="3">Mac</option>
+                                                <option value="4">April</option>
+                                                <option value="5">Mei</option>
+                                                <option value="6">Jun</option>
+                                                <option value="7">Julai</option>
+                                                <option value="8">Ogos</option>
+                                                <option value="9">September</option>
+                                                <option value="10">Oktober</option>
+                                                <option value="11">November</option>
+                                                <option value="12">Disember</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Tuntutan (RM)</td>
+                                        <td>:</td>
+                                        <td>
+                                            <div class="input-group">
+                                                @if (old('bulanbajak') >= 3 && old('bulanbajak') <= 7)
+                                                    <input type="text" name="amaunlulus" class="form-control">
+                                                @else
+                                                    <input type="text" name="amaunlulus2" class="form-control">
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+
                                     <td>No Akaun Bank</td>
                                     <td>:</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="number" name="noakaun" id="noakaun" class="form-control">
+                                            <input type="number" name="noakaun" id="noakaun" class="form-control" value="{{ $petanibajak->lastnoakaun }}">
                                         </div>
                                     </td>
                                 </tr>
@@ -235,7 +251,7 @@ $currentYear = date('Y');
                                     <td>Nama Bank</td>
                                     <td>:</td>
                                     <td>
-                                        <select class="form-control" name="bank" id="bank">
+                                        <select class="form-control" name="bank" id="bank" value="{{ $petanibajak->lastkodbank}}">
                                             <option value="">Sila pilih...</option>
                                             @foreach (DB::table('bank')->get() as $bank)
                                                 <option value="{{ $bank->kodbank }}">{{ $bank->namabank }}</option>
@@ -247,7 +263,7 @@ $currentYear = date('Y');
                                     <td>Cawangan Bank</td>
                                     <td>:</td>
                                     <td>
-                                        <select class="form-control" name="bankcwgn" id="bankcwgn">
+                                        <select class="form-control" name="bankcwgn" id="bankcwgn" value="{{ $petanibajak->lastcwgnbnk}}">
                                             <option value="">Sila pilih...</option>
                                             @foreach (DB::table('daerah')->get() as $daerah)
                                                 <option value="{{ $daerah->koddaerah }}">{{ $daerah->namadaerah }}
@@ -267,6 +283,11 @@ $currentYear = date('Y');
 
                         </table>
                     </div>
+
+
+
+
+
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="submit" value="submit">Kemaskini

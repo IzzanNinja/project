@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
 
     //Route ptundaf blade
     Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');
+    Route::get('/ptundaf3', [TuntutanController::class, 'index'])->name('ptundaf3');
+
       // Define the route for displaying the search form (GET request)
 Route::get('/carian ', [TuntutanController::class, 'showSearchForm'])->name('carian');
 
@@ -70,7 +72,6 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 
 // Subsidi Daftar Form Page
 Route::get('/pet_cetak', [DaftarController::class, 'showPetCetakForm'])->name('pet_cetak');
-Route::get('/ptundaf', [TuntutanController::class, 'index'])->name('ptundaf');
 
 
 

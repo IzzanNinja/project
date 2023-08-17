@@ -41,14 +41,9 @@ public function showTanah($table_id)
 
     // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'table_id' matches the provided $table_id
     $tanah = DB::table('tanah')
-
         ->where('nokppetani', $nokp)
         ->where('table_id', $table_id)
-
         ->first();
-
-        // //if dd correct data pula cilakak
-        // dd($nokp, $table_id, $tanah);
 
     // Check if the $tanah is found
     if (!$tanah) {
@@ -65,18 +60,24 @@ public function showTanah($table_id)
     // Retrieve the 'deskripsi' value for the 'pemilikan' in the 'tanah' record
     $tanah->deskripsi = DB::table('pemilikan')->where('kodmilik', $tanah->pemilikan)->value('deskripsi');
 
-    return view('ptundaf2', compact('nama','table_id', 'tanah'));
+    // Fetch the lastkodbank value from the 'petanibajak' table
+
+    $lastnoakaun = DB::table('petanibajak')->where('nokp', $nokp)->value('lastnoakaun');
+
+    $lastkodbank = DB::table('petanibajak')->where('nokp', $nokp)->value('lastkodbank');
+
+    $lastcwgnbnk = DB::table('petanibajak')->where('nokp', $nokp)->value('lastcwgnbnk');
+
+
+    return view('ptundaf2', compact('nama', 'table_id', 'tanah', 'lastnoakaun', 'lastkodbank', 'lastcwgnbnk'));
 }
 
 
-
-  // Function to store the tuntutan data
 public function storeTuntutan(Request $request)
 {
     // Validate the input data
     $request->validate([
         'bulanbajak' => 'required',
-        'amaun' => 'required',
         'noakaun' => 'required',
         'bank' => 'required',
         'bankcwgn' => 'required',
@@ -84,11 +85,14 @@ public function storeTuntutan(Request $request)
         'table_id' => 'required|exists:tanah,table_id',
     ]);
 
+    $amaunField = $request->input('bulanbajak') >= 3 && $request->input('bulanbajak') <= 7 ? 'amaunlulus' : 'amaunlulus2';
+
     DB::table('tanah')
         ->where('table_id', $request->input('table_id'))
         ->update([
             'bulanbajak' => $request->input('bulanbajak'),
-            'amaun' => $request->input('amaun'),
+            'amaunlulus' => $amaunField === 'amaunlulus' ? $request->input($amaunField) : null,
+            'amaunlulus2' => $amaunField === 'amaunlulus2' ? $request->input($amaunField) : null,
             'noakaun' => $request->input('noakaun'),
             'bank' => $request->input('bank'),
             'bankcwgn' => $request->input('bankcwgn'),
@@ -98,6 +102,9 @@ public function storeTuntutan(Request $request)
     // Redirect to the 'ptundaf' route with a success message
     return redirect()->route('ptundaf')->with('success', 'Tuntutan data has been stored successfully.');
 }
+
+
+
 
 
     public function changeDate($id)
