@@ -223,7 +223,7 @@
                                 @endif
                                 @if ($check->musim2)
                                     <li class="nav-item">
-                                        <a href="{{ route('ptundaf3') }}" class="nav-link">
+                                        <a href="{{ route('ptundaf') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Musim Utama</p>
                                         </a>

@@ -15,7 +15,7 @@ $currentYear = date('Y');
 
 // Fetch data from 'tanah' table where 'nokppetani' matches the logged-in user's nokp and 'tarikh' year is the current year
     $tanah = DB::table('tanah')
-        ->select('tanah.*', 'pemilikgeran', 'nogeran', 'luaspohon', 'bil', 'noakaun')
+        ->select('tanah.*', 'pemilikgeran', 'nogeran', 'luaspohon', 'bil', 'noakaun', 'stesen', 'pemilikan', 'tahunpohon')
         ->where('nokppetani', $nokp)
         ->whereYear('tarikh', $currentYear)
         ->latest('tarikh')
@@ -120,16 +120,19 @@ $currentYear = date('Y');
                             <tr>
                                 <td width="25%">Pemilikan Geran</td>
                                 <td width="5%">:</td>
-                                <td width="70%"><input type="text" class="form-control" id="pemilikan"
-                                        name="pemilikan" placeholder="Nama Pemohon" value="{{ $specificItem->pemilikan }}"
-                                        readonly></td>
+                                <td width="70%">
+                                    <input type="text" class="form-control" id="pemilikan" name="pemilikan"
+                                        placeholder="Nama Pemohon"
+                                        value="{{ DB::table('pemilikan')->where('kodmilik', $specificItem->pemilikan)->value('deskripsi') }}"
+                                        readonly>
+                                </td>
+
                             </tr>
-                            <tr>
-                                <td width="25%">Bil Geran</td>
-                                <td width="5%">:</td>
-                                <td width="70%"><input type="text" class="form-control" id="bil" name="bil"
-                                        placeholder="Bil" value="{{ $specificItem->bil }}" readonly></td>
-                            </tr>
+
+                            <input type="text" class="form-control" id="bil" name="bil" placeholder="Bil"
+                                value="{{ $specificItem->bil }}" hidden>
+
+
                             <tr>
                                 <td width="25%">Jabatan</td>
                                 <td width="5%">:</td>
@@ -158,7 +161,9 @@ $currentYear = date('Y');
                                 <td>:</td>
                                 <td>
                                     <input type="text" class="form-control" id="lokasi" name="lokasi"
-                                        value="{{ $specificItem->lokasi }}" readonly>
+                                        placeholder="lokasi"
+                                        value="{{ DB::table('lokasitanah')->where('id', $specificItem->lokasi)->value('namalokasi') }}"
+                                        readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -201,57 +206,82 @@ $currentYear = date('Y');
 
 
 
-                                    <tr>
-                                        <td>Siap Bajak</td>
-                                        <td>:</td>
-                                        <td>
-                                            <select class="form-control" name="bulanbajak" id="bulanbajak">
-                                                <option value="">Sila pilih...</option>
-                                                <option value="1">Januari</option>
-                                                <option value="2">Februari</option>
-                                                <option value="3">Mac</option>
-                                                <option value="4">April</option>
-                                                <option value="5">Mei</option>
-                                                <option value="6">Jun</option>
-                                                <option value="7">Julai</option>
-                                                <option value="8">Ogos</option>
-                                                <option value="9">September</option>
-                                                <option value="10">Oktober</option>
-                                                <option value="11">November</option>
-                                                <option value="12">Disember</option>
-                                            </select>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>Siap Bajak</td>
+                                    <td>:</td>
+                                    <td>
+                                        <select class="form-control" name="bulanbajak" id="bulanbajak">
+                                            <option value="">Sila pilih...</option>
+                                            <option value="1">Januari</option>
+                                            <option value="2">Februari</option>
+                                            <option value="3">Mac</option>
+                                            <option value="4">April</option>
+                                            <option value="5">Mei</option>
+                                            <option value="6">Jun</option>
+                                            <option value="7">Julai</option>
+                                            <option value="8">Ogos</option>
+                                            <option value="9">September</option>
+                                            <option value="10">Oktober</option>
+                                            <option value="11">November</option>
+                                            <option value="12">Disember</option>
+                                        </select>
+                                    </td>
+                                </tr>
 
-                                    <tr>
-                                        <td>Tuntutan (RM)</td>
-                                        <td>:</td>
-                                        <td>
-                                            <div class="input-group">
-                                                @if (old('bulanbajak') >= 3 && old('bulanbajak') <= 7)
-                                                    <input type="text" name="amaunlulus" class="form-control">
-                                                @else
-                                                    <input type="text" name="amaunlulus2" class="form-control">
-                                                @endif
-                                            </div>
-                                        </td>
-                                    </tr>
-
-
-
-                                    <td>No Akaun Bank</td>
+                                <tr>
+                                    <td>Tuntutan (RM)</td>
                                     <td>:</td>
                                     <td>
                                         <div class="input-group">
-                                            <input type="number" name="noakaun" id="noakaun" class="form-control" value="{{ $petanibajak->lastnoakaun }}">
+                                            @php
+                                                $bulanbajakValue = old('bulanbajak') ?? 0;
+                                            @endphp
+
+                                            <input type="text" name="amaunlulus" id="amaunlulus" class="form-control"
+                                                style="display: none;">
+                                            <input type="text" name="amaunlulus2" id="amaunlulus2"
+                                                class="form-control" style="display: none;">
                                         </div>
                                     </td>
+                                </tr>
+
+                                <script>
+                                    document.getElementById('bulanbajak').addEventListener('change', function() {
+                                        var selectedValue = this.value;
+                                        var amaunlulusField = document.getElementById('amaunlulus');
+                                        var amaunlulus2Field = document.getElementById('amaunlulus2');
+
+                                        if (selectedValue >= 3 && selectedValue <= 7) {
+                                            amaunlulusField.style.display = 'block';
+                                            amaunlulus2Field.style.display = 'none';
+                                        } else {
+                                            amaunlulusField.style.display = 'none';
+                                            amaunlulus2Field.style.display = 'block';
+                                        }
+                                    });
+                                </script>
+
+
+
+
+
+
+
+                                <td>No Akaun Bank</td>
+                                <td>:</td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="number" name="noakaun" id="noakaun" class="form-control"
+                                            value="{{ $petanibajak->lastnoakaun }}">
+                                    </div>
+                                </td>
                                 </tr>
                                 <tr>
                                     <td>Nama Bank</td>
                                     <td>:</td>
                                     <td>
-                                        <select class="form-control" name="bank" id="bank" value="{{ $petanibajak->lastkodbank}}">
+                                        <select class="form-control" name="bank" id="bank"
+                                            value="{{ $petanibajak->lastkodbank }}">
                                             <option value="">Sila pilih...</option>
                                             @foreach (DB::table('bank')->get() as $bank)
                                                 <option value="{{ $bank->kodbank }}">{{ $bank->namabank }}</option>
@@ -263,7 +293,8 @@ $currentYear = date('Y');
                                     <td>Cawangan Bank</td>
                                     <td>:</td>
                                     <td>
-                                        <select class="form-control" name="bankcwgn" id="bankcwgn" value="{{ $petanibajak->lastcwgnbnk}}">
+                                        <select class="form-control" name="bankcwgn" id="bankcwgn"
+                                            value="{{ $petanibajak->lastcwgnbnk }}">
                                             <option value="">Sila pilih...</option>
                                             @foreach (DB::table('daerah')->get() as $daerah)
                                                 <option value="{{ $daerah->koddaerah }}">{{ $daerah->namadaerah }}

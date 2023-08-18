@@ -54,23 +54,19 @@ public function showTanah($table_id)
     // Retrieve the 'nama' value for the 'nokppetani' in the 'users' table
     $nama = DB::table('users')->where('nokp', $tanah->nokppetani)->value('nama');
 
-    // Retrieve the 'namalokasi' value for the 'lokasi' in the 'tanah' record
-    $tanah->lokasi = DB::table('lokasitanah')->where('id', $tanah->lokasi)->value('namalokasi');
-
-    // Retrieve the 'deskripsi' value for the 'pemilikan' in the 'tanah' record
-    $tanah->deskripsi = DB::table('pemilikan')->where('kodmilik', $tanah->pemilikan)->value('deskripsi');
-
     // Fetch the lastkodbank value from the 'petanibajak' table
+    $petaniBajak = DB::table('petanibajak')->where('nokp', $nokp)->first();
 
-    $lastnoakaun = DB::table('petanibajak')->where('nokp', $nokp)->value('lastnoakaun');
+    // Use map to add additional fields to the $tanah object
+    $tanahWithLokasi = collect([$tanah])->map(function ($item) {
+        $item->lokasi = DB::table('lokasitanah')->where('id', $item->lokasi)->value('namalokasi');
+        $item->deskripsi = DB::table('pemilikan')->where('kodmilik', $item->pemilikan)->value('deskripsi');
+        return $item;
+    })->first(); // Retrieve the first item from the collection
 
-    $lastkodbank = DB::table('petanibajak')->where('nokp', $nokp)->value('lastkodbank');
-
-    $lastcwgnbnk = DB::table('petanibajak')->where('nokp', $nokp)->value('lastcwgnbnk');
-
-
-    return view('ptundaf2', compact('nama', 'table_id', 'tanah', 'lastnoakaun', 'lastkodbank', 'lastcwgnbnk'));
+    return view('ptundaf2', compact('nama', 'table_id', 'tanahWithLokasi', 'petaniBajak'));
 }
+
 
 
 public function storeTuntutan(Request $request)
@@ -87,23 +83,22 @@ public function storeTuntutan(Request $request)
 
     $amaunField = $request->input('bulanbajak') >= 3 && $request->input('bulanbajak') <= 7 ? 'amaunlulus' : 'amaunlulus2';
 
+    $dataToUpdate = [
+        'bulanbajak' => $request->input('bulanbajak'),
+        'amaunlulus' => $amaunField === 'amaunlulus' ? $request->input('amaunlulus') : null,
+        'amaunlulus2' => $amaunField === 'amaunlulus2' ? $request->input('amaunlulus2') : null,
+        'noakaun' => $request->input('noakaun'),
+        'bank' => $request->input('bank'),
+        'bankcwgn' => $request->input('bankcwgn'),
+        'tartuntut' => $request->input('tartuntut'),
+    ];
+
     DB::table('tanah')
         ->where('table_id', $request->input('table_id'))
-        ->update([
-            'bulanbajak' => $request->input('bulanbajak'),
-            'amaunlulus' => $amaunField === 'amaunlulus' ? $request->input($amaunField) : null,
-            'amaunlulus2' => $amaunField === 'amaunlulus2' ? $request->input($amaunField) : null,
-            'noakaun' => $request->input('noakaun'),
-            'bank' => $request->input('bank'),
-            'bankcwgn' => $request->input('bankcwgn'),
-            'tartuntut' => $request->input('tartuntut'),
-        ]);
-
+        ->update($dataToUpdate);
     // Redirect to the 'ptundaf' route with a success message
     return redirect()->route('ptundaf')->with('success', 'Tuntutan data has been stored successfully.');
 }
-
-
 
 
 
@@ -153,7 +148,7 @@ public function storeTuntutan(Request $request)
                     ->orWhere('tanah.tahunpohon', $tahunpohon);
             })
             ->orderBy('tanah.tahunpohon', 'desc')
-            ->select('tanah.*', 'tanah.tahunpohon', 'tanah.pemilikgeran', 'stesen.stationdesc', 'tanah.nogeran', 'tanah.luaspohon', 'tanah.amaunlulus')
+            ->select('tanah.*', 'tanah.tahunpohon', 'tanah.pemilikgeran', 'stesen.stationdesc', 'tanah.nogeran', 'tanah.luaspohon', 'tanah.amaunlulus', 'tanah.nopenyatamusim')
             ->get();
     } else {
         // If the "tahun" input is empty, set an empty collection for searchResults
